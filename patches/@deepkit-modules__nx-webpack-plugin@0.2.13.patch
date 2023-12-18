@@ -1,0 +1,12 @@
+diff --git a/src/lib/with-deepkit.js b/src/lib/with-deepkit.js
+index 7c78b8b385318112ce1456ad01ffd63912d9a3d4..ba5cfb4af35edfa23f56f0d603f45f6d5f89cec2 100644
+--- a/src/lib/with-deepkit.js
++++ b/src/lib/with-deepkit.js
+@@ -32,6 +32,7 @@ function withDeepkit() {
+         rules
+             .filter(__assignType((rule) => !!rule.loader?.includes('ts-loader'), ['rule', '', 'P"2!!/"']))
+             .forEach(__assignType(tsRule => {
++            tsRule.options.transpileOnly = false;
+             tsRule.options.getCustomTransformers = addDeepkitTransformer(tsRule.options.getCustomTransformers);
+         }, ['tsRule', '', 'P"2!"/"']));
+         return config;

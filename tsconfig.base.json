@@ -5,16 +5,19 @@
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
+    "stripInternal": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "esnext",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@zeus/engine": ["libs/engine/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
