@@ -19,5 +19,13 @@
       "@zeus/engine": ["libs/engine/src/index.ts"]
     }
   },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
+    "disableTypeScriptVersionCheck": true
+  },
+  "reflection": true,
   "exclude": ["node_modules", "tmp"]
 }
