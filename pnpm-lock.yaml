@@ -1,8 +1,20 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 overrides:
   typescript: 5.3.3
   '@analogjs/vite-plugin-angular': 0.2.21
+
+patchedDependencies:
+  '@deepkit/type-compiler@1.0.1-alpha.108':
+    hash: awxv5jarcpnzm7jwp5j37ybc2y
+    path: patches/@deepkit__type-compiler@1.0.1-alpha.108.patch
+  typescript@5.3.3:
+    hash: pc3ipe4yqkatcubt4zqtfzi3mq
+    path: patches/typescript@5.3.3.patch
 
 dependencies:
   '@angular/animations':
@@ -53,6 +65,9 @@ dependencies:
   '@deepkit/event':
     specifier: 1.0.1-alpha.108
     version: 1.0.1-alpha.108(@deepkit/core@1.0.1-alpha.108)(@deepkit/injector@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)
+  '@deepkit/filesystem':
+    specifier: 1.0.1-alpha.108
+    version: 1.0.1-alpha.108(@deepkit/core@1.0.1-alpha.108)
   '@deepkit/framework':
     specifier: 1.0.1-alpha.108
     version: 1.0.1-alpha.108(@deepkit/app@1.0.1-alpha.108)(@deepkit/broker@1.0.1-alpha.108)(@deepkit/bson@1.0.1-alpha.108)(@deepkit/core-rxjs@1.0.1-alpha.108)(@deepkit/core@1.0.1-alpha.108)(@deepkit/event@1.0.1-alpha.108)(@deepkit/http@1.0.1-alpha.108)(@deepkit/injector@1.0.1-alpha.108)(@deepkit/logger@1.0.1-alpha.108)(@deepkit/orm@1.0.1-alpha.108)(@deepkit/rpc-tcp@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/sql@1.0.1-alpha.108)(@deepkit/stopwatch@1.0.1-alpha.108)(@deepkit/template@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(@deepkit/workflow@1.0.1-alpha.108)(@oclif/config@1.18.17)(rxjs@7.8.1)
@@ -87,14 +102,14 @@ dependencies:
     specifier: 1.0.1-alpha.108
     version: 1.0.1-alpha.108(@deepkit/core@1.0.1-alpha.108)(@deepkit/event@1.0.1-alpha.108)(@deepkit/injector@1.0.1-alpha.108)(@deepkit/stopwatch@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)
   '@deepular/client':
-    specifier: 0.1.2
-    version: 0.1.2(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@deepkit/core@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(@deepular/core@0.1.2)(rxjs@7.8.1)(zone.js@0.14.0)
+    specifier: 0.1.3
+    version: 0.1.3(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@deepkit/core@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(@deepular/core@0.2.0)(rxjs@7.8.1)(zone.js@0.14.0)
   '@deepular/core':
-    specifier: 0.1.2
-    version: 0.1.2(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@deepkit/bson@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(rxjs@7.8.1)
+    specifier: 0.2.0
+    version: 0.2.0(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@deepkit/bson@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(rxjs@7.8.1)
   '@deepular/server':
-    specifier: 0.1.2
-    version: 0.1.2(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@angular/platform-server@17.0.3)(@deepkit/app@1.0.1-alpha.108)(@deepkit/core@1.0.1-alpha.108)(@deepkit/framework@1.0.1-alpha.108)(@deepkit/http@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(@deepular/core@0.1.2)(rxjs@7.8.1)(zone.js@0.14.0)
+    specifier: 0.1.3
+    version: 0.1.3(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@angular/platform-server@17.0.3)(@deepkit/app@1.0.1-alpha.108)(@deepkit/core@1.0.1-alpha.108)(@deepkit/framework@1.0.1-alpha.108)(@deepkit/http@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(@deepular/core@0.2.0)(rxjs@7.8.1)(zone.js@0.14.0)
   '@nx/angular':
     specifier: 17.2.6
     version: 17.2.6(@angular-devkit/build-angular@17.0.3)(@angular-devkit/core@17.0.3)(@angular-devkit/schematics@17.0.3)(@schematics/angular@17.0.3)(@swc-node/register@1.6.7)(@swc/core@1.3.85)(@types/node@18.16.9)(esbuild@0.19.5)(eslint@8.48.0)(nx@17.2.6)(rxjs@7.8.1)(ts-node@10.9.1)(typescript@5.3.3)
@@ -107,6 +122,9 @@ dependencies:
   tslib:
     specifier: 2.6.2
     version: 2.6.2
+  uWebSockets.js:
+    specifier: github:uNetworking/uWebSockets.js#v20.34.0
+    version: github.com/uNetworking/uWebSockets.js/fca27c05066342b01951782248640c8013b37196
   zone.js:
     specifier: 0.14.0
     version: 0.14.0
@@ -144,7 +162,7 @@ devDependencies:
     version: 17.0.3
   '@deepkit/type-compiler':
     specifier: 1.0.1-alpha.108
-    version: 1.0.1-alpha.108(typescript@5.3.3)
+    version: 1.0.1-alpha.108(patch_hash=awxv5jarcpnzm7jwp5j37ybc2y)(typescript@5.3.3)
   '@deepkit/vite':
     specifier: 1.0.1-alpha.108
     version: 1.0.1-alpha.108(@deepkit/type-compiler@1.0.1-alpha.108)
@@ -152,8 +170,8 @@ devDependencies:
     specifier: 0.1.3
     version: 0.1.3(@angular/compiler-cli@17.0.3)(typescript@5.3.3)
   '@deepular/dev':
-    specifier: 0.1.4
-    version: 0.1.4(@angular/compiler-cli@17.0.3)(@angular/platform-server@17.0.3)(@deepkit/app@1.0.1-alpha.108)(@deepkit/type-compiler@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(@deepular/compiler@0.1.3)(@deepular/core@0.1.2)(@nx/vite@17.2.6)(@swc/core@1.3.85)(@types/node@18.16.9)(jest-environment-jsdom@29.7.0)(jest@29.7.0)(postcss@8.4.32)(stylus@0.59.0)(tailwindcss@3.3.7)(typescript@5.3.3)(vite-node@1.0.4)(vite@5.0.10)(vitest@1.0.4)
+    specifier: 0.1.5
+    version: 0.1.5(@angular/compiler-cli@17.0.3)(@angular/platform-server@17.0.3)(@deepkit/app@1.0.1-alpha.108)(@deepkit/type-compiler@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(@deepular/compiler@0.1.3)(@deepular/core@0.2.0)(@nx/vite@17.2.6)(@swc/core@1.3.85)(@types/node@18.16.9)(jest-environment-jsdom@29.7.0)(jest@29.7.0)(postcss@8.4.32)(stylus@0.59.0)(tailwindcss@3.3.7)(typescript@5.3.3)(vite-node@1.0.4)(vite@5.0.10)(vitest@1.0.4)
   '@nx/esbuild':
     specifier: 17.2.6
     version: 17.2.6(@swc-node/register@1.6.7)(@swc/core@1.3.85)(@types/node@18.16.9)(esbuild@0.19.5)(nx@17.2.6)(typescript@5.3.3)
@@ -261,7 +279,7 @@ devDependencies:
     version: 4.8.3
   typescript:
     specifier: 5.3.3
-    version: 5.3.3
+    version: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
   url-loader:
     specifier: ^4.1.1
     version: 4.1.1(webpack@5.89.0)
@@ -332,7 +350,7 @@ packages:
       ng-packagr: ^17.0.0
       protractor: ^7.0.0
       tailwindcss: ^2.0.0 || ^3.0.0
-      typescript: '>=5.2 <5.3'
+      typescript: 5.3.3
     peerDependenciesMeta:
       '@angular/localize':
         optional: true
@@ -416,7 +434,7 @@ packages:
       text-table: 0.2.0
       tree-kill: 1.2.2
       tslib: 2.6.2
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
       undici: 5.27.2
       vite: 4.5.0(@types/node@18.16.9)(less@4.2.0)(sass@1.69.5)(stylus@0.59.0)(terser@5.24.0)
       webpack: 5.89.0(@swc/core@1.3.85)(esbuild@0.19.5)
@@ -495,7 +513,7 @@ packages:
     resolution: {integrity: sha512-unZ6QNwtxuB8Eni7UPdw7uK6iZipZUXIsH+ZuLMOxwFgGMqeRnpv8SW0212rto3d/Ec0jESzVHKcwZ9pT+jxgw==}
     peerDependencies:
       eslint: ^7.20.0 || ^8.0.0
-      typescript: '*'
+      typescript: 5.3.3
     dependencies:
       '@angular-eslint/bundled-angular-compiler': 17.1.1
       '@angular-eslint/utils': 17.1.1(eslint@8.48.0)(typescript@5.3.3)
@@ -504,7 +522,7 @@ packages:
       aria-query: 5.3.0
       axobject-query: 4.0.0
       eslint: 8.48.0
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -513,12 +531,12 @@ packages:
     resolution: {integrity: sha512-fFOBlCOVObVu3gjLj+0BypqO1ZR/0bfJnDElqMdYwJG7zRaFT8NNQbrOo/q/GQoqOFoNna6mw3teTGsd5JnL2A==}
     peerDependencies:
       eslint: ^7.20.0 || ^8.0.0
-      typescript: '*'
+      typescript: 5.3.3
     dependencies:
       '@angular-eslint/utils': 17.1.1(eslint@8.48.0)(typescript@5.3.3)
       '@typescript-eslint/utils': 6.13.1(eslint@8.48.0)(typescript@5.3.3)
       eslint: 8.48.0
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -527,24 +545,24 @@ packages:
     resolution: {integrity: sha512-ofL46rNhRVeSxrSQF0vwhKMco+vJuo+ZGjSOzFmT9N3KAMB0j+WXTbpyGGMy0gQSBc4W6p+j+zxGa2CR2xb6wA==}
     peerDependencies:
       eslint: ^7.20.0 || ^8.0.0
-      typescript: '*'
+      typescript: 5.3.3
     dependencies:
       '@angular-eslint/bundled-angular-compiler': 17.1.1
       eslint: 8.48.0
       eslint-scope: 7.2.2
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     dev: true
 
   /@angular-eslint/utils@17.1.1(eslint@8.48.0)(typescript@5.3.3):
     resolution: {integrity: sha512-CTNPOb05S/DII/Fm8JYUvKo+B4u/ctHjGJ0X1YXUR0q31oaGqTE3KePGq76+Y6swRDf9NjUIcfcnZp3u3j4CBQ==}
     peerDependencies:
       eslint: ^7.20.0 || ^8.0.0
-      typescript: '*'
+      typescript: 5.3.3
     dependencies:
       '@angular-eslint/bundled-angular-compiler': 17.1.1
       '@typescript-eslint/utils': 6.13.1(eslint@8.48.0)(typescript@5.3.3)
       eslint: 8.48.0
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -619,7 +637,7 @@ packages:
     hasBin: true
     peerDependencies:
       '@angular/compiler': 17.0.3
-      typescript: '>=5.2 <5.3'
+      typescript: 5.3.3
     dependencies:
       '@angular/compiler': 17.0.3(@angular/core@17.0.3)
       '@babel/core': 7.23.2
@@ -629,7 +647,7 @@ packages:
       reflect-metadata: 0.1.14
       semver: 7.5.4
       tslib: 2.6.2
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
       yargs: 17.7.2
     transitivePeerDependencies:
       - supports-color
@@ -3023,6 +3041,14 @@ packages:
       '@deepkit/injector': 1.0.1-alpha.108(@deepkit/core@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)
       '@deepkit/type': 1.0.1-alpha.108(@deepkit/core@1.0.1-alpha.108)
 
+  /@deepkit/filesystem@1.0.1-alpha.108(@deepkit/core@1.0.1-alpha.108):
+    resolution: {integrity: sha512-k2vz4IP19uAnSBBV/0VcYhvSytftMSNq8m23cgd9zOj1VcA29N61YZ/xYXNGOYrz7w1fv3wcJguizt9CajQsqQ==}
+    peerDependencies:
+      '@deepkit/core': ^1.0.1-alpha.13
+    dependencies:
+      '@deepkit/core': 1.0.1-alpha.108
+    dev: false
+
   /@deepkit/framework-debug-api@1.0.1-alpha.108(@deepkit/bson@1.0.1-alpha.108)(@deepkit/core-rxjs@1.0.1-alpha.108)(@deepkit/core@1.0.1-alpha.108)(@deepkit/injector@1.0.1-alpha.108)(@deepkit/logger@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/stopwatch@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(rxjs@7.8.1):
     resolution: {integrity: sha512-1TnaXlAsuAK0k5XQx7ITJryCTrtJm1JQfMoDmr5zzmkmXLqUE1yk/A17tYTuSlXA1wWIO+e5nUefdjLaVRFzKA==}
     peerDependencies:
@@ -3299,12 +3325,12 @@ packages:
     resolution: {integrity: sha512-+g0Opkg+08OGPcIQ+rygin7V2LcWo/lgO3Dm+XsojSrkzS5fJMwupQKZACRrJ4EK/lJSrh5fHqmJNMHJPudeTw==}
     dev: false
 
-  /@deepkit/type-compiler@1.0.1-alpha.108(typescript@5.3.3):
+  /@deepkit/type-compiler@1.0.1-alpha.108(patch_hash=awxv5jarcpnzm7jwp5j37ybc2y)(typescript@5.3.3):
     resolution: {integrity: sha512-tyqidre0rc3vF2JHFLN2egA3G2HfTogP56nFwFmDqWmG4hP+bevt41pBQ1/dp+DM2bbqrG7bnys5PSbqyoMOhg==}
     hasBin: true
     requiresBuild: true
     peerDependencies:
-      typescript: '*'
+      typescript: 5.3.3
     dependencies:
       '@deepkit/type-spec': 1.0.1-alpha.108
       '@marcj/ts-clone-node': 2.2.0(typescript@5.3.3)
@@ -3313,10 +3339,11 @@ packages:
       lz-string: 1.5.0
       micromatch: 4.0.5
       strip-json-comments: 3.1.1
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     transitivePeerDependencies:
       - supports-color
     dev: true
+    patched: true
 
   /@deepkit/type-spec@1.0.1-alpha.108:
     resolution: {integrity: sha512-OIJsZ0nZKybaKrzrY7WpkIlDXm88wE8N5G5cu+FL3snZx/drzF5FxmbRP2omLGRRDb68+o/vTni26sUbBtWOBw==}
@@ -3338,7 +3365,7 @@ packages:
     peerDependencies:
       '@deepkit/type-compiler': ^1.0.1-alpha.93
     dependencies:
-      '@deepkit/type-compiler': 1.0.1-alpha.108(typescript@5.3.3)
+      '@deepkit/type-compiler': 1.0.1-alpha.108(patch_hash=awxv5jarcpnzm7jwp5j37ybc2y)(typescript@5.3.3)
       '@rollup/pluginutils': 5.1.0
     transitivePeerDependencies:
       - rollup
@@ -3359,8 +3386,8 @@ packages:
       '@deepkit/stopwatch': 1.0.1-alpha.108(@deepkit/core@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)
       '@deepkit/type': 1.0.1-alpha.108(@deepkit/core@1.0.1-alpha.108)
 
-  /@deepular/client@0.1.2(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@deepkit/core@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(@deepular/core@0.1.2)(rxjs@7.8.1)(zone.js@0.14.0):
-    resolution: {integrity: sha512-RGrQ8sgIz9McddF9rTYGo3r3MVz61CiLpciNPpsJ0dLAOEHdDSdwTxLqXU9MOsetibu1LiANQsTYrrWqQv98tQ==}
+  /@deepular/client@0.1.3(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@deepkit/core@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(@deepular/core@0.2.0)(rxjs@7.8.1)(zone.js@0.14.0):
+    resolution: {integrity: sha512-xGkpj7c923hA1zsXt+/RKJjNHYzrJ/KybXt2b15VzfyUuDsU1MF2RzA+weV+qUIYBd+9pq9Vjfpxc5nLnwCA4w==}
     peerDependencies:
       '@angular/core': 17.0.3
       '@angular/platform-browser': 17.0.3
@@ -3376,7 +3403,7 @@ packages:
       '@deepkit/core': 1.0.1-alpha.108
       '@deepkit/rpc': 1.0.1-alpha.108(@deepkit/bson@1.0.1-alpha.108)(@deepkit/core-rxjs@1.0.1-alpha.108)(@deepkit/core@1.0.1-alpha.108)(@deepkit/injector@1.0.1-alpha.108)(@deepkit/logger@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(rxjs@7.8.1)
       '@deepkit/type': 1.0.1-alpha.108(@deepkit/core@1.0.1-alpha.108)
-      '@deepular/core': 0.1.2(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@deepkit/bson@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(rxjs@7.8.1)
+      '@deepular/core': 0.2.0(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@deepkit/bson@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(rxjs@7.8.1)
       rxjs: 7.8.1
       tslib: 2.6.2
       zone.js: 0.14.0
@@ -3387,16 +3414,16 @@ packages:
     hasBin: true
     peerDependencies:
       '@angular/compiler-cli': 17.0.3
-      typescript: 5.2.2
+      typescript: 5.3.3
     dependencies:
       '@angular/compiler-cli': 17.0.3(@angular/compiler@17.0.3)(typescript@5.3.3)
       patch-package: 8.0.0
       tslib: 2.6.2
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     dev: true
 
-  /@deepular/core@0.1.2(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@deepkit/bson@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(rxjs@7.8.1):
-    resolution: {integrity: sha512-gY9I8gBxSCdcy43RemGPZjn1wtrnsz3/ct6pjj019IFfw/7dVB3Cg3/Rb87Rj9Sz3jPlDoU7FWbGAZ96ECB29Q==}
+  /@deepular/core@0.2.0(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@deepkit/bson@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(rxjs@7.8.1):
+    resolution: {integrity: sha512-atTXIfUK1rkM/I0psqbu3js13W3TovDZgt7Tk7SYjrgG0qLSdW9zH/LtJ/mHcU7bxzGsaBrWusZ9QpymEg9Onw==}
     peerDependencies:
       '@angular/core': 17.0.3
       '@angular/platform-browser': 17.0.3
@@ -3413,8 +3440,8 @@ packages:
       rxjs: 7.8.1
       tslib: 2.6.2
 
-  /@deepular/dev@0.1.4(@angular/compiler-cli@17.0.3)(@angular/platform-server@17.0.3)(@deepkit/app@1.0.1-alpha.108)(@deepkit/type-compiler@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(@deepular/compiler@0.1.3)(@deepular/core@0.1.2)(@nx/vite@17.2.6)(@swc/core@1.3.85)(@types/node@18.16.9)(jest-environment-jsdom@29.7.0)(jest@29.7.0)(postcss@8.4.32)(stylus@0.59.0)(tailwindcss@3.3.7)(typescript@5.3.3)(vite-node@1.0.4)(vite@5.0.10)(vitest@1.0.4):
-    resolution: {integrity: sha512-cdDM5xBevSI+M93HOUSo+TICyFVxPB1ZWrcD/jWE/oXMmOx6jRNqSrNqih7n4V3ouPO0T1JNalvKJKlqBbRV0A==}
+  /@deepular/dev@0.1.5(@angular/compiler-cli@17.0.3)(@angular/platform-server@17.0.3)(@deepkit/app@1.0.1-alpha.108)(@deepkit/type-compiler@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(@deepular/compiler@0.1.3)(@deepular/core@0.2.0)(@nx/vite@17.2.6)(@swc/core@1.3.85)(@types/node@18.16.9)(jest-environment-jsdom@29.7.0)(jest@29.7.0)(postcss@8.4.32)(stylus@0.59.0)(tailwindcss@3.3.7)(typescript@5.3.3)(vite-node@1.0.4)(vite@5.0.10)(vitest@1.0.4):
+    resolution: {integrity: sha512-pfTS3sTcQumecpII2B+BU8gdMStp5BEUf2A31Ps4K+m0RP/7lFj+Go0y9g4zEIDo60tC5ioKhRbUHXTgk5maOA==}
     hasBin: true
     peerDependencies:
       '@deepkit/app': 1.0.1-alpha.108
@@ -3434,7 +3461,7 @@ packages:
       '@deepkit/type': 1.0.1-alpha.108(@deepkit/core@1.0.1-alpha.108)
       '@deepkit/vite': 1.0.1-alpha.108(@deepkit/type-compiler@1.0.1-alpha.108)
       '@deepular/compiler': 0.1.3(@angular/compiler-cli@17.0.3)(typescript@5.3.3)
-      '@deepular/core': 0.1.2(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@deepkit/bson@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(rxjs@7.8.1)
+      '@deepular/core': 0.2.0(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@deepkit/bson@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(rxjs@7.8.1)
       '@jsheaven/read-config-file': 1.0.1
       '@nx/vite': 17.2.6(@swc-node/register@1.6.7)(@swc/core@1.3.85)(@types/node@18.16.9)(nx@17.2.6)(typescript@5.3.3)(vite@5.0.10)(vitest@1.0.4)
       deepmerge: 4.3.1
@@ -3477,8 +3504,8 @@ packages:
       - webpack-cli
     dev: true
 
-  /@deepular/server@0.1.2(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@angular/platform-server@17.0.3)(@deepkit/app@1.0.1-alpha.108)(@deepkit/core@1.0.1-alpha.108)(@deepkit/framework@1.0.1-alpha.108)(@deepkit/http@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(@deepular/core@0.1.2)(rxjs@7.8.1)(zone.js@0.14.0):
-    resolution: {integrity: sha512-XcjIMxgPDjuv4wYLlSYCXF4EMw2Kcz3d5ZVQTDASbsas/4QwL9ZWaUFc+u5HdDoOfjQjWvVGQXIjbIwV9X1uFg==}
+  /@deepular/server@0.1.3(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@angular/platform-server@17.0.3)(@deepkit/app@1.0.1-alpha.108)(@deepkit/core@1.0.1-alpha.108)(@deepkit/framework@1.0.1-alpha.108)(@deepkit/http@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(@deepular/core@0.2.0)(rxjs@7.8.1)(zone.js@0.14.0):
+    resolution: {integrity: sha512-6e6K1/RiMtx0eq1pVJ+L8zT0/8GDOepGiRJAf8uY33pbZjXdQZ7ZVR93HwMKClKznWGfhqJ2p3F9N9cO2aGUWw==}
     peerDependencies:
       '@angular/core': 17.0.3
       '@angular/platform-browser': 17.0.3
@@ -3502,7 +3529,7 @@ packages:
       '@deepkit/http': 1.0.1-alpha.108(@deepkit/app@1.0.1-alpha.108)(@deepkit/core@1.0.1-alpha.108)(@deepkit/event@1.0.1-alpha.108)(@deepkit/injector@1.0.1-alpha.108)(@deepkit/logger@1.0.1-alpha.108)(@deepkit/stopwatch@1.0.1-alpha.108)(@deepkit/template@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(@deepkit/workflow@1.0.1-alpha.108)
       '@deepkit/rpc': 1.0.1-alpha.108(@deepkit/bson@1.0.1-alpha.108)(@deepkit/core-rxjs@1.0.1-alpha.108)(@deepkit/core@1.0.1-alpha.108)(@deepkit/injector@1.0.1-alpha.108)(@deepkit/logger@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(rxjs@7.8.1)
       '@deepkit/type': 1.0.1-alpha.108(@deepkit/core@1.0.1-alpha.108)
-      '@deepular/core': 0.1.2(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@deepkit/bson@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(rxjs@7.8.1)
+      '@deepular/core': 0.2.0(@angular/core@17.0.3)(@angular/platform-browser@17.0.3)(@deepkit/bson@1.0.1-alpha.108)(@deepkit/rpc@1.0.1-alpha.108)(@deepkit/type@1.0.1-alpha.108)(rxjs@7.8.1)
       rxjs: 7.8.1
       tslib: 2.6.2
       zone.js: 0.14.0
@@ -4783,7 +4810,7 @@ packages:
       resolve: 1.22.8
       semver: 7.5.4
       source-map: 0.6.1
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     transitivePeerDependencies:
       - '@types/node'
     dev: true
@@ -4806,11 +4833,11 @@ packages:
     engines: {node: ^18.13.0 || >=20.9.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
     peerDependencies:
       '@angular/compiler-cli': ^17.0.0
-      typescript: '>=5.2 <5.3'
+      typescript: 5.3.3
       webpack: ^5.54.0
     dependencies:
       '@angular/compiler-cli': 17.0.3(@angular/compiler@17.0.3)(typescript@5.3.3)
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
       webpack: 5.89.0(@swc/core@1.3.85)(esbuild@0.19.5)
 
   /@nodelib/fs.scandir@2.1.5:
@@ -5353,7 +5380,7 @@ packages:
       '@nx/linter': 17.2.6(@swc-node/register@1.6.7)(@swc/core@1.3.85)(@types/node@18.16.9)(eslint@8.48.0)(nx@17.2.6)
       eslint: 8.48.0
       tslib: 2.6.2
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     transitivePeerDependencies:
       - '@babel/traverse'
       - '@swc-node/register'
@@ -5853,10 +5880,10 @@ packages:
   /@phenomnomnominal/tsquery@5.0.1(typescript@5.3.3):
     resolution: {integrity: sha512-3nVv+e2FQwsW8Aw6qTU6f+1rfcJ3hrcnvH/mu9i8YhxO+9sqbOfpL8m6PbET5+xKOlz/VSbp0RoYWYCtIsnmuA==}
     peerDependencies:
-      typescript: ^3 || ^4 || ^5
+      typescript: 5.3.3
     dependencies:
       esquery: 1.5.0
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
 
   /@pixi/accessibility@7.3.2(@pixi/core@7.3.2)(@pixi/display@7.3.2)(@pixi/events@7.3.2):
     resolution: {integrity: sha512-MdkU22HTauRvq9cMeWZIQGaDDa86sr+m12rKNdLV+FaDQgP/AhP+qCVpK7IKeJa9BrWGXaYMw/vueij7HkyDSA==}
@@ -6604,7 +6631,7 @@ packages:
     resolution: {integrity: sha512-+Tccbb4+fN8vYx88fdEGFbsCSnF0zBxbVhZkYkFAbVI7h6zVIgA3Jmlok4ZM+q+1KxzPN7AOfhQVuFOYBzZBeA==}
     peerDependencies:
       '@swc/core': '>= 1.3'
-      typescript: '>= 4.3'
+      typescript: 5.3.3
     dependencies:
       '@swc-node/core': 1.10.6(@swc/core@1.3.85)
       '@swc-node/sourcemap-support': 0.3.0
@@ -6613,7 +6640,7 @@ packages:
       debug: 4.3.4
       pirates: 4.0.6
       tslib: 2.6.2
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     transitivePeerDependencies:
       - supports-color
 
@@ -7045,7 +7072,7 @@ packages:
       natural-compare: 1.4.0
       semver: 7.5.4
       ts-api-utils: 1.0.3(typescript@5.3.3)
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -7066,7 +7093,7 @@ packages:
       '@typescript-eslint/visitor-keys': 6.15.0
       debug: 4.3.4
       eslint: 8.48.0
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -7101,7 +7128,7 @@ packages:
       debug: 4.3.4
       eslint: 8.48.0
       ts-api-utils: 1.0.3(typescript@5.3.3)
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -7121,7 +7148,7 @@ packages:
       debug: 4.3.4
       eslint: 8.48.0
       ts-api-utils: 1.0.3(typescript@5.3.3)
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     transitivePeerDependencies:
       - supports-color
 
@@ -7150,7 +7177,7 @@ packages:
       is-glob: 4.0.3
       semver: 7.5.4
       ts-api-utils: 1.0.3(typescript@5.3.3)
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -7171,7 +7198,7 @@ packages:
       is-glob: 4.0.3
       semver: 7.5.4
       ts-api-utils: 1.0.3(typescript@5.3.3)
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     transitivePeerDependencies:
       - supports-color
 
@@ -8420,10 +8447,10 @@ packages:
     resolution: {integrity: sha512-fvO+AWcmbO7P1S+A3mwm3IGr74eHMeq5ZLhNhyNQc9mVDNHT4oe0Gg0ksdIFFNXLK7k7Z/TYcLAUSQdRgh1bsA==}
     engines: {node: '>=14.9.0'}
     peerDependencies:
-      typescript: '>=3.x || >= 4.x'
+      typescript: 5.3.3
     dependencies:
       helpertypes: 0.0.19
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     dev: true
 
   /compressible@2.0.18:
@@ -8578,7 +8605,7 @@ packages:
     resolution: {integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==}
     engines: {node: '>=14'}
     peerDependencies:
-      typescript: '>=4.9.5'
+      typescript: 5.3.3
     peerDependenciesMeta:
       typescript:
         optional: true
@@ -8587,7 +8614,7 @@ packages:
       js-yaml: 4.1.0
       parse-json: 5.2.0
       path-type: 4.0.0
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
 
   /create-jest@29.7.0(@types/node@18.16.9)(ts-node@10.9.1):
     resolution: {integrity: sha512-Adz2bdH0Vq3F53KEMJOoftQFutWCukm6J24wbPWRO4k1kMY7gS7ds/uoJkNuV8wDCtWWnuwGcJwpWcih+zEW1Q==}
@@ -9773,7 +9800,7 @@ packages:
     resolution: {integrity: sha512-fR3WRkOb4bQdWB/y7ssDUlVdrclvwtyCUIHCfivAoYxq9dF7XfrDKbMdZIfwJ7hxIAqkYSGeU7lLJE6xrxIBdg==}
     engines: {node: '>=12.13.0', yarn: '>=1.0.0'}
     peerDependencies:
-      typescript: '>3.6.0'
+      typescript: 5.3.3
       vue-template-compiler: '*'
       webpack: ^5.11.0
     peerDependenciesMeta:
@@ -9792,7 +9819,7 @@ packages:
       schema-utils: 3.3.0
       semver: 7.5.4
       tapable: 2.2.1
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
       webpack: 5.89.0(@swc/core@1.3.85)(esbuild@0.19.5)
     dev: false
 
@@ -10900,7 +10927,7 @@ packages:
       '@angular/core': '>=13.0.0 <18.0.0'
       '@angular/platform-browser-dynamic': '>=13.0.0 <18.0.0'
       jest: ^29.0.0
-      typescript: '>=4.4'
+      typescript: 5.3.3
     dependencies:
       '@angular-devkit/build-angular': 17.0.3(@angular/compiler-cli@17.0.3)(@angular/platform-server@17.0.3)(@swc/core@1.3.85)(@types/node@18.16.9)(jest-environment-jsdom@29.7.0)(jest@29.7.0)(stylus@0.59.0)(tailwindcss@3.3.7)(typescript@5.3.3)
       '@angular/compiler-cli': 17.0.3(@angular/compiler@17.0.3)(typescript@5.3.3)
@@ -10913,7 +10940,7 @@ packages:
       jest-util: 29.7.0
       pretty-format: 29.7.0
       ts-jest: 29.1.1(@babel/core@7.23.6)(esbuild@0.19.5)(jest@29.7.0)(typescript@5.3.3)
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
     optionalDependencies:
       esbuild: 0.19.5
     transitivePeerDependencies:
@@ -14514,9 +14541,9 @@ packages:
     resolution: {integrity: sha512-wNMeqtMz5NtwpT/UZGY5alT+VoKdSsOOP/kqHFcUW1P/VRhH2wJ48+DN2WwUliNbQ976ETwDL0Ifd2VVvgonvg==}
     engines: {node: '>=16.13.0'}
     peerDependencies:
-      typescript: '>=4.2.0'
-    dependencies:
       typescript: 5.3.3
+    dependencies:
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
 
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
@@ -14531,7 +14558,7 @@ packages:
       babel-jest: ^29.0.0
       esbuild: '*'
       jest: ^29.0.0
-      typescript: '>=4.3 <6'
+      typescript: 5.3.3
     peerDependenciesMeta:
       '@babel/core':
         optional: true
@@ -14552,7 +14579,7 @@ packages:
       lodash.memoize: 4.1.2
       make-error: 1.3.6
       semver: 7.5.4
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
       yargs-parser: 21.1.1
     dev: true
 
@@ -14560,7 +14587,7 @@ packages:
     resolution: {integrity: sha512-rNH3sK9kGZcH9dYzC7CewQm4NtxJTjSEVRJ2DyBZR7f8/wcta+iV44UPCXc5+nzDzivKtlzV6c9P4e+oFhDLYg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
-      typescript: '*'
+      typescript: 5.3.3
       webpack: ^5.0.0
     dependencies:
       chalk: 4.1.2
@@ -14568,7 +14595,7 @@ packages:
       micromatch: 4.0.5
       semver: 7.5.4
       source-map: 0.7.4
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
       webpack: 5.89.0(@swc/core@1.3.85)(esbuild@0.19.5)
     dev: false
 
@@ -14586,7 +14613,7 @@ packages:
       '@swc/core': '>=1.2.50'
       '@swc/wasm': '>=1.2.50'
       '@types/node': '*'
-      typescript: '>=2.7'
+      typescript: 5.3.3
     peerDependenciesMeta:
       '@swc/core':
         optional: true
@@ -14606,7 +14633,7 @@ packages:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.3.3
+      typescript: 5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq)
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
 
@@ -14674,10 +14701,11 @@ packages:
   /typed-assert@1.0.9:
     resolution: {integrity: sha512-KNNZtayBCtmnNmbo5mG47p1XsCyrx6iVqomjcZnec/1Y5GGARaxPs6r49RnSPeUP3YjNYiU9sQHAtY4BBvnZwg==}
 
-  /typescript@5.3.3:
+  /typescript@5.3.3(patch_hash=pc3ipe4yqkatcubt4zqtfzi3mq):
     resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
     engines: {node: '>=14.17'}
     hasBin: true
+    patched: true
 
   /ua-parser-js@1.0.37:
     resolution: {integrity: sha512-bhTyI94tZofjo+Dn8SN6Zv8nBDvyXTymAdM3LDI/0IboIUwTu1rEhW7v2TfiVsoYWgkQ4kOVqnI8APUFbIQIFQ==}
@@ -15505,6 +15533,8 @@ packages:
     dependencies:
       tslib: 2.6.2
 
-settings:
-  autoInstallPeers: false
-  excludeLinksFromLockfile: false
+  github.com/uNetworking/uWebSockets.js/fca27c05066342b01951782248640c8013b37196:
+    resolution: {tarball: https://codeload.github.com/uNetworking/uWebSockets.js/tar.gz/fca27c05066342b01951782248640c8013b37196}
+    name: uWebSockets.js
+    version: 20.34.0
+    dev: false

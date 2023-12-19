@@ -23,6 +23,7 @@
     "@deepkit/core": "1.0.1-alpha.108",
     "@deepkit/core-rxjs": "1.0.1-alpha.108",
     "@deepkit/event": "1.0.1-alpha.108",
+    "@deepkit/filesystem": "1.0.1-alpha.108",
     "@deepkit/framework": "1.0.1-alpha.108",
     "@deepkit/http": "1.0.1-alpha.108",
     "@deepkit/injector": "1.0.1-alpha.108",
@@ -34,13 +35,14 @@
     "@deepkit/template": "1.0.1-alpha.108",
     "@deepkit/type": "1.0.1-alpha.108",
     "@deepkit/workflow": "1.0.1-alpha.108",
-    "@deepular/client": "0.1.2",
-    "@deepular/core": "0.1.2",
-    "@deepular/server": "0.1.2",
+    "@deepular/client": "0.1.3",
+    "@deepular/core": "0.2.0",
+    "@deepular/server": "0.1.3",
     "@nx/angular": "17.2.6",
     "pixi.js": "7.3.2",
     "rxjs": "7.8.1",
     "tslib": "2.6.2",
+    "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.34.0",
     "zone.js": "0.14.0"
   },
   "devDependencies": {
@@ -57,7 +59,7 @@
     "@deepkit/type-compiler": "1.0.1-alpha.108",
     "@deepkit/vite": "1.0.1-alpha.108",
     "@deepular/compiler": "0.1.3",
-    "@deepular/dev": "0.1.4",
+    "@deepular/dev": "0.1.5",
     "@nx/esbuild": "17.2.6",
     "@nx/eslint": "17.2.6",
     "@nx/eslint-plugin": "17.2.6",
@@ -104,5 +106,11 @@
   "resolutions": {
     "typescript": "5.3.3",
     "@analogjs/vite-plugin-angular": "0.2.21"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "typescript@5.3.3": "patches/typescript@5.3.3.patch",
+      "@deepkit/type-compiler@1.0.1-alpha.108": "patches/@deepkit__type-compiler@1.0.1-alpha.108.patch"
+    }
   }
 }

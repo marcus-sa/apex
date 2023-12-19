@@ -11,7 +11,7 @@
       "options": {
         "cwd": "{projectRoot}",
         "envFile": "{workspaceRoot}/.env",
-        "command": "ngkit build"
+        "command": "deepular build"
       }
     },
     "serve": {
@@ -19,7 +19,7 @@
       "options": {
         "cwd": "{projectRoot}",
         "envFile": "{workspaceRoot}/.env",
-        "command": "ngkit serve"
+        "command": "deepular serve"
       }
     },
     "lint": {
