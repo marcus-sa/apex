@@ -8,6 +8,7 @@
     "stripInternal": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "useDefineForClassFields": false,
     "importHelpers": true,
     "target": "esnext",
     "module": "esnext",
@@ -15,9 +16,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {
-      "@zeus/engine": ["libs/engine/src/index.ts"]
-    }
+    "paths": {}
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

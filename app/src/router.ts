@@ -1,3 +1,23 @@
-import { provideRouter } from '@deepular/core';
+import { provideRouter, ServerController } from '@deepular/core';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
-export const router = provideRouter([]);
+import { GameComponent } from './game';
+import type { RoomController } from './game/room';
+import { RoomComponent } from './game/room';
+
+export const router = provideRouter([
+  {
+    path: 'game',
+    component: GameComponent,
+    children: [
+      {
+        path: 'room/:id',
+        component: RoomComponent,
+        imports: [],
+        resolve: {
+          info: (room: ServerController<RoomController>, route: ActivatedRouteSnapshot) => room.getInfo(route.params['id']),
+        },
+      },
+    ],
+  }
+]);
