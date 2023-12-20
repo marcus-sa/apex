@@ -1,0 +1,13 @@
+diff --git a/src/builders/dev-server/vite-server.js b/src/builders/dev-server/vite-server.js
+index 856e7dafc651a708d657674db4556a7743e28421..6717a880417d4347aa6ab3d8e0157f9bea16d693 100755
+--- a/src/builders/dev-server/vite-server.js
++++ b/src/builders/dev-server/vite-server.js
+@@ -318,7 +318,7 @@ async function setupServer(serverOptions, outputFiles, assets, preserveSymlinks,
+         ...externalMetadata.explicit,
+     ];
+     const configuration = {
+-        configFile: false,
++        configFile: node_path_1.join(serverOptions.projectRoot, 'vite.config.ts'),
+         envFile: false,
+         cacheDir: (0, node_path_1.join)(serverOptions.cacheOptions.path, 'vite'),
+         root: virtualProjectRoot,

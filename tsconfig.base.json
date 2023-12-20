@@ -16,7 +16,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@zeus/api/client": ["libs/api/client/src/index.ts"],
+      "@zeus/api/server": ["libs/api/server/src/index.ts"],
+      "@zeus/api/shared": ["libs/api/shared/src/index.ts"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
