@@ -15,7 +15,7 @@
         "outputPath": "dist/{projectRoot}",
         "main": "{projectRoot}/src/main.ts",
         "tsConfig": "{projectRoot}/tsconfig.app.json",
-        "assets": ["{projectRoot}/src/assets"],
+        "assets": [],
         "webpackConfig": "{projectRoot}/webpack.config.ts"
       },
       "configurations": {

@@ -1,9 +1,12 @@
 import { RemoteController, RpcKernelBaseConnection } from '@deepkit/rpc';
 import { WebSocket } from 'uWebSockets.js';
 
-import { GameControllerInterface, MessengerControllerInterface, RoomControllerInterface } from '@zeus/api/client';
-
-import { User } from './user';
+import {
+  GameControllerInterface,
+  MessengerControllerInterface,
+  RoomControllerInterface,
+} from '@zeus/api/client';
+import { User } from '@zeus/api/shared';
 
 export interface GameClientControllers {
   readonly game: RemoteController<GameControllerInterface>;
@@ -12,10 +15,8 @@ export interface GameClientControllers {
 }
 
 export class GameClient {
-  constructor(
-    readonly connection: RpcKernelBaseConnection,
-    readonly ws: WebSocket<undefined>,
-    readonly controllers: GameClientControllers,
-    readonly user?: User,
-  ) {}
+  readonly connection: RpcKernelBaseConnection;
+  readonly ws: WebSocket<undefined>;
+  readonly controllers: GameClientControllers;
+  readonly user?: User;
 }

@@ -1,17 +1,10 @@
 import { Route } from '@angular/router';
 
-import { GameComponent } from './game';
-import { RoomComponent } from './game/room';
+import { RoomComponent } from './room';
 
 export const routes: Route[] = [
   {
-    path: 'game',
-    component: GameComponent,
-    children: [
-      {
-        path: 'room/:id',
-        component: RoomComponent,
-      }
-    ]
+    path: 'room/:id',
+    component: RoomComponent,
   }
 ];
