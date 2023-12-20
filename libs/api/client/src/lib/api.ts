@@ -8,3 +8,6 @@ export const RoomControllerInterface = ControllerSymbol('game/room');
 
 export interface RoomControllerInterface {}
 
+export const MessengerControllerInterface = ControllerSymbol('messenger');
+
+export interface MessengerControllerInterface {}

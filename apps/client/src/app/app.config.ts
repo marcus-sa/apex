@@ -4,10 +4,11 @@ import { provideRouter } from '@angular/router';
 import { routes } from './routes';
 import { provideRpcClient } from './utils';
 import { GameController } from './game';
+import { MessengerController } from './game/messenger';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideRpcClient('ws://localhost:8081', [GameController]),
+    provideRpcClient('ws://localhost:8081', [GameController, MessengerController]),
   ],
 };

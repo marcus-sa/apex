@@ -1,22 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RpcClient } from '@deepkit/rpc';
+import { Component } from '@angular/core';
 
-import { RoomController } from './room.controller';
+import { RoomService } from './room.service';
 
 @Component({
   selector: 'zeus-room',
   standalone: true,
-  providers: [],
+  providers: [RoomService],
   templateUrl: './room.component.html',
 })
-export class RoomComponent implements OnInit, OnDestroy {
-  constructor(readonly client: RpcClient) {}
-
-  ngOnInit() {
-    this.client.registerController(RoomController, '/game/room');
-  }
-
-  ngOnDestroy() {
-    this.client.clientKernel!.controllers.delete('/game/room');
-  }
-}
+export class RoomComponent {}

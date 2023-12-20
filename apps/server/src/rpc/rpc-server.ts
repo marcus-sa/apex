@@ -1,5 +1,6 @@
 import { WebSocket, App } from 'uWebSockets.js';
-import { RpcKernelBaseConnection, RemoteController } from '@deepkit/rpc';
+import { RpcKernelBaseConnection } from '@deepkit/rpc';
+import { cast } from '@deepkit/type';
 import {
   RpcServerCreateConnection,
   RpcServerListener,
@@ -8,32 +9,45 @@ import {
   FrameworkConfig,
 } from '@deepkit/framework';
 
-import { GameControllerInterface, RoomControllerInterface } from '@zeus/api/client';
+import { GameControllerInterface, MessengerControllerInterface, RoomControllerInterface } from '@zeus/api/client';
 
-// https://unetworkingab.medium.com/millions-of-active-websockets-with-node-js-7dc575746a01
+import { GameClient } from '../game-client';
+import { ZeusRpcServerConfig } from '../config';
+
 export class ZeusRpcServer implements RpcServerInterface {
-  readonly connections = new Map<WebSocket<undefined>, RpcKernelBaseConnection>();
-  readonly clientControllers = new Map<RpcKernelBaseConnection, {
-    game: RemoteController<GameControllerInterface>,
-    room: RemoteController<RoomControllerInterface>,
-  }>;
+  private readonly connections = new Map<WebSocket<undefined>, RpcKernelBaseConnection>();
 
-  constructor(private readonly config: FrameworkConfig) {}
+  readonly gameClients = new Set<GameClient>();
 
-  private createClientControllers(connection: RpcKernelBaseConnection): void {
+  constructor(private readonly config: ZeusRpcServerConfig) {}
+
+  private addGameClient(ws: WebSocket<undefined>, connection: RpcKernelBaseConnection): void {
     const game = connection.controller<GameControllerInterface>(GameControllerInterface);
     const room = connection.controller<RoomControllerInterface>(RoomControllerInterface);
+    const messenger = connection.controller<MessengerControllerInterface>(MessengerControllerInterface);
 
-    this.clientControllers.set(connection, {
-      game,
-      room,
+    this.connections.set(ws, connection);
+
+    const gameClient = cast<GameClient>({
+      controllers: {
+        game,
+        room,
+        messenger,
+      },
+      connection,
+      ws,
     });
+
+    this.gameClients.add(gameClient);
   }
 
   start(options: RpcServerOptions, createRpcConnection: RpcServerCreateConnection): RpcServerListener {
+    // https://unetworkingab.medium.com/millions-of-active-websockets-with-node-js-7dc575746a01
     const server = App();
 
     server.ws('/' ,{
+      idleTimeout: this.config.idleTimeout,
+      maxLifetime: 0,
       open: (ws: WebSocket<undefined>) => {
         const connection = createRpcConnection({
           write(b) {
@@ -49,8 +63,7 @@ export class ZeusRpcServer implements RpcServerInterface {
             return new TextDecoder('utf8').decode(ws.getRemoteAddressAsText());
           }
         });
-        this.connections.set(ws, connection);
-        this.createClientControllers(connection);
+        this.addGameClient(ws, connection);
       },
       message: (ws: WebSocket<undefined>, message: ArrayBuffer) => {
         const connection = this.connections.get(ws);
@@ -63,7 +76,7 @@ export class ZeusRpcServer implements RpcServerInterface {
       }
     });
 
-    server.listen(this.config.port + 1, (res) => {
+    server.listen(this.config.port, (res) => {
       if (!res) {
         throw new Error('Failed to start RPC server');
       }

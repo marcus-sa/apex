@@ -3,6 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/client/src",
   "projectType": "library",
+  "tags": ["client"],
   "targets": {
     "build": {
       "executor": "@nx/rollup:rollup",
@@ -29,6 +30,5 @@
         "jestConfig": "{projectRoot}/jest.config.ts"
       }
     }
-  },
-  "tags": []
+  }
 }
