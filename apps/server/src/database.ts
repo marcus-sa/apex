@@ -11,12 +11,12 @@ import {
   Room,
   RoomItem,
   User,
-} from '@zeus/api/shared';
+} from '@apex/api/shared';
 
-import { ZeusDatabaseConfig } from './config';
+import { ApexDatabaseConfig } from './config';
 
-export class ZeusDatabase extends Database {
-  constructor(config: ZeusDatabaseConfig) {
+export class ApexDatabase extends Database {
+  constructor(config: ApexDatabaseConfig) {
     super(
       new MySQLDatabaseAdapter({
         ...config,

@@ -12,12 +12,12 @@ import {
   GameControllerInterface,
   MessengerControllerInterface,
   RoomControllerInterface,
-} from '@zeus/api/client';
+} from '@apex/api/client';
 
 import { GameClient } from '../game-client';
-import { ZeusRpcServerConfig } from '../config';
+import { ApexRpcServerConfig } from '../config';
 
-export class ZeusRpcServer implements RpcServerInterface {
+export class ApexRpcServer implements RpcServerInterface {
   private readonly connections = new WeakMap<
     WebSocket<undefined>,
     RpcKernelBaseConnection
@@ -25,7 +25,7 @@ export class ZeusRpcServer implements RpcServerInterface {
 
   readonly gameClients = new Set<GameClient>();
 
-  constructor(private readonly config: ZeusRpcServerConfig) {}
+  constructor(private readonly config: ApexRpcServerConfig) {}
 
   private addGameClient(
     ws: WebSocket<undefined>,

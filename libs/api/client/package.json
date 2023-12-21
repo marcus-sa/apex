@@ -1,5 +1,5 @@
 {
-  "name": "@zeus/api/client",
+  "name": "@apex/api/client",
   "version": "0.0.1",
   "dependencies": {},
   "type": "commonjs",

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RpcClient } from '@deepkit/rpc';
 
-import { RoomControllerInterface } from '@zeus/api/server';
+import { RoomControllerInterface } from '@apex/api/server';
 
 @Injectable()
 export class RoomService {

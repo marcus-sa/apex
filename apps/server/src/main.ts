@@ -3,16 +3,16 @@ import { FrameworkModule, RpcServer } from '@deepkit/framework';
 import { RpcKernelSecurity } from '@deepkit/rpc';
 import { Database } from '@deepkit/orm';
 
-import { ZeusRpcServer, ZeusRpcKernelSecurity } from './rpc';
+import { ApexRpcServer, ApexRpcKernelSecurity } from './rpc';
 import { UserController } from './user';
 import { MessengerController } from './messenger';
 import { RoomController } from './room';
-import { ZeusConfig } from './config';
+import { ApexConfig } from './config';
 import { InventoryController } from './inventory';
-import { ZeusDatabase } from './database';
+import { ApexDatabase } from './database';
 
 void new App({
-  config: ZeusConfig,
+  config: ApexConfig,
   imports: [new FrameworkModule()],
   controllers: [
     UserController,
@@ -23,15 +23,15 @@ void new App({
   providers: [
     {
       provide: RpcServer,
-      useClass: ZeusRpcServer,
+      useClass: ApexRpcServer,
     },
     {
       provide: RpcKernelSecurity,
-      useClass: ZeusRpcKernelSecurity,
+      useClass: ApexRpcKernelSecurity,
     },
     {
       provide: Database,
-      useClass: ZeusDatabase,
+      useClass: ApexDatabase,
     },
   ],
 })

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { RoomService } from './room.service';
 
 @Component({
-  selector: 'zeus-room',
+  selector: 'apex-room',
   standalone: true,
   providers: [RoomService],
   templateUrl: './room.component.html',

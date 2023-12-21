@@ -1,5 +1,5 @@
 {
-  "name": "@zeus/api/shared",
+  "name": "@apex/api/shared",
   "version": "0.0.1",
   "dependencies": {},
   "type": "commonjs",

@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { MessengerService } from './messenger.service';
 
 @Component({
-  selector: 'zeus-messenger',
+  selector: 'apex-messenger',
   standalone: true,
   imports: [RouterOutlet],
   providers: [MessengerService],

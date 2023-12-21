@@ -1,7 +1,7 @@
 import { ControllerSymbol } from '@deepkit/rpc';
 import { JSONEntity } from '@deepkit/type';
 
-import { Room, InvalidRoomPasswordError } from '@zeus/api/shared';
+import { Room, InvalidRoomPasswordError } from '@apex/api/shared';
 
 export const RoomControllerInterface = ControllerSymbol('room', [
   Room,

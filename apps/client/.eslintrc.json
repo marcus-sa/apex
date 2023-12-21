@@ -16,7 +16,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "zeus",
+            "prefix": "apex",
             "style": "camelCase"
           }
         ],
@@ -24,7 +24,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "zeus",
+            "prefix": "apex",
             "style": "kebab-case"
           }
         ]

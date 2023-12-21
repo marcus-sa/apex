@@ -1,18 +1,18 @@
 import { integer } from '@deepkit/type';
 
-export class ZeusRpcServerConfig {
+export class ApexRpcServerConfig {
   readonly idleTimeout: integer = 300;
   readonly port: number = 8082;
 }
 
-export class ZeusDatabaseConfig {
+export class ApexDatabaseConfig {
   readonly database: string;
   readonly user: string;
   readonly password: string;
   readonly host: string;
 }
 
-export class ZeusConfig {
-  readonly server: ZeusRpcServerConfig = new ZeusRpcServerConfig();
-  readonly database: ZeusDatabaseConfig;
+export class ApexConfig {
+  readonly server: ApexRpcServerConfig = new ApexRpcServerConfig();
+  readonly database: ApexDatabaseConfig;
 }

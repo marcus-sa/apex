@@ -5,8 +5,8 @@ import {
   GameControllerInterface,
   MessengerControllerInterface,
   RoomControllerInterface,
-} from '@zeus/api/client';
-import { User } from '@zeus/api/shared';
+} from '@apex/api/client';
+import { User } from '@apex/api/shared';
 
 export interface GameClientControllers {
   readonly game: RemoteController<GameControllerInterface>;
