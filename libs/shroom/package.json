@@ -19,5 +19,10 @@
     "swf-extract": "1.1.0",
     "@tweenjs/tween.js": "21.0.0",
     "xml2js": "0.6.2"
+  },
+  "devDependencies": {
+    "@types/rbush": "3.0.3",
+    "@types/bytebuffer": "^5.0.48",
+    "@types/xml2js": "^0.4.14"
   }
 }

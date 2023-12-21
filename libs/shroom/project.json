@@ -1,5 +1,5 @@
 {
-  "name": "api-shared",
+  "name": "shroom",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shroom/src",
   "projectType": "library",
