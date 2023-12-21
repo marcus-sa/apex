@@ -1,7 +1,16 @@
 {
+  "plugins": ["prettier-plugin-tailwindcss"],
   "trailingComma": "all",
   "bracketSpacing": true,
   "tabWidth": 2,
   "singleQuote": true,
-  "arrowParens": "avoid"
+  "arrowParens": "avoid",
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "angular"
+      }
+    }
+  ]
 }

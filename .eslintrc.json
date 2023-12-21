@@ -2,9 +2,14 @@
   "root": true,
   "ignorePatterns": ["**/*"],
   "plugins": ["@nx"],
+  "extends": ["plugin:tailwindcss/recommended"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "extends": ["import"],
+      "settings": {
+        "import/internal-regex": "^@(apex)/"
+      },
       "rules": {
         "@nx/enforce-module-boundaries": [
           "error",
@@ -18,13 +23,113 @@
               }
             ]
           }
+        ],
+        "eqeqeq": ["error", "always", { "null": "ignore" }],
+        "import/newline-after-import": "error",
+        "import/no-default-export": ["error"],
+        "import/no-unresolved": ["off"],
+        "import/no-internal-modules": ["warn"],
+        "import/order": [
+          "error",
+          {
+            "groups": [
+              ["builtin", "external"],
+              "internal",
+              ["parent", "sibling", "index"]
+            ],
+            "newlines-between": "always",
+            "pathGroups": [
+              {
+                "pattern": "^@(apex)/",
+                "group": "internal",
+                "position": "before"
+              }
+            ]
+          }
         ]
       }
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nx/typescript"],
-      "rules": {}
+      "extends": [
+        "plugin:@nx/typescript",
+        "plugin:etc/recommended",
+        "plugin:import/typescript",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:@typescript-eslint/strict",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "functional/immutable-data": ["error"],
+        "functional/no-method-signature": ["off"],
+        "functional/prefer-readonly-type": ["error"],
+        // "functional/no-expression-statement": ["error", { "ignoreVoid": true }],
+        "functional/no-loop-statement": ["error"],
+        "no-var": ["error"],
+        "prefer-const": ["error"],
+        "etc/no-const-enum": ["error"],
+        "etc/no-misused-generics": ["error"],
+        "etc/no-t": ["off"],
+        "etc/throw-error": ["error"],
+        "etc/prefer-interface": ["error"],
+        "@typescript-eslint/await-thenable": ["error"],
+        "@typescript-eslint/no-non-null-assertion": ["off"],
+        "@typescript-eslint/no-inferrable-types": ["off"],
+        "@typescript-eslint/explicit-module-boundary-types": ["warn"],
+        "@typescript-eslint/prefer-readonly": ["error"],
+        "@typescript-eslint/prefer-readonly-parameter-types": [
+          "off",
+          {
+            "ignoreInferredTypes": true,
+            "treatMethodsAsReadonly": true,
+            "checkParameterProperties": true
+          }
+        ],
+        "@typescript-eslint/prefer-nullish-coalescing": ["off"],
+        "@typescript-eslint/consistent-type-imports": ["error"],
+        "@typescript-eslint/promise-function-async": ["error"],
+        "@typescript-eslint/no-explicit-any": ["off"],
+        "@typescript-eslint/no-unused-vars": ["off"],
+        "@typescript-eslint/no-empty-interface": ["warn"],
+        "@typescript-eslint/no-misused-new": ["error"],
+        "@typescript-eslint/no-for-in-array": ["error"],
+        "@typescript-eslint/member-ordering": "off",
+        "@typescript-eslint/typedef": [
+          "warn",
+          {
+            "memberVariableDeclaration": true,
+            "propertyDeclaration": true,
+            "parameter": true
+          }
+        ],
+        "@typescript-eslint/no-unnecessary-condition": ["off"],
+        "@angular-eslint/directive-selector": [
+          "error",
+          { "type": "attribute", "prefix": "apex", "style": "camelCase" }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          { "type": "element", "prefix": "apex", "style": "kebab-case" }
+        ]
+      }
+    },
+    {
+      "files": ["*.html"],
+      "parser": "@angular-eslint/template-parser",
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        /**
+         * Any template/HTML related rules you wish to use/reconfigure over and above the
+         * recommended set provided by the @angular-eslint project would go here.
+         */
+      }
     },
     {
       "files": ["*.js", "*.jsx"],
@@ -38,5 +143,6 @@
       },
       "rules": {}
     }
+
   ]
 }
