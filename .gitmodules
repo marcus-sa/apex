@@ -1,0 +1,3 @@
+[submodule "libs/shroom/src"]
+	path = libs/shroom/src
+	url = https://github.com/marcus-sa/shroom.git
