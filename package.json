@@ -45,7 +45,21 @@
     "rxjs": "7.8.1",
     "tslib": "2.6.2",
     "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.34.0",
-    "zone.js": "0.14.0"
+    "zone.js": "0.14.0",
+    "@gizeta/swf-reader": "1.0.0",
+    "@timohausmann/quadtree-js": "1.2.6",
+    "bin-pack": "1.0.2",
+    "bytebuffer": "5.0.1",
+    "canvas": "2.11.2",
+    "detect-edges": "1.1.1",
+    "frame-stream": "4.0.0",
+    "glob": "10.3.10",
+    "quadtree-lib": "1.0.9",
+    "rbush": "3.0.1",
+    "stream": "0.0.2",
+    "swf-extract": "1.1.0",
+    "@tweenjs/tween.js": "21.0.0",
+    "xml2js": "0.6.2"
   },
   "devDependencies": {
     "@analogjs/vite-plugin-angular": "0.2.21",

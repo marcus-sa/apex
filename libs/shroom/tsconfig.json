@@ -17,5 +17,6 @@
     {
       "path": "./tsconfig.spec.json"
     }
-  ]
+  ],
+  "reflection": false
 }
