@@ -1,12 +1,11 @@
-import {
+import type {
   AutoIncrement,
-  cast,
-  entity,
   integer,
   JSONEntity,
   Positive,
   PrimaryKey,
 } from '@deepkit/type';
+import { cast, entity } from '@deepkit/type';
 
 export enum ItemType {
   ROOM,
@@ -19,7 +18,7 @@ export enum ItemInteractionType {
   TELEPORT,
 }
 
-@entity.name('item')
+@entity.name('base-item')
 export class BaseItem {
   readonly id: integer & PrimaryKey & AutoIncrement;
   readonly baseId: integer & Positive;

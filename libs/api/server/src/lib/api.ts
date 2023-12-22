@@ -1,7 +1,13 @@
 import { ControllerSymbol } from '@deepkit/rpc';
-import { JSONEntity } from '@deepkit/type';
+import type { JSONEntity } from '@deepkit/type';
 
-import { Room, InvalidRoomPasswordError } from '@apex/api/shared';
+import { Room, InvalidRoomPasswordError, User } from '@apex/api/shared';
+
+export const GameControllerInterface = ControllerSymbol('game', [User]);
+
+export interface GameControllerInterface {
+  getOnlineUsers(): Promise<readonly User[]>;
+}
 
 export const RoomControllerInterface = ControllerSymbol('room', [
   Room,

@@ -1,17 +1,17 @@
-import {
+import type {
   AutoIncrement,
-  entity,
+  BackReference,
   integer,
   PrimaryKey,
-  Reference,
 } from '@deepkit/type';
+import { entity } from '@deepkit/type';
 
-import { CatalogueItem } from './catalogue-item';
+import type { CatalogueItem } from './catalogue-item';
 
 @entity.name('catalogue-page')
 export class CataloguePage {
   readonly id: integer & PrimaryKey & AutoIncrement;
-  readonly items: readonly CatalogueItem[] & Reference;
+  readonly items: readonly CatalogueItem[] & BackReference;
   readonly caption: string;
   readonly visible: boolean = true;
   readonly enabled: boolean = true;
