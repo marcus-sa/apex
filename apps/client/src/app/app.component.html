@@ -1,2 +1,2 @@
-<div #canvas></div>
-<router-outlet></router-outlet>
+<router-outlet *ngIf="assetsLoaded"></router-outlet>
+<div class="bg-black w-full" #canvas></div>

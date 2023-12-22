@@ -64,9 +64,11 @@
       ],
       "rules": {
         // "functional/prefer-immutable-types": ["error"],
-        "functional/immutable-data": ["error"],
+        "functional/immutable-data": ["warn"],
         "functional/no-method-signature": ["off"],
-        "functional/prefer-readonly-type": ["error"],
+        "functional/prefer-readonly-type": ["error", {
+          "ignoreClass": "fieldsOnly"
+        }],
         // "functional/no-expression-statement": ["error", { "ignoreVoid": true }],
         "functional/no-loop-statement": ["off"],
         "no-var": ["error"],
@@ -76,6 +78,7 @@
         // "etc/no-t": ["off"],
         // "etc/throw-error": ["error"],
         // "etc/prefer-interface": ["error"],
+        "@typescript-eslint/no-extraneous-class": "off",
         "@typescript-eslint/require-await": "warn",
         "@typescript-eslint/no-misused-promises": "warn",
         "@typescript-eslint/await-thenable": ["error"],

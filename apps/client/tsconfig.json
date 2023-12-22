@@ -36,6 +36,7 @@
     "strictTemplates": true
   },
   "reflection": [
-    "src/**/*.controller.ts"
+    "src/**/*.controller.ts",
+    "src/app/ui/dialog.component.ts"
   ]
 }

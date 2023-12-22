@@ -12,11 +12,11 @@ export const RoomControllerInterface = ControllerSymbol('room', [
 ]);
 
 export interface RoomControllerInterface {
-  handleChatMessage(chat: RoomChat): Promise<void>;
-  handleUserJoined(user: User): Promise<void>;
-  handleUserLeft(user: User): Promise<void>;
-  kickMe(reason?: string): Promise<void>;
-  banMe(reason?: string): Promise<void>;
+  handleChatMessage(chat: RoomChat): void;
+  handleUserJoined(user: User): void;
+  handleUserLeft(user: User): void;
+  kickMe(reason?: string): void;
+  banMe(reason?: string): void;
 }
 
 export const MessengerControllerInterface = ControllerSymbol('messenger');
