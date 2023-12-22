@@ -1,18 +1,18 @@
-import { Writable } from 'type-fest';
-import {
+import type { Writable } from 'type-fest';
+import type {
   JSONEntity,
   AutoIncrement,
-  cast,
-  entity,
   integer,
   Positive,
   PrimaryKey,
   Reference,
   Unique,
+  BackReference,
 } from '@deepkit/type';
+import { cast, entity } from '@deepkit/type';
 
-import { Inventory } from './inventory';
-import { Room } from './room';
+import type { Inventory } from './inventory';
+import type { Room } from './room';
 
 @entity.name('user')
 export class User {
@@ -20,17 +20,19 @@ export class User {
   readonly credits: integer & Positive = 0;
   readonly motto?: string;
   readonly inventory: Inventory & Reference;
-  readonly rooms: readonly Room[] & Reference = [];
+  readonly rooms: readonly Room[] & BackReference = [];
   readonly username: string & Unique;
   readonly look: string;
   // transient
   readonly activeRoom?: Room;
 
   setActiveRoom(this: Writable<this>, room: Room): void {
+    // eslint-disable-next-line functional/immutable-data
     this.activeRoom = room;
   }
 
   addRoom(this: Writable<this>, room: Room): void {
+    // eslint-disable-next-line functional/immutable-data
     this.rooms = [...this.rooms, room];
   }
 

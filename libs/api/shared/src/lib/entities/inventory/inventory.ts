@@ -1,25 +1,25 @@
-import { Writable } from 'type-fest';
-import {
+import type { Writable } from 'type-fest';
+import type {
   AutoIncrement,
   BackReference,
   integer,
   JSONEntity,
   PrimaryKey,
   Reference,
-  cast,
-  entity,
 } from '@deepkit/type';
+import { cast, entity } from '@deepkit/type';
 
-import { User } from '../user';
-import { InventoryItem } from './inventory-item';
+import type { User } from '../user';
+import type { InventoryItem } from './inventory-item';
 
 @entity.name('inventory')
 export class Inventory {
   readonly id: integer & PrimaryKey & AutoIncrement;
-  readonly user: User & BackReference;
-  readonly items: readonly InventoryItem[] & Reference = [];
+  readonly user: User & Reference;
+  readonly items: readonly InventoryItem[] & BackReference = [];
 
   addItem(this: Writable<this>, item: InventoryItem): void {
+    // eslint-disable-next-line functional/immutable-data
     this.items = [...this.items, item];
   }
 

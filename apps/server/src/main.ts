@@ -13,7 +13,11 @@ import { ApexDatabase } from './database';
 
 void new App({
   config: ApexConfig,
-  imports: [new FrameworkModule()],
+  imports: [
+    new FrameworkModule({
+      migrateOnStartup: true,
+    }),
+  ],
   controllers: [
     UserController,
     MessengerController,
@@ -35,5 +39,5 @@ void new App({
     },
   ],
 })
-  .loadConfigFromEnv({ prefix: 'ZEUS_' })
+  .loadConfigFromEnv({ prefix: 'APEX_' })
   .run(['server:start']);

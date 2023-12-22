@@ -1,5 +1,6 @@
 import { Database } from '@deepkit/orm';
 import { MySQLDatabaseAdapter } from '@deepkit/mysql';
+import { PostgresDatabaseAdapter } from '@deepkit/postgres';
 
 import {
   BaseItem,
@@ -13,28 +14,39 @@ import {
   User,
 } from '@apex/api/shared';
 
-import { ApexDatabaseConfig } from './config';
+import type { ApexDatabaseConfig } from './config';
 
 export class ApexDatabase extends Database {
+  static createAdapter(config: ApexDatabaseConfig) {
+    switch (config.adapter) {
+      case 'mysql':
+        return new MySQLDatabaseAdapter({
+          database: config.name,
+          ssl: {
+            rejectUnauthorized: true,
+          },
+          ...config,
+        });
+
+      case 'postgres':
+        return new PostgresDatabaseAdapter({
+          database: config.name,
+          ...config,
+        });
+    }
+  }
+
   constructor(config: ApexDatabaseConfig) {
-    super(
-      new MySQLDatabaseAdapter({
-        ...config,
-        ssl: {
-          rejectUnauthorized: true,
-        },
-      }),
-      [
-        Inventory,
-        InventoryItem,
-        User,
-        Room,
-        RoomItem,
-        Catalogue,
-        CatalogueItem,
-        CataloguePage,
-        BaseItem,
-      ],
-    );
+    super(ApexDatabase.createAdapter(config), [
+      User,
+      BaseItem,
+      InventoryItem,
+      Inventory,
+      RoomItem,
+      Room,
+      Catalogue,
+      CataloguePage,
+      CatalogueItem,
+    ]);
   }
 }
