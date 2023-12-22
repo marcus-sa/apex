@@ -1,4 +1,4 @@
-import type { integer } from '@deepkit/type';
+import { integer } from '@deepkit/type';
 
 export class ApexRpcServerConfig {
   readonly idleTimeout: integer = 960;
