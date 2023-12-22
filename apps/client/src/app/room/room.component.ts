@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { RoomService } from './room.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'apex-room',
@@ -8,4 +9,8 @@ import { RoomService } from './room.service';
   providers: [RoomService],
   templateUrl: './room.component.html',
 })
-export class RoomComponent {}
+export class RoomComponent implements OnInit {
+  constructor(private readonly app: AppComponent) {}
+
+  ngOnInit() {}
+}

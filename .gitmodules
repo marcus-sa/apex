@@ -1,6 +1,3 @@
-[submodule "libs/shroom/src"]
-	path = libs/shroom/src
-	url = https://github.com/marcus-sa/shroom.git
 [submodule "libs/scuti-renderer/src"]
 	path = libs/scuti-renderer/src
 	url = https://github.com/marcus-sa/scuti-renderer.git

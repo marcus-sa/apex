@@ -27,7 +27,7 @@
       "@apex/api/client": ["libs/api/client/src/index.ts"],
       "@apex/api/server": ["libs/api/server/src/index.ts"],
       "@apex/api/shared": ["libs/api/shared/src/index.ts"],
-      "@jankuss/shroom": ["libs/shroom/src/src/index.ts"]
+      "@apex/scuti-renderer": ["libs/scuti-renderer/src/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

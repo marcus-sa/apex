@@ -5,24 +5,11 @@
   "main": "./index.cjs",
   "module": "./index.js",
   "dependencies": {
-    "@gizeta/swf-reader": "1.0.0",
-    "@timohausmann/quadtree-js": "1.2.6",
-    "bin-pack": "1.0.2",
-    "bytebuffer": "5.0.1",
-    "canvas": "2.11.2",
-    "detect-edges": "1.1.1",
-    "frame-stream": "4.0.0",
-    "glob": "10.3.10",
-    "quadtree-lib": "1.0.9",
-    "rbush": "3.0.1",
-    "stream": "0.0.2",
-    "swf-extract": "1.1.0",
-    "@tweenjs/tween.js": "21.0.0",
-    "xml2js": "0.6.2"
-  },
-  "devDependencies": {
-    "@types/rbush": "3.0.3",
-    "@types/bytebuffer": "^5.0.48",
-    "@types/xml2js": "^0.4.14"
+    "@pixi/layers": "^2.1.0",
+    "buffer": "^6.0.3",
+    "gsap": "^3.12.2",
+    "pixi-stats": "^1.2.2",
+    "pixi.js": "^7.2.4",
+    "scuti-bundle": "^1.0.7"
   }
 }
