@@ -1,4 +1,4 @@
-import type {
+import {
   AutoIncrement,
   integer,
   JSONEntity,
@@ -7,8 +7,8 @@ import type {
 } from '@deepkit/type';
 import { BackReference, cast, entity } from '@deepkit/type';
 
-import type { BaseItem } from '../base-item';
-import type { Inventory } from './inventory';
+import { BaseItem } from '../base-item';
+import { Inventory } from './inventory';
 
 @entity.name('inventory-item')
 export class InventoryItem {

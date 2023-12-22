@@ -1,4 +1,4 @@
-import type {
+import {
   AutoIncrement,
   BackReference,
   integer,
@@ -6,7 +6,7 @@ import type {
 } from '@deepkit/type';
 import { entity } from '@deepkit/type';
 
-import type { CatalogueItem } from './catalogue-item';
+import { CatalogueItem } from './catalogue-item';
 
 @entity.name('catalogue-page')
 export class CataloguePage {

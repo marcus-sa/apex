@@ -14,7 +14,7 @@ import {
   User,
 } from '@apex/api/shared';
 
-import type { ApexDatabaseConfig } from './config';
+import { ApexDatabaseConfig } from './config';
 
 export class ApexDatabase extends Database {
   static createAdapter(config: ApexDatabaseConfig) {

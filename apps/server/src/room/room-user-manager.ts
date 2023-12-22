@@ -1,4 +1,4 @@
-import type { Room, RoomUser } from '@apex/api/shared';
+import { Room, RoomUser } from '@apex/api/shared';
 
 export class RoomUserManager {
   private readonly users = new Set<RoomUser>();

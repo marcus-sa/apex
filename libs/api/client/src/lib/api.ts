@@ -2,7 +2,9 @@ import { ControllerSymbol } from '@deepkit/rpc';
 
 export const GameControllerInterface = ControllerSymbol('game');
 
-export interface GameControllerInterface {}
+export interface GameControllerInterface {
+  sendChat(): string;
+}
 
 export const RoomControllerInterface = ControllerSymbol('game/room');
 

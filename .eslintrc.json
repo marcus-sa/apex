@@ -1,7 +1,7 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nx"],
+  "plugins": ["@nx", "functional"],
   "extends": ["plugin:tailwindcss/recommended"],
   "overrides": [
     {
@@ -63,11 +63,12 @@
         "plugin:prettier/recommended"
       ],
       "rules": {
+        // "functional/prefer-immutable-types": ["error"],
         "functional/immutable-data": ["error"],
         "functional/no-method-signature": ["off"],
         "functional/prefer-readonly-type": ["error"],
         // "functional/no-expression-statement": ["error", { "ignoreVoid": true }],
-        "functional/no-loop-statement": ["error"],
+        "functional/no-loop-statement": ["off"],
         "no-var": ["error"],
         // "prefer-const": ["error"],
         // "etc/no-const-enum": ["error"],
@@ -89,7 +90,7 @@
           }
         ],
         "@typescript-eslint/prefer-nullish-coalescing": ["off"],
-        "@typescript-eslint/consistent-type-imports": ["error"],
+        "@typescript-eslint/consistent-type-imports": ["off"],
         "@typescript-eslint/promise-function-async": ["error"],
         "@typescript-eslint/no-explicit-any": ["off"],
         "@typescript-eslint/no-unused-vars": ["off"],

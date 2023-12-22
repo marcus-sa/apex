@@ -1,5 +1,5 @@
 import { WebSocket, App } from 'uWebSockets.js';
-import { RpcKernelBaseConnection } from '@deepkit/rpc';
+import { RemoteController, RpcKernelBaseConnection } from '@deepkit/rpc';
 import { cast } from '@deepkit/type';
 import {
   RpcServerCreateConnection,

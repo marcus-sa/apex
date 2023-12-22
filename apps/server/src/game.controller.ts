@@ -1,7 +1,7 @@
 import { rpc } from '@deepkit/rpc';
 
 import { GameControllerInterface } from '@apex/api/server';
-import type { User } from '@apex/api/shared';
+import { User } from '@apex/api/shared';
 
 import { ApexRpcServer } from './rpc';
 

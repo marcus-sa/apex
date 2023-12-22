@@ -1,5 +1,5 @@
 import { ControllerSymbol } from '@deepkit/rpc';
-import type { JSONEntity } from '@deepkit/type';
+import { JSONEntity } from '@deepkit/type';
 
 import { Room, InvalidRoomPasswordError, User } from '@apex/api/shared';
 

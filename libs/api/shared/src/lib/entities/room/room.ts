@@ -1,5 +1,5 @@
-import type { Writable } from 'type-fest';
-import type {
+import { Writable } from 'type-fest';
+import {
   JSONEntity,
   AutoIncrement,
   BackReference,
@@ -10,9 +10,9 @@ import type {
 } from '@deepkit/type';
 import { cast, entity } from '@deepkit/type';
 
-import type { User } from '../user';
-import type { RoomUser } from './room-user';
-import type { RoomItem } from './room-item';
+import { User } from '../user';
+import { RoomUser } from './room-user';
+import { RoomItem } from './room-item';
 
 export enum RoomType {
   OPEN,

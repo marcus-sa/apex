@@ -1,5 +1,5 @@
-import type { Writable } from 'type-fest';
-import type {
+import { Writable } from 'type-fest';
+import {
   AutoIncrement,
   BackReference,
   integer,
@@ -9,8 +9,8 @@ import type {
 } from '@deepkit/type';
 import { cast, entity } from '@deepkit/type';
 
-import type { User } from '../user';
-import type { InventoryItem } from './inventory-item';
+import { User } from '../user';
+import { InventoryItem } from './inventory-item';
 
 @entity.name('inventory')
 export class Inventory {

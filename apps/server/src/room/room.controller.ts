@@ -1,9 +1,9 @@
 import { rpc } from '@deepkit/rpc';
 import { Database } from '@deepkit/orm';
 
-import type { CreateRoomArgs } from '@apex/api/server';
+import { CreateRoomArgs } from '@apex/api/server';
 import { RoomControllerInterface } from '@apex/api/server';
-import type { Room } from '@apex/api/shared';
+import { Room } from '@apex/api/shared';
 
 @rpc.controller(RoomControllerInterface)
 export class RoomController implements RoomControllerInterface {

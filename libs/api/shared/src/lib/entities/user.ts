@@ -1,5 +1,5 @@
-import type { Writable } from 'type-fest';
-import type {
+import { Writable } from 'type-fest';
+import {
   JSONEntity,
   AutoIncrement,
   integer,
@@ -11,8 +11,8 @@ import type {
 } from '@deepkit/type';
 import { cast, entity } from '@deepkit/type';
 
-import type { Inventory } from './inventory';
-import type { Room } from './room';
+import { Inventory } from './inventory';
+import { Room } from './room';
 
 @entity.name('user')
 export class User {
