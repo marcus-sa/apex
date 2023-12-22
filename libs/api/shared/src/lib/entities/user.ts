@@ -8,6 +8,7 @@ import {
   Reference,
   Unique,
   BackReference,
+  DatabaseField,
 } from '@deepkit/type';
 import { cast, entity } from '@deepkit/type';
 
@@ -24,9 +25,9 @@ export class User {
   readonly username: string & Unique;
   readonly look: string;
   // transient
-  readonly activeRoom?: Room;
+  readonly activeRoom?: Room & DatabaseField<{ readonly skip: true }>;
 
-  setActiveRoom(this: Writable<this>, room: Room): void {
+  setActiveRoom(this: Writable<this>, room: Room | undefined): void {
     // eslint-disable-next-line functional/immutable-data
     this.activeRoom = room;
   }

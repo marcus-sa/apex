@@ -1,12 +1,12 @@
 import { RemoteController, RpcKernelBaseConnection } from '@deepkit/rpc';
 import { WebSocket } from 'uWebSockets.js';
 
+import { User } from '@apex/api/shared';
 import {
   GameControllerInterface,
   MessengerControllerInterface,
   RoomControllerInterface,
 } from '@apex/api/client';
-import { User } from '@apex/api/shared';
 
 export interface GameClientControllers {
   readonly game: RemoteController<GameControllerInterface>;

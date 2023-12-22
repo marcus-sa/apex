@@ -1,4 +1,6 @@
+import { cast, entity } from '@deepkit/type';
 import { Writable } from 'type-fest';
+import { Subject } from 'rxjs';
 import {
   JSONEntity,
   AutoIncrement,
@@ -7,14 +9,15 @@ import {
   PrimaryKey,
   PositiveNoZero,
   Reference,
+  DatabaseField,
 } from '@deepkit/type';
-import { cast, entity } from '@deepkit/type';
 
 import { User } from '../user';
 import { RoomUser } from './room-user';
 import { RoomItem } from './room-item';
+import { RoomChat } from './room-chat';
 
-export enum RoomType {
+export enum RoomState {
   OPEN,
   FULL,
   LOCKED,
@@ -30,9 +33,12 @@ export class Room {
   readonly password?: string;
   readonly capacity: integer & PositiveNoZero = 1;
   readonly items: readonly RoomItem[] & BackReference = [];
-  readonly type: RoomType = RoomType.OPEN;
+  readonly state: RoomState = RoomState.OPEN;
   // transient
-  readonly users: readonly RoomUser[] = [];
+  readonly users: readonly RoomUser[] & DatabaseField<{ readonly skip: true }> =
+    [];
+  readonly chats: Subject<RoomChat> & DatabaseField<{ readonly skip: true }> =
+    new Subject<RoomChat>();
 
   addUser(this: Writable<this>, user: RoomUser): void {
     // eslint-disable-next-line functional/immutable-data

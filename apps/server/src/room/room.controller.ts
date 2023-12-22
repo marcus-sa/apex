@@ -1,20 +1,34 @@
 import { rpc } from '@deepkit/rpc';
-import { Database } from '@deepkit/orm';
 
 import { CreateRoomArgs } from '@apex/api/server';
 import { RoomControllerInterface } from '@apex/api/server';
 import { Room } from '@apex/api/shared';
 
+import { UserSession } from '../user-session';
+import { RoomManager } from './room-manager';
+
 @rpc.controller(RoomControllerInterface)
 export class RoomController implements RoomControllerInterface {
-  constructor(private readonly database: Database) {}
+  constructor(
+    private readonly session: UserSession,
+    private readonly roomManager: RoomManager,
+  ) {}
 
-  // @ts-expect-error not implemented
-  async join(id: Room['id']): Promise<Room> {}
+  @rpc.action()
+  async join(
+    id: Room['id'],
+    options: { readonly password?: string },
+  ): Promise<Room> {
+    return await this.roomManager.join(id, this.session.user);
+  }
 
-  // @ts-expect-error not implemented
-  async delete(id: Room['id']): Promise<Room> {}
+  @rpc.action()
+  async create(data: CreateRoomArgs): Promise<Room> {
+    return await this.roomManager.create(this.session.user, data);
+  }
 
-  // @ts-expect-error not implemented
-  async create(data: CreateRoomArgs): Promise<Room> {}
+  @rpc.action()
+  async delete(id: Room['id']): Promise<Room> {
+    return await this.roomManager.delete(id, this.session.user);
+  }
 }

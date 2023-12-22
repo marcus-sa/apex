@@ -1,3 +1,9 @@
 import { Session } from '@deepkit/rpc';
 
-export class UserSession extends Session {}
+import { User } from '@apex/api/shared';
+
+export class UserSession extends Session {
+  constructor(readonly user: User) {
+    super(user.username, '');
+  }
+}

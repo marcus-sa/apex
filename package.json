@@ -54,6 +54,7 @@
     "frame-stream": "4.0.0",
     "glob": "10.3.10",
     "gsap": "^3.12.4",
+    "pixi-stats": "^1.2.2",
     "pixi.js": "7.3.2",
     "quadtree-lib": "1.0.9",
     "rbush": "3.0.1",

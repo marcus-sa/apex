@@ -1,5 +1,5 @@
 import { WebSocket, App } from 'uWebSockets.js';
-import { RemoteController, RpcKernelBaseConnection } from '@deepkit/rpc';
+import { RpcKernelBaseConnection } from '@deepkit/rpc';
 import { cast } from '@deepkit/type';
 import {
   RpcServerCreateConnection,
@@ -8,6 +8,7 @@ import {
   RpcServerInterface,
 } from '@deepkit/framework';
 
+import { User } from '@apex/api/shared';
 import {
   GameControllerInterface,
   MessengerControllerInterface,
@@ -23,7 +24,7 @@ export class ApexRpcServer implements RpcServerInterface {
     RpcKernelBaseConnection
   >();
 
-  readonly gameClients = new Set<GameClient>();
+  private readonly gameClients = new Set<GameClient>();
 
   constructor(private readonly config: ApexRpcServerConfig) {}
 
@@ -54,6 +55,20 @@ export class ApexRpcServer implements RpcServerInterface {
     });
 
     this.gameClients.add(gameClient);
+  }
+
+  getGameClientByUser(user: User): GameClient {
+    const gameClient = this.getGameClients().find(
+      client => client.user?.id === user.id,
+    );
+    if (!gameClient) {
+      throw new Error('No game client with user: ' + user.id);
+    }
+    return gameClient;
+  }
+
+  getGameClients(): readonly GameClient[] {
+    return [...this.gameClients];
   }
 
   start(
