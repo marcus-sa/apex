@@ -3,16 +3,15 @@ import { cast } from '@deepkit/type';
 import { Room, RoomChat, User } from '@apex/api/shared';
 import { CreateRoomArgs } from '@apex/api/server';
 
-import { ApexRpcServer } from '../rpc';
-import { GameClient } from '../game-client';
 import { RoomRepository } from './room.repository';
+import { GameManager, GameClient } from '../game';
 
 export class RoomManager {
   private readonly activeRooms = new Map<Room['id'], Room>();
 
   constructor(
     private readonly repo: RoomRepository,
-    private readonly server: ApexRpcServer,
+    private readonly game: GameManager,
   ) {}
 
   private async getOrCreateActiveRoom(id: Room['id']): Promise<Room> {
@@ -36,9 +35,7 @@ export class RoomManager {
   }
 
   private getGameClientsForActiveRoom(room: Room): readonly GameClient[] {
-    return this.server
-      .getGameClients()
-      .filter(client => client.user?.activeRoom === room);
+    return [...this.game.clients].filter(client => client.user?.activeRoom?.id === room.id);
   }
 
   async join(id: Room['id'], user: User): Promise<Room> {

@@ -3,14 +3,14 @@ import { FrameworkModule, RpcServer } from '@deepkit/framework';
 import { RpcKernelSecurity, SessionState } from '@deepkit/rpc';
 import { Database } from '@deepkit/orm';
 
-import { ApexRpcServer, ApexRpcKernelSecurity } from './rpc';
-import { UserController } from './user';
-import { MessengerController } from './messenger';
-import { RoomModule } from './room';
-import { ApexConfig } from './config';
+import { GameModule } from './game';
 import { InventoryController } from './inventory';
+import { RoomModule } from './room';
+import { ApexRpcServer, ApexRpcKernelSecurity } from './rpc';
+import { UserModule } from './user';
+import { MessengerController } from './messenger';
+import { ApexConfig } from './config';
 import { ApexDatabase } from './database';
-import { UserSession } from './user-session';
 
 void new App({
   config: ApexConfig,
@@ -18,9 +18,11 @@ void new App({
     new FrameworkModule({
       migrateOnStartup: true,
     }),
+    new GameModule(),
     new RoomModule(),
+    new UserModule(),
   ],
-  controllers: [UserController, MessengerController, InventoryController],
+  controllers: [MessengerController, InventoryController],
   providers: [
     {
       provide: RpcServer,
@@ -33,13 +35,6 @@ void new App({
     {
       provide: Database,
       useClass: ApexDatabase,
-    },
-    {
-      provide: UserSession,
-      scope: 'rpc',
-      useFactory(sessionState: SessionState): UserSession {
-        return sessionState.getSession() as UserSession;
-      },
     },
   ],
 })

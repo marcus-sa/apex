@@ -4,7 +4,7 @@ import { CreateRoomArgs } from '@apex/api/server';
 import { RoomControllerInterface } from '@apex/api/server';
 import { Room } from '@apex/api/shared';
 
-import { UserSession } from '../user-session';
+import { UserSession } from '../user';
 import { RoomManager } from './room-manager';
 
 @rpc.controller(RoomControllerInterface)

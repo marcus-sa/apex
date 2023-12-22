@@ -1,6 +1,5 @@
 import { WebSocket, App } from 'uWebSockets.js';
 import { RpcKernelBaseConnection } from '@deepkit/rpc';
-import { cast } from '@deepkit/type';
 import {
   RpcServerCreateConnection,
   RpcServerListener,
@@ -8,14 +7,7 @@ import {
   RpcServerInterface,
 } from '@deepkit/framework';
 
-import { User } from '@apex/api/shared';
-import {
-  GameControllerInterface,
-  MessengerControllerInterface,
-  RoomControllerInterface,
-} from '@apex/api/client';
-
-import { GameClient } from '../game-client';
+import { GameManager } from '../game';
 import { ApexRpcServerConfig } from '../config';
 
 export class ApexRpcServer implements RpcServerInterface {
@@ -24,52 +16,10 @@ export class ApexRpcServer implements RpcServerInterface {
     RpcKernelBaseConnection
   >();
 
-  private readonly gameClients = new Set<GameClient>();
-
-  constructor(private readonly config: ApexRpcServerConfig) {}
-
-  private addGameClient(
-    ws: WebSocket<undefined>,
-    connection: RpcKernelBaseConnection,
-  ): void {
-    const game = connection.controller<GameControllerInterface>(
-      GameControllerInterface,
-    );
-    const room = connection.controller<RoomControllerInterface>(
-      RoomControllerInterface,
-    );
-    const messenger = connection.controller<MessengerControllerInterface>(
-      MessengerControllerInterface,
-    );
-
-    this.connections.set(ws, connection);
-
-    const gameClient = cast<GameClient>({
-      controllers: {
-        game,
-        room,
-        messenger,
-      },
-      connection,
-      ws,
-    });
-
-    this.gameClients.add(gameClient);
-  }
-
-  getGameClientByUser(user: User): GameClient {
-    const gameClient = this.getGameClients().find(
-      client => client.user?.id === user.id,
-    );
-    if (!gameClient) {
-      throw new Error('No game client with user: ' + user.id);
-    }
-    return gameClient;
-  }
-
-  getGameClients(): readonly GameClient[] {
-    return [...this.gameClients];
-  }
+  constructor(
+    private readonly config: ApexRpcServerConfig,
+    private readonly gameManager: GameManager,
+  ) {}
 
   start(
     options: RpcServerOptions,
@@ -96,7 +46,8 @@ export class ApexRpcServer implements RpcServerInterface {
             return new TextDecoder('utf8').decode(ws.getRemoteAddressAsText());
           },
         });
-        this.addGameClient(ws, connection);
+        this.connections.set(ws, connection);
+        this.gameManager.addClient(connection);
       },
       message: (ws: WebSocket<undefined>, message: ArrayBuffer) => {
         const connection = this.connections.get(ws)!;
