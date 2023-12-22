@@ -64,7 +64,9 @@
       ],
       "rules": {
         // "functional/prefer-immutable-types": ["error"],
-        "functional/immutable-data": ["warn"],
+        "functional/immutable-data": ["warn", {
+          "ignoreClass": true
+        }],
         "functional/no-method-signature": ["off"],
         "functional/prefer-readonly-type": ["error", {
           "ignoreClass": "fieldsOnly"
