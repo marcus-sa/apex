@@ -15,6 +15,7 @@ export interface RoomControllerInterface {
   handleChatMessage(chat: RoomChat): void;
   handleUserJoined(user: User): void;
   handleUserLeft(user: User): void;
+  handleUpdates(room: Room): void;
   kickMe(reason?: string): void;
   banMe(reason?: string): void;
 }

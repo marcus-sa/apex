@@ -37,7 +37,9 @@ export class ApexRpcServer implements RpcServerInterface {
             ws.send(b, true);
           },
           close() {
-            ws.close();
+            try {
+              ws.close();
+            } catch {}
           },
           bufferedAmount() {
             return ws.getBufferedAmount();

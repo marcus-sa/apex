@@ -118,4 +118,8 @@ export class RoomManager {
 
     return room;
   }
+
+  async get(id: Room['id']): Promise<Room> {
+    return await this.getOrCreateActiveRoom(id);
+  }
 }

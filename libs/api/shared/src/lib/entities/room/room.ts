@@ -31,6 +31,7 @@ export class Room {
   readonly owner: User & Reference;
   readonly description?: string;
   readonly password?: string;
+  readonly map: string;
   readonly capacity: integer & PositiveNoZero = 1;
   readonly items: readonly RoomItem[] & BackReference = [];
   readonly state: RoomState = RoomState.OPEN;

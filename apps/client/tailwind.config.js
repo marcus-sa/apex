@@ -1,4 +1,5 @@
 const { createGlobPatternsForDependencies } = require('@nx/angular/tailwind');
+const { addDynamicIconSelectors } = require('@iconify/tailwind');
 const { join } = require('node:path');
 
 /** @type {import('tailwindcss').Config} */
@@ -10,5 +11,7 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    addDynamicIconSelectors(),
+  ],
 };

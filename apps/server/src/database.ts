@@ -38,10 +38,10 @@ export class ApexDatabase extends Database {
 
   constructor(config: ApexDatabaseConfig) {
     super(ApexDatabase.createAdapter(config), [
-      User,
       BaseItem,
-      InventoryItem,
       Inventory,
+      InventoryItem,
+      User,
       RoomItem,
       Room,
       Catalogue,

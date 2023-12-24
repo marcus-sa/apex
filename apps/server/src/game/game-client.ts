@@ -14,7 +14,9 @@ export interface GameClientControllers {
 }
 
 export class GameClient {
-  readonly connection: RpcKernelBaseConnection;
-  readonly controllers: GameClientControllers;
-  readonly user?: User;
+  constructor(
+    readonly connection: RpcKernelBaseConnection,
+  readonly controllers: GameClientControllers,
+  readonly user?: User,) {
+  }
 }

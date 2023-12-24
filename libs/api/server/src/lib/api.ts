@@ -17,11 +17,12 @@ export const RoomControllerInterface = ControllerSymbol('room', [
 export type CreateRoomArgs = Omit<JSONEntity<Room>, 'id' | 'users' | 'owner'>;
 
 export interface RoomControllerInterface {
+  get(id: Room['id']): Promise<Room>;
   /**
    * @returns Room
    * @throws InvalidRoomPasswordError
    */
-  join(id: Room['id'], options: { readonly password?: string }): Promise<Room>;
+  join(id: Room['id'], options?: { readonly password?: string }): Promise<Room>;
 
   delete(id: Room['id']): Promise<Room>;
 

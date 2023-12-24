@@ -23,14 +23,7 @@ export class GameManager {
       MessengerControllerInterface,
     );
 
-    const gameClient = cast<GameClient>({
-      controllers: {
-        game,
-        room,
-        messenger,
-      },
-      connection,
-    });
+    const gameClient = new GameClient(connection, { game, room, messenger });
 
     const session = connection.sessionState.getSession()
     if (session instanceof UserSession) {

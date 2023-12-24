@@ -17,6 +17,8 @@ void new App({
   imports: [
     new FrameworkModule({
       migrateOnStartup: true,
+      debug: true,
+      debugBrokerHost: 'http://localhost:8083',
     }),
     new GameModule(),
     new RoomModule(),
@@ -38,5 +40,6 @@ void new App({
     },
   ],
 })
+  // TODO: load config from yaml/json file
   .loadConfigFromEnv({ prefix: 'APEX_' })
   .run(['server:start']);

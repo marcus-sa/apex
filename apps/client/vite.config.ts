@@ -1,17 +1,17 @@
 import { join } from 'node:path';
 import { defineConfig } from 'vite';
-import { deepkitType } from '@deepkit/vite'
+import { deepkitType } from '@deepkit/vite';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 export default defineConfig({
   optimizeDeps: {
     exclude: ['@deepkit/rpc'],
     esbuildOptions: {
-      target: 'esnext'
-    }
+      target: 'esnext',
+    },
   },
   build: {
-    target: 'esnext'
+    target: 'esnext',
   },
   plugins: [
     nxViteTsPaths(),
@@ -20,6 +20,6 @@ export default defineConfig({
         sourceMap: true,
       },
       tsConfig: join(__dirname, 'tsconfig.app.json'),
-    })
+    }),
   ],
 });
