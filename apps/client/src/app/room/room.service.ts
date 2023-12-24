@@ -9,9 +9,14 @@ import { ROOM } from './something';
 
 @Injectable()
 export class RoomService {
-  private readonly server = this.client.controller<RoomControllerInterface>(RoomControllerInterface);
+  private readonly server = this.client.controller<RoomControllerInterface>(
+    RoomControllerInterface,
+  );
 
-  constructor(private readonly client: RpcClient, @Inject(ROOM) private readonly room$: Subject<Room>) {}
+  constructor(
+    private readonly client: RpcClient,
+    @Inject(ROOM) private readonly room$: Subject<Room>,
+  ) {}
 
   isOwner(user: User, room: Room): boolean {
     return user.id === room.owner.id;
@@ -21,8 +26,11 @@ export class RoomService {
     return await this.server.get(id);
   }
 
-  async join(id: Room['id']): Promise<Room> {
-    const room = await this.server.join(id);
+  async join(
+    id: Room['id'],
+    options?: { readonly password?: string },
+  ): Promise<Room> {
+    const room = await this.server.join(id, options);
     this.room$.next(room);
     return room;
   }

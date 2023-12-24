@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
   standalone: true,
   template: ``,
   host: {
-    class: 'h-7 text-xs w-full rounded-sm text-black px-2 inner-shadow border-none focus:outline-none'
-  }
+    class:
+      'h-7 text-xs w-full rounded-sm text-black px-2 shadow-inner focus:outline-none',
+  },
 })
 export class ApexInputComponent {}

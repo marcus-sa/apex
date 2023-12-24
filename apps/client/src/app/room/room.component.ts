@@ -2,7 +2,7 @@ import { Component, DestroyRef, Inject, OnInit, signal } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { cast, deserialize } from '@deepkit/type';
+import { Observable } from 'rxjs';
 
 import { Room, RoomState } from '@apex/api/shared';
 import {
@@ -15,7 +15,7 @@ import { AppComponent } from '../app.component';
 import { RoomService } from './room.service';
 import { UserService } from '../user';
 import { ROOM } from './something';
-import { Observable, Subject } from 'rxjs';
+import { PasswordProtectedRoomDialogComponent } from './password-protected-room-dialog.component';
 
 @Component({
   selector: 'apex-room',
@@ -53,25 +53,47 @@ export class RoomComponent implements OnInit {
     this.app.renderer.add(this.scutiRoom);
   }
 
-  private async join(id: Room['id']) {
-    const room = await this.service.join(id);
+  private async join(
+    id: Room['id'],
+    options?: { readonly password?: string },
+  ): Promise<Room> {
+    const room = await this.service.join(id, options);
     this.render(room);
+    return room;
   }
 
   async ngOnInit(): Promise<void> {
     this.activatedRoute.params
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(async params => {
-        const room = await this.service.get(+params['id']);
-        // room.users.length === room.capacity
+        let room = await this.service.get(+params['id']);
         if (!this.service.isOwner(this.user.me, room)) {
+          // room.users.length === room.capacity
           if (room.state === RoomState.FULL) {
           } else if (room.state === RoomState.LOCKED) {
           } else if (room.state === RoomState.PASSWORD_PROTECTED) {
+            const dialogRef = this.dialog.open(
+              PasswordProtectedRoomDialogComponent,
+              {
+                data: {
+                  room,
+                },
+              },
+            );
+
+            dialogRef.componentInstance!.error.set(new Error('wtf'));
+
+            dialogRef.componentInstance!.onSubmit.subscribe(async password => {
+              try {
+                room = await this.join(room.id, { password });
+                dialogRef.componentInstance!.close();
+                return;
+              } catch (err) {
+                dialogRef.componentInstance!.error.set(err as Error);
+              }
+            });
           }
         }
-
-        await this.join(room.id);
       });
   }
 }
