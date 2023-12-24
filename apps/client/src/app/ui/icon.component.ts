@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { cva } from 'class-variance-authority';
 
-const icon = cva([], {
+const icon = cva(['h-5', 'w-5'], {
   variants: {
     type: {
       cross: 'icon-[iconoir--xmark]',
