@@ -1,8 +1,7 @@
-import { cast, entity } from '@deepkit/type';
+import { entity } from '@deepkit/type';
 import { Writable } from 'type-fest';
 import { Subject } from 'rxjs';
 import {
-  JSONEntity,
   AutoIncrement,
   BackReference,
   integer,
@@ -26,7 +25,7 @@ export enum RoomState {
 
 @entity.name('room')
 export class Room {
-  readonly id: integer & PrimaryKey & AutoIncrement;
+  readonly id: integer & PrimaryKey & AutoIncrement = 0;
   readonly name: string;
   readonly owner: User & Reference;
   readonly description?: string;
@@ -46,7 +45,16 @@ export class Room {
     this.users = [...this.users, user];
   }
 
-  static create(data: JSONEntity<Room>): Room {
-    return cast<Room>(data);
+  setOwner(this: Writable<this>, owner: User): void {
+    // eslint-disable-next-line functional/immutable-data
+    this.owner = owner;
+  }
+
+  static create({ name, owner, map }: Pick<Room, 'name' | 'owner' | 'map'>) {
+    return Object.assign(new Room(), {
+      name,
+      owner,
+      map,
+    });
   }
 }

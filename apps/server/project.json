@@ -39,6 +39,13 @@
         }
       }
     },
+    "seed": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/server",
+        "command": "ts-node -r tsconfig-paths/register src/seed.ts"
+      }
+    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"]

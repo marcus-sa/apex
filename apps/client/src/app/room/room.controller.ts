@@ -1,13 +1,16 @@
 import { rpc } from '@deepkit/rpc';
-import { inject } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
-import { RoomControllerInterface } from '@apex/api/client';
+import { RoomControllerInterface, RoomEvent } from '@apex/api/client';
 import { Room, RoomChat, User } from '@apex/api/shared';
-import { ROOM } from './something';
 
 @rpc.controller(RoomControllerInterface)
 export class RoomController implements RoomControllerInterface {
-  readonly room$ = inject(ROOM);
+  #events = new Subject<RoomEvent>();
+
+  get events(): Observable<RoomEvent> {
+    return this.#events.asObservable();
+  }
 
   banMe(reason?: string): void {}
 
@@ -20,4 +23,8 @@ export class RoomController implements RoomControllerInterface {
   handleUpdates(room: Room) {}
 
   kickMe(reason?: string): void {}
+
+  handleEvent(event: RoomEvent): void {
+    this.#events.next(event);
+  }
 }

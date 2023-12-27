@@ -4,6 +4,37 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: SpaceGrotesk-Bold;
+  src: url('./assets/fonts/SpaceGrotesk-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: SpaceGrotesk-Light;
+  src: url('./assets/fonts/SpaceGrotesk-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: SpaceGrotesk-Medium;
+  src: url('./assets/fonts/SpaceGrotesk-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: SpaceGrotesk-Regular;
+  src: url('./assets/fonts/SpaceGrotesk-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: SpaceGrotesk-SemiBold;
+  src: url('./assets/fonts/SpaceGrotesk-SemiBold.ttf') format('truetype');
+}
+
+@layer base {
+  html {
+    @apply font-regular;
+  }
+}
+
 .animation-shake {
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);

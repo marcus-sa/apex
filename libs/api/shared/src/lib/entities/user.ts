@@ -1,26 +1,24 @@
 import { Writable } from 'type-fest';
+import { entity } from '@deepkit/type';
 import {
-  JSONEntity,
   AutoIncrement,
   integer,
   Positive,
   PrimaryKey,
-  Reference,
   Unique,
   BackReference,
   DatabaseField,
 } from '@deepkit/type';
-import { cast, entity } from '@deepkit/type';
 
 import { Inventory } from './inventory';
 import { Room } from './room';
 
 @entity.name('user')
 export class User {
-  readonly id: integer & PrimaryKey & AutoIncrement;
+  readonly id: integer & PrimaryKey & AutoIncrement = 0;
   readonly credits: integer & Positive = 0;
   readonly motto?: string;
-  readonly inventory: Inventory & Reference;
+  readonly inventory: Inventory & BackReference = new Inventory(this);
   readonly rooms: readonly Room[] & BackReference = [];
   readonly username: string & Unique;
   readonly look: string;
@@ -37,7 +35,7 @@ export class User {
     this.rooms = [...this.rooms, room];
   }
 
-  static create(data: JSONEntity<User>): User {
-    return cast<User>(data);
+  static create({ username, look }: Pick<User, 'username' | 'look'>): User {
+    return Object.assign(new User(), { username, look });
   }
 }

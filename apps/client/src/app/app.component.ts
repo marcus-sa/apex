@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, signal, TemplateRef, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { NgIf } from '@angular/common';
@@ -13,7 +13,10 @@ import { Scuti } from '@apex/scuti-renderer';
 })
 export class AppComponent implements OnInit {
   @ViewChild('canvas', { static: true })
-  readonly canvas: ElementRef<HTMLDivElement>;
+  readonly canvasElementRef: ElementRef<HTMLDivElement>;
+
+  @ViewChild('init', { static: true })
+  readonly initTemplateRef: TemplateRef<unknown>;
 
   renderer: Scuti;
   assetsLoaded = signal(false);
@@ -21,22 +24,19 @@ export class AppComponent implements OnInit {
   constructor(private readonly dialog: Dialog) {}
 
   async ngOnInit() {
-    // const dialogRef = this.dialog.open(ApexDialogComponent, {
-    //   hasBackdrop: true,
-    //   data: {
-    //     content: 'Initializing game ...',
-    //   },
-    // });
+    const dialogRef = this.dialog.open(this.initTemplateRef, {
+      hasBackdrop: true,
+    });
     this.renderer = new Scuti({
       width: window.innerWidth,
       height: window.innerHeight,
-      canvas: this.canvas.nativeElement,
+      canvas: this.canvasElementRef.nativeElement,
       resources: 'http://localhost:8083',
       backgroundColor: 0x212225,
       resizeTo: window,
     });
     await this.renderer.load();
     this.assetsLoaded.set(true);
-    // dialogRef.close();
+    dialogRef.close();
   }
 }

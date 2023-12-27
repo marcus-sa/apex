@@ -11,16 +11,18 @@ import {
   WallMaterial as ScutiWallMaterial,
 } from '@apex/scuti-renderer';
 
+import { JoinRoomOptions } from '@apex/api/server';
+import { RoomChatEvent } from '@apex/api/client';
+
 import { AppComponent } from '../app.component';
 import { RoomService } from './room.service';
 import { UserService } from '../user';
-import { ROOM } from './something';
 import { PasswordProtectedRoomDialogComponent } from './password-protected-room-dialog.component';
+import { RoomController } from './room.controller';
 
 @Component({
   selector: 'apex-room',
   standalone: true,
-  providers: [RoomService],
   templateUrl: './room.component.html',
 })
 export class RoomComponent implements OnInit {
@@ -33,9 +35,7 @@ export class RoomComponent implements OnInit {
     private readonly user: UserService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly destroyRef: DestroyRef,
-    private readonly router: Router,
-    @Inject(ROOM)
-    protected readonly room$: Observable<Room>,
+    private readonly controller: RoomController,
   ) {}
 
   private render(room: Room) {
@@ -55,7 +55,7 @@ export class RoomComponent implements OnInit {
 
   private async join(
     id: Room['id'],
-    options?: { readonly password?: string },
+    options?: JoinRoomOptions,
   ): Promise<Room> {
     const room = await this.service.join(id, options);
     this.render(room);
@@ -81,13 +81,10 @@ export class RoomComponent implements OnInit {
               },
             );
 
-            dialogRef.componentInstance!.error.set(new Error('wtf'));
-
             dialogRef.componentInstance!.onSubmit.subscribe(async password => {
               try {
                 room = await this.join(room.id, { password });
                 dialogRef.componentInstance!.close();
-                return;
               } catch (err) {
                 dialogRef.componentInstance!.error.set(err as Error);
               }
@@ -95,5 +92,15 @@ export class RoomComponent implements OnInit {
           }
         }
       });
+
+    this.controller.events.pipe(
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe(event => {
+      switch (true) {
+        case event instanceof RoomChatEvent: {
+          // TODO
+        }
+      }
+    });
   }
 }

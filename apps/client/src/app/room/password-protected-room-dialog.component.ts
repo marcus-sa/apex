@@ -34,8 +34,12 @@ export interface ApexPasswordProtectedRoomDialogData {
         (keydown)="error.set(null)"
       />
       <span class="text-red-700" *ngIf="isInvalidDoorCodeError(error())">
-        Invalid door code ...
+        Invalid door code
       </span>
+      <p class="text-red-700" *ngIf="isUnknownError(error())">
+        An unknown error occurred:
+        {{ error()?.['message'] }};
+      </p>
       <div class="flex justify-between">
         <button apex (click)="submit()">Enter</button>
         <button apex (click)="close()">Cancel</button>
@@ -52,9 +56,9 @@ export interface ApexPasswordProtectedRoomDialogData {
   ],
 })
 export class PasswordProtectedRoomDialogComponent {
-  password: string;
+  protected password: string;
 
-  error = signal<InvalidRoomPasswordError | Error | null>(null);
+  readonly error = signal<InvalidRoomPasswordError | Error | null>(null);
 
   readonly #onSubmit = new Subject<string>();
 
@@ -64,7 +68,8 @@ export class PasswordProtectedRoomDialogComponent {
 
   constructor(
     protected readonly dialogRef: DialogRef,
-    @Inject(DIALOG_DATA) readonly data: ApexPasswordProtectedRoomDialogData,
+    @Inject(DIALOG_DATA)
+    protected readonly data: ApexPasswordProtectedRoomDialogData,
   ) {
     assert<Room>(data);
 
@@ -79,11 +84,15 @@ export class PasswordProtectedRoomDialogComponent {
     return error instanceof InvalidRoomPasswordError;
   }
 
-  close() {
-    this.dialogRef.close();
+  protected isUnknownError(error: unknown): error is Error {
+    return error instanceof Error;
   }
 
   protected submit() {
     this.#onSubmit.next(this.password);
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }

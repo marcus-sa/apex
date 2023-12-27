@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { RpcClient } from '@deepkit/rpc';
 import { Subject } from 'rxjs';
 
-import { RoomControllerInterface } from '@apex/api/server';
+import { JoinRoomOptions, RoomControllerInterface } from '@apex/api/server';
 import { Room, User } from '@apex/api/shared';
 
 import { ROOM } from './something';
@@ -28,7 +28,7 @@ export class RoomService {
 
   async join(
     id: Room['id'],
-    options?: { readonly password?: string },
+    options?: JoinRoomOptions,
   ): Promise<Room> {
     const room = await this.server.join(id, options);
     this.room$.next(room);

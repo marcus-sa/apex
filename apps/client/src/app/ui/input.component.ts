@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'input[apex]',
+  selector: 'input[apex-input]',
   exportAs: 'apexInput',
   standalone: true,
   template: ``,

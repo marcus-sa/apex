@@ -9,7 +9,15 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        bold: 'SpaceGrotesk-Bold',
+        light: 'SpaceGrotesk-Light',
+        medium: 'SpaceGrotesk-Medium',
+        regular: 'SpaceGrotesk-Regular',
+        'semi-bold': 'SpaceGrotesk-SemiBold'
+      }
+    },
   },
   plugins: [
     addDynamicIconSelectors(),

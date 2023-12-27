@@ -1,2 +1,5 @@
 <router-outlet *ngIf="assetsLoaded()"></router-outlet>
-<div class="fixed w-full bg-black" #canvas></div>
+<div class="fixed w-full" #canvas></div>
+<ng-template #init>
+  Initializing game ...
+</ng-template>
