@@ -1,0 +1,17 @@
+{
+  "name": "@apex/pathfinding-win32-ia32-msvc",
+  "version": "0.0.0",
+  "os": [
+    "win32"
+  ],
+  "cpu": [
+    "ia32"
+  ],
+  "main": "pathfinding.win32-ia32-msvc.node",
+  "files": [
+    "pathfinding.win32-ia32-msvc.node"
+  ],
+  "engines": {
+    "node": ">= 10"
+  }
+}

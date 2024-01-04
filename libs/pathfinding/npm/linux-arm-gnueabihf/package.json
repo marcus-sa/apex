@@ -1,0 +1,17 @@
+{
+  "name": "@apex/pathfinding-linux-arm-gnueabihf",
+  "version": "0.0.0",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "arm"
+  ],
+  "main": "pathfinding.linux-arm-gnueabihf.node",
+  "files": [
+    "pathfinding.linux-arm-gnueabihf.node"
+  ],
+  "engines": {
+    "node": ">= 10"
+  }
+}
