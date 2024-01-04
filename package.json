@@ -52,6 +52,7 @@
     "seedrandom": "^3.0.5",
     "tslib": "2.6.2",
     "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.34.0",
+    "yaml": "^2.3.4",
     "zone.js": "0.14.0"
   },
   "devDependencies": {

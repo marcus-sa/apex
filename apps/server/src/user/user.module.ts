@@ -1,6 +1,8 @@
 import { createModule } from '@deepkit/app';
 import { SessionState } from '@deepkit/rpc';
 
+import { User } from '@apex/api/shared';
+
 import { UserSession } from './user-session';
 import { UserController } from './user.controller';
 
@@ -14,7 +16,14 @@ export class UserModule extends createModule({
         return sessionState.getSession() as UserSession;
       },
     },
+    {
+      provide: User,
+      scope: 'rpc',
+      useFactory(session: UserSession): User {
+        return session.user;
+      },
+    },
   ],
-  exports: [UserSession],
+  exports: [UserSession, User],
   forRoot: true,
 }) {}

@@ -7,7 +7,6 @@ import {
   RpcServerInterface,
 } from '@deepkit/framework';
 
-import { GameManager } from '../game';
 import { ApexRpcServerConfig } from '../config';
 
 export class ApexRpcServer implements RpcServerInterface {
@@ -16,10 +15,7 @@ export class ApexRpcServer implements RpcServerInterface {
     RpcKernelBaseConnection
   >();
 
-  constructor(
-    private readonly config: ApexRpcServerConfig,
-    private readonly gameManager: GameManager,
-  ) {}
+  constructor(private readonly config: ApexRpcServerConfig) {}
 
   start(
     options: RpcServerOptions,
@@ -39,7 +35,9 @@ export class ApexRpcServer implements RpcServerInterface {
           close() {
             try {
               ws.close();
-            } catch {}
+            } catch {
+              /* eslint-disable no-empty */
+            }
           },
           bufferedAmount() {
             return ws.getBufferedAmount();
@@ -49,7 +47,6 @@ export class ApexRpcServer implements RpcServerInterface {
           },
         });
         this.connections.set(ws, connection);
-        this.gameManager.addClient(connection);
       },
       message: (ws: WebSocket<undefined>, message: ArrayBuffer) => {
         const connection = this.connections.get(ws)!;

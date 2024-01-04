@@ -1,7 +1,11 @@
 import { RpcKernelBaseConnection } from '@deepkit/rpc';
 import { cast } from '@deepkit/type';
 
-import { GameControllerInterface, MessengerControllerInterface, RoomControllerInterface } from '@apex/api/client';
+import {
+  GameControllerInterface,
+  MessengerControllerInterface,
+  RoomControllerInterface,
+} from '@apex/api/client';
 
 import { GameClient } from './game-client';
 import { UserSession } from '../user';
@@ -11,8 +15,7 @@ export class GameManager {
   readonly connectionClients = new Map<RpcKernelBaseConnection, GameClient>();
   readonly userSessionClients = new Map<UserSession, GameClient>();
 
-  // TODO: only create game clients for authenticated users
-  addClient(connection: RpcKernelBaseConnection): void {
+  addClient(connection: RpcKernelBaseConnection, session: UserSession): void {
     const game = connection.controller<GameControllerInterface>(
       GameControllerInterface,
     );
@@ -23,14 +26,14 @@ export class GameManager {
       MessengerControllerInterface,
     );
 
-    const gameClient = new GameClient(connection, { game, room, messenger });
-
-    const session = connection.sessionState.getSession()
-    if (session instanceof UserSession) {
-      this.userSessionClients.set(session, gameClient);
-    }
+    const gameClient = new GameClient(connection, session, {
+      game,
+      room,
+      messenger,
+    });
 
     this.clients.add(gameClient);
+    this.userSessionClients.set(session, gameClient);
     this.connectionClients.set(connection, gameClient);
   }
 
@@ -38,7 +41,9 @@ export class GameManager {
     return this.userSessionClients.get(session);
   }
 
-  getConnectionClient(connection: RpcKernelBaseConnection): GameClient | undefined {
+  getConnectionClient(
+    connection: RpcKernelBaseConnection,
+  ): GameClient | undefined {
     return this.connectionClients.get(connection);
   }
 }
