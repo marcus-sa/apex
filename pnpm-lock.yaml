@@ -155,6 +155,9 @@ dependencies:
   uWebSockets.js:
     specifier: github:uNetworking/uWebSockets.js#v20.34.0
     version: github.com/uNetworking/uWebSockets.js/fca27c05066342b01951782248640c8013b37196
+  yaml:
+    specifier: ^2.3.4
+    version: 2.3.4
   zone.js:
     specifier: 0.14.0
     version: 0.14.0

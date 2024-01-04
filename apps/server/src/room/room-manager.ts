@@ -35,7 +35,9 @@ export class RoomManager {
   }
 
   private getGameClientsForActiveRoom(room: Room): readonly GameClient[] {
-    return [...this.game.clients].filter(client => client.user?.activeRoom?.id === room.id);
+    return [...this.game.clients].filter(
+      client => client.session.user?.activeRoom?.id === room.id,
+    );
   }
 
   async join(id: Room['id'], user: User): Promise<Room> {

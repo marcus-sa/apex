@@ -1,7 +1,10 @@
+import { readFileSync } from 'node:fs';
 import { App } from '@deepkit/app';
 import { FrameworkModule, RpcServer } from '@deepkit/framework';
-import { RpcKernelSecurity, SessionState } from '@deepkit/rpc';
+import { RpcKernelSecurity } from '@deepkit/rpc';
 import { Database } from '@deepkit/orm';
+import * as yaml from 'yaml';
+import { DeepPartial } from '@deepkit/type';
 
 import { GameModule } from './game';
 import { InventoryController } from './inventory';
@@ -11,8 +14,9 @@ import { UserModule } from './user';
 import { MessengerController } from './messenger';
 import { ApexConfig } from './config';
 import { ApexDatabase } from './database';
+import { IntegrationsModule } from './integrations';
 
-void new App({
+const app = new App({
   config: ApexConfig,
   imports: [
     new FrameworkModule({
@@ -20,6 +24,7 @@ void new App({
       debug: true,
       debugBrokerHost: 'http://localhost:8083',
     }),
+    new IntegrationsModule(),
     new GameModule(),
     new RoomModule(),
     new UserModule(),
@@ -39,7 +44,24 @@ void new App({
       useClass: ApexDatabase,
     },
   ],
-})
-  // TODO: load config from yaml/json file
-  .loadConfigFromEnv({ prefix: 'APEX_' })
-  .run(['server:start']);
+}).setup((module, config) => {
+  module
+    .getImportedModuleByClass(IntegrationsModule)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access
+    .configure(config.integrations);
+});
+
+if (process.env['APEX_CONFIG_FILE']) {
+  const configFile: string = readFileSync(
+    process.env['APEX_CONFIG_FILE'],
+    'utf8',
+  );
+  const config = yaml.parse(configFile) as DeepPartial<ApexConfig>;
+  app.configure(config);
+} else {
+  app.loadConfigFromEnv({ prefix: 'APEX_' });
+}
+
+app.loadConfigFromEnvVariable('APEX_');
+
+void app.run(['server:start']);
