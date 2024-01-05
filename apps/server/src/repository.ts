@@ -1,15 +1,21 @@
 import { ClassType } from '@deepkit/core';
 import {
+  cast,
+  ChangesInterface,
+  DeepPartial,
+  JSONPartial,
+} from '@deepkit/type';
+import {
   Database,
   DatabaseQueryModel,
   DeleteResult,
   OrmEntity,
+  PatchResult,
 } from '@deepkit/orm';
-import { cast, JSONEntity } from '@deepkit/type';
 
 export function Repository<T extends OrmEntity>(entity: ClassType<T>) {
   return class BaseRepository {
-    constructor(readonly database: Database) {}
+    constructor(protected readonly database: Database) {}
 
     async findOne(filter: DatabaseQueryModel<T>['filter']): Promise<T> {
       return await this.database.query(entity).filter(filter).findOne();
@@ -25,7 +31,14 @@ export function Repository<T extends OrmEntity>(entity: ClassType<T>) {
       return await this.database.query(entity).filter(filter).find();
     }
 
-    async create(data: Partial<JSONEntity<T>>): Promise<T> {
+    async update(
+      filter: DatabaseQueryModel<T>['filter'],
+      changes: ChangesInterface<T> | DeepPartial<T>,
+    ): Promise<PatchResult<T>> {
+      return await this.database.query(entity).filter(filter).patchOne(changes);
+    }
+
+    async create(data: JSONPartial<T>): Promise<T> {
       const entity = cast<T>(data);
       await this.database.persist(entity);
       return entity;

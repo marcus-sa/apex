@@ -3,6 +3,14 @@ import { JSONEntity } from '@deepkit/type';
 
 import { Room, InvalidRoomPasswordError, User } from '@apex/api/shared';
 
+export const UserControllerInterface = ControllerSymbol('user', [User]);
+
+export type CreateUserData = Pick<User, 'username' | 'look'>;
+
+export interface UserControllerInterface {
+  create(data: CreateUserData, token: string): Promise<User>;
+}
+
 export const GameControllerInterface = ControllerSymbol('game', [User]);
 
 export interface GameControllerInterface {
@@ -16,7 +24,7 @@ export const RoomControllerInterface = ControllerSymbol('room', [
 
 export type CreateRoomArgs = Omit<JSONEntity<Room>, 'id' | 'users' | 'owner'>;
 
-export type JoinRoomOptions = { readonly password: string; };
+export type JoinRoomOptions = { readonly password: string };
 
 export interface RoomControllerInterface {
   get(id: Room['id']): Promise<Room>;

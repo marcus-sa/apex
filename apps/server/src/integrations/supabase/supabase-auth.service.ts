@@ -1,13 +1,48 @@
+import { SupabaseClient } from '@supabase/supabase-js';
+import { empty } from '@deepkit/core';
+
+import { CreateUserData } from '@apex/api/server';
 import { User } from '@apex/api/shared';
 
-import { AuthService, JwtPayload } from '../../auth';
+import { AuthService } from '../../auth';
+import { UserRepository } from '../../user';
 
 export class SupabaseAuthService extends AuthService {
-  override async getUserFromJwtPayload(payload: JwtPayload): Promise<User> {
-    throw new Error('Method not implemented.');
+  constructor(
+    private readonly client: SupabaseClient,
+    private readonly user: UserRepository,
+  ) {
+    super();
   }
 
-  override async verifyJwt(token: string): Promise<JwtPayload> {
-    throw new Error('Method not implemented.');
+  private async getUserByToken(token: string) {
+    const { data, error } = await this.client.auth.getUser(token);
+    if (error) {
+      throw error;
+    }
+    return data.user;
+  }
+
+  override async authenticate(token: string): Promise<User> {
+    const user = await this.getUserByToken(token);
+    if (empty(user.user_metadata)) {
+      throw new Error('Missing user metadata');
+    }
+    const id = user.user_metadata['id'] as User['id'];
+    return this.user.findOne({ id });
+  }
+
+  override async createUser(
+    data: CreateUserData,
+    token: string,
+  ): Promise<User> {
+    const supabaseUser = await this.getUserByToken(token);
+    const user = await this.user.create(data);
+    await this.client.auth.admin.updateUserById(supabaseUser.id, {
+      user_metadata: {
+        id: user.id,
+      },
+    });
+    return user;
   }
 }

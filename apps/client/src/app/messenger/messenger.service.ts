@@ -5,7 +5,10 @@ import { MessengerControllerInterface } from '@apex/api/server';
 
 @Injectable()
 export class MessengerService {
-  private readonly controller = this.client.controller<MessengerControllerInterface>(MessengerControllerInterface);
+  private readonly controller =
+    this.client.controller<MessengerControllerInterface>(
+      MessengerControllerInterface,
+    );
 
   constructor(private readonly client: RpcClient) {}
 }

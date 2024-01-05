@@ -1,1 +1,1 @@
-export * from './sound-manager'
+export * from './sound-manager';

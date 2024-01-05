@@ -3,10 +3,9 @@ import {
   AutoIncrement,
   BackReference,
   integer,
-  JSONEntity,
   PrimaryKey,
-  cast,
-  entity, Reference,
+  entity,
+  Reference,
 } from '@deepkit/type';
 
 import { User } from '../user';
@@ -17,7 +16,7 @@ export class Inventory {
   readonly id: integer & PrimaryKey & AutoIncrement = 0;
   readonly items: readonly InventoryItem[] & BackReference = [];
 
-  constructor(readonly belongsTo: User & Reference) {}
+  // constructor(readonly belongsTo: User & Reference) {}
 
   addItem(this: Writable<this>, item: InventoryItem): void {
     // eslint-disable-next-line functional/immutable-data

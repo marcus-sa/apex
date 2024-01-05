@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SoundManager {
   readonly credits = new Audio('/assets/audio/cash_register.mp3');

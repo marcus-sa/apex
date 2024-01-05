@@ -5,10 +5,12 @@ import { User } from '@apex/api/shared';
 
 import { UserSession } from './user-session';
 import { UserController } from './user.controller';
+import { UserRepository } from './user.repository';
 
 export class UserModule extends createModule({
   controllers: [UserController],
   providers: [
+    UserRepository,
     {
       provide: UserSession,
       scope: 'rpc',
@@ -24,6 +26,6 @@ export class UserModule extends createModule({
       },
     },
   ],
-  exports: [UserSession, User],
+  exports: [UserRepository, UserSession, User],
   forRoot: true,
 }) {}

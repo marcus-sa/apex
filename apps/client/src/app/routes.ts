@@ -6,5 +6,5 @@ export const routes: Route[] = [
   {
     path: 'room/:id',
     component: RoomComponent,
-  }
+  },
 ];

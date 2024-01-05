@@ -9,7 +9,5 @@ export class UserService {
   readonly cached = new Set<User>();
 
   // @ts-ignore
-  get me(): User {
-
-  }
+  get me(): User {}
 }

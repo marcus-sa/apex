@@ -26,10 +26,7 @@ export class RoomService {
     return await this.server.get(id);
   }
 
-  async join(
-    id: Room['id'],
-    options?: JoinRoomOptions,
-  ): Promise<Room> {
+  async join(id: Room['id'], options?: JoinRoomOptions): Promise<Room> {
     const room = await this.server.join(id, options);
     this.room$.next(room);
     return room;

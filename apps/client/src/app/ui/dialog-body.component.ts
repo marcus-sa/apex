@@ -11,12 +11,15 @@ import { ApexDialogTitleComponent } from './dialog-title.component';
   exportAs: 'apexDialogBody',
   template: `<ng-content></ng-content>`,
   host: {
-    'class': 'w-96 rounded-sm bg-black bg-opacity-[90%] px-5 pb-5 flex gap-4 flex-col',
-    '[class.pt-5]': '!title'
+    class:
+      'w-96 rounded-sm bg-black bg-opacity-[90%] px-5 pb-5 flex gap-4 flex-col',
+    '[class.pt-5]': '!title',
   },
   hostDirectives: [CdkDrag],
   imports: [ApexButtonComponent, NgIf, CdkDrag],
 })
 export class ApexDialogBodyComponent {
-  @ContentChild(ApexDialogTitleComponent) title: ApexDialogTitleComponent | undefined;
+  @ContentChild(ApexDialogTitleComponent) title:
+    | ApexDialogTitleComponent
+    | undefined;
 }

@@ -15,7 +15,7 @@ const icon = cva(['h-5', 'w-5'], {
   template: ``,
   host: {
     '[class]': 'class',
-  }
+  },
 })
 export class ApexIconComponent {
   @Input() type: 'cross';

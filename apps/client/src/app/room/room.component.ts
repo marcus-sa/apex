@@ -53,10 +53,7 @@ export class RoomComponent implements OnInit {
     this.app.renderer.add(this.scutiRoom);
   }
 
-  private async join(
-    id: Room['id'],
-    options?: JoinRoomOptions,
-  ): Promise<Room> {
+  private async join(id: Room['id'], options?: JoinRoomOptions): Promise<Room> {
     const room = await this.service.join(id, options);
     this.render(room);
     return room;
@@ -93,14 +90,14 @@ export class RoomComponent implements OnInit {
         }
       });
 
-    this.controller.events.pipe(
-      takeUntilDestroyed(this.destroyRef),
-    ).subscribe(event => {
-      switch (true) {
-        case event instanceof RoomChatEvent: {
-          // TODO
+    this.controller.events
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(event => {
+        switch (true) {
+          case event instanceof RoomChatEvent: {
+            // TODO
+          }
         }
-      }
-    });
+      });
   }
 }
