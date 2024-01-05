@@ -1,5 +1,5 @@
 import { Writable } from 'type-fest';
-import { entity } from '@deepkit/type';
+import { cast, entity } from '@deepkit/type';
 import {
   AutoIncrement,
   integer,
@@ -12,16 +12,22 @@ import {
 
 import { Inventory } from './inventory';
 import { Room } from './room';
+import { Friend } from './friend';
+import { FriendRequest } from './friend-request';
 
 @entity.name('user')
 export class User {
   readonly id: integer & PrimaryKey & AutoIncrement = 0;
   readonly credits: integer & Positive = 0;
   readonly motto?: string;
-  readonly inventory: Inventory & BackReference = new Inventory(this);
+  readonly inventory: Inventory & BackReference = new Inventory();
   readonly rooms: readonly Room[] & BackReference = [];
   readonly username: string & Unique;
   readonly look: string;
+  readonly online: boolean = false;
+  readonly friends: readonly Friend[] &
+    BackReference<{ readonly via: typeof Friend }> = [];
+  // readonly friends: readonly User[] & BackReference;
   // transient
   readonly activeRoom?: Room & DatabaseField<{ readonly skip: true }>;
 
@@ -35,7 +41,12 @@ export class User {
     this.rooms = [...this.rooms, room];
   }
 
+  setOnline(this: Writable<this>, value: boolean): void {
+    // eslint-disable-next-line functional/immutable-data
+    this.online = value;
+  }
+
   static create({ username, look }: Pick<User, 'username' | 'look'>): User {
-    return Object.assign(new User(), { username, look });
+    return cast<User>({ username, look });
   }
 }

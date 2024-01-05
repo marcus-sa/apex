@@ -1,8 +1,7 @@
 import { User } from '@apex/api/shared';
-
-export interface JwtPayload {}
+import { CreateUserData } from '@apex/api/server';
 
 export abstract class AuthService {
-  abstract verifyJwt(token: string): Promise<JwtPayload>;
-  abstract getUserFromJwtPayload(payload: JwtPayload): Promise<User>;
+  abstract authenticate(token: string): Promise<User>;
+  abstract createUser(data: CreateUserData, token: string): Promise<User>;
 }

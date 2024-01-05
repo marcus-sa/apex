@@ -1,6 +1,6 @@
 import { RpcKernelBaseConnection } from '@deepkit/rpc';
-import { cast } from '@deepkit/type';
 
+import { User } from '@apex/api/shared';
 import {
   GameControllerInterface,
   MessengerControllerInterface,
@@ -8,14 +8,26 @@ import {
 } from '@apex/api/client';
 
 import { GameClient } from './game-client';
-import { UserSession } from '../user';
+import { UserRepository, UserSession } from '../user';
 
 export class GameManager {
+  private readonly userClients = new Map<User['id'], GameClient>();
+  private readonly connectionClients = new Map<
+    RpcKernelBaseConnection,
+    GameClient
+  >();
+  private readonly connectionSessions = new Map<
+    RpcKernelBaseConnection,
+    UserSession
+  >();
   readonly clients = new Set<GameClient>();
-  readonly connectionClients = new Map<RpcKernelBaseConnection, GameClient>();
-  readonly userSessionClients = new Map<UserSession, GameClient>();
 
-  addClient(connection: RpcKernelBaseConnection, session: UserSession): void {
+  constructor(private readonly user: UserRepository) {}
+
+  async connect(
+    connection: RpcKernelBaseConnection,
+    session: UserSession,
+  ): Promise<void> {
     const game = connection.controller<GameControllerInterface>(
       GameControllerInterface,
     );
@@ -33,17 +45,41 @@ export class GameManager {
     });
 
     this.clients.add(gameClient);
-    this.userSessionClients.set(session, gameClient);
+    this.userClients.set(session.user.id, gameClient);
     this.connectionClients.set(connection, gameClient);
+    this.connectionSessions.set(connection, session);
+
+    await this.user.setOnline(session.user);
   }
 
-  getUserSessionClient(session: UserSession): GameClient | undefined {
-    return this.userSessionClients.get(session);
+  getUserClient(user: User): GameClient | undefined {
+    return this.userClients.get(user.id);
   }
 
   getConnectionClient(
     connection: RpcKernelBaseConnection,
   ): GameClient | undefined {
     return this.connectionClients.get(connection);
+  }
+
+  async disconnect(connection: RpcKernelBaseConnection): Promise<void> {
+    const client = this.connectionClients.get(connection);
+    if (!client) {
+      return;
+      // throw new Error('No connection client');
+    }
+    this.connectionClients.delete(connection);
+
+    const session = this.connectionSessions.get(connection);
+    if (!session) {
+      return;
+      // throw new Error('No connection session');
+    }
+    this.connectionSessions.delete(connection);
+    this.userClients.delete(session.user.id);
+
+    this.clients.delete(client);
+
+    await this.user.setOffline(session.user);
   }
 }

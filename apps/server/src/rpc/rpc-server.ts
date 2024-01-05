@@ -8,6 +8,7 @@ import {
 } from '@deepkit/framework';
 
 import { ApexRpcServerConfig } from '../config';
+import { GameManager } from '../game';
 
 export class ApexRpcServer implements RpcServerInterface {
   private readonly connections = new WeakMap<
@@ -15,7 +16,10 @@ export class ApexRpcServer implements RpcServerInterface {
     RpcKernelBaseConnection
   >();
 
-  constructor(private readonly config: ApexRpcServerConfig) {}
+  constructor(
+    private readonly config: ApexRpcServerConfig,
+    private readonly game: GameManager,
+  ) {}
 
   start(
     options: RpcServerOptions,
@@ -56,6 +60,7 @@ export class ApexRpcServer implements RpcServerInterface {
         const connection = this.connections.get(ws)!;
         connection.close();
         this.connections.delete(ws);
+        queueMicrotask(async () => this.game.disconnect(connection));
       },
     });
 

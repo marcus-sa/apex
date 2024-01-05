@@ -1,4 +1,4 @@
-import { entity } from '@deepkit/type';
+import { cast, entity } from '@deepkit/type';
 import { Writable } from 'type-fest';
 import { Subject } from 'rxjs';
 import {
@@ -51,7 +51,7 @@ export class Room {
   }
 
   static create({ name, owner, map }: Pick<Room, 'name' | 'owner' | 'map'>) {
-    return Object.assign(new Room(), {
+    return cast<User>({
       name,
       owner,
       map,

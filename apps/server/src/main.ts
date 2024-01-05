@@ -11,7 +11,7 @@ import { InventoryController } from './inventory';
 import { RoomModule } from './room';
 import { ApexRpcServer, ApexRpcKernelSecurity } from './rpc';
 import { UserModule } from './user';
-import { MessengerController } from './messenger';
+import { MessengerModule } from './messenger';
 import { ApexConfig } from './config';
 import { ApexDatabase } from './database';
 import { IntegrationsModule } from './integrations';
@@ -28,8 +28,9 @@ const app = new App({
     new GameModule(),
     new RoomModule(),
     new UserModule(),
+    new MessengerModule(),
   ],
-  controllers: [MessengerController, InventoryController],
+  controllers: [InventoryController],
   providers: [
     {
       provide: RpcServer,
@@ -47,7 +48,6 @@ const app = new App({
 }).setup((module, config) => {
   module
     .getImportedModuleByClass(IntegrationsModule)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access
     .configure(config.integrations);
 });
 
