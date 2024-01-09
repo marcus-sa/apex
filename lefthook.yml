@@ -13,5 +13,5 @@ pre-commit:
       glob: '*.{js,ts,jsx,tsx}'
       run: pnpm eslint --quiet --fix {staged_files} && git add {staged_files}
     prettier:
-      glob: '[*.{json,yml,yaml,html,graphql},!pnpm-lock.yaml]'
+      glob: '[*.{json,yml,yaml,html,graphql,toml},!pnpm-lock.yaml]'
       run: pnpm prettier --write {staged_files} && git add {staged_files}
