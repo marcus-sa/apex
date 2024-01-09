@@ -2,21 +2,22 @@ import { rpc } from '@deepkit/rpc';
 
 import { CreateRoomArgs } from '@apex/api/server';
 import { RoomControllerInterface } from '@apex/api/server';
-import { Room } from '@apex/api/shared';
+import { Room, User } from '@apex/api/shared';
 
-import { UserSession } from '../user';
 import { RoomManager } from './room-manager';
+import { GameClient } from '../game';
 
 @rpc.controller(RoomControllerInterface)
 export class RoomController implements RoomControllerInterface {
   constructor(
-    private readonly session: UserSession,
-    private readonly manager: RoomManager,
+    private readonly room: RoomManager,
+    private readonly user: User,
+    private readonly gameClient: GameClient,
   ) {}
 
   @rpc.action()
   async get(id: Room['id']): Promise<Room> {
-    return await this.manager.get(id);
+    return await this.room.get(id);
   }
 
   @rpc.action()
@@ -24,16 +25,30 @@ export class RoomController implements RoomControllerInterface {
     id: Room['id'],
     options?: { readonly password?: string },
   ): Promise<Room> {
-    return await this.manager.join(id, this.session.user);
+    return await this.room.join(id, this.gameClient);
+  }
+
+  @rpc.action()
+  async sendChatMessage(content: string) {
+    await this.room.sendChatMessage(
+      this.user.getActiveRoom().id,
+      this.user,
+      content,
+    );
+  }
+
+  @rpc.action()
+  async leave(): Promise<void> {
+    await this.room.leave(this.user.getActiveRoom().id, this.gameClient);
   }
 
   @rpc.action()
   async create(data: CreateRoomArgs): Promise<Room> {
-    return await this.manager.create(this.session.user, data);
+    return await this.room.create(this.user, data);
   }
 
   @rpc.action()
   async delete(id: Room['id']): Promise<Room> {
-    return await this.manager.delete(id, this.session.user);
+    return await this.room.delete(id, this.user);
   }
 }

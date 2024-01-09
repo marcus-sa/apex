@@ -10,8 +10,6 @@ export class GameController implements GameControllerInterface {
   constructor(private readonly game: GameManager) {}
 
   async getOnlineUsers(): Promise<readonly User[]> {
-    return [...this.game.clients]
-      .map(client => client.user)
-      .filter((user): user is User => !!user);
+    return [...this.game.clients].map(client => client.session.user);
   }
 }

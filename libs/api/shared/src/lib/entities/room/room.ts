@@ -14,7 +14,7 @@ import {
 import { User } from '../user';
 import { RoomUser } from './room-user';
 import { RoomItem } from './room-item';
-import { RoomChat } from './room-chat';
+import { RoomChatMessage } from './room-chat-message';
 
 export enum RoomState {
   OPEN,
@@ -37,8 +37,8 @@ export class Room {
   // transient
   readonly users: readonly RoomUser[] & DatabaseField<{ readonly skip: true }> =
     [];
-  readonly chats: Subject<RoomChat> & DatabaseField<{ readonly skip: true }> =
-    new Subject<RoomChat>();
+  readonly chatMessages: Subject<RoomChatMessage> &
+    DatabaseField<{ readonly skip: true }> = new Subject<RoomChatMessage>();
 
   addUser(this: Writable<this>, user: RoomUser): void {
     // eslint-disable-next-line functional/immutable-data

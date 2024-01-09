@@ -12,7 +12,7 @@ import {
 } from '@apex/scuti-renderer';
 
 import { JoinRoomOptions } from '@apex/api/server';
-import { RoomChatEvent } from '@apex/api/client';
+import { RoomChatMessageEvent } from '@apex/api/client';
 
 import { AppComponent } from '../app.component';
 import { RoomService } from './room.service';
@@ -94,7 +94,7 @@ export class RoomComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(event => {
         switch (true) {
-          case event instanceof RoomChatEvent: {
+          case event instanceof RoomChatMessageEvent: {
             // TODO
           }
         }

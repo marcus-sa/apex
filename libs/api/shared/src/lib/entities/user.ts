@@ -13,7 +13,6 @@ import {
 import { Inventory } from './inventory';
 import { Room } from './room';
 import { Friend } from './friend';
-import { FriendRequest } from './friend-request';
 
 @entity.name('user')
 export class User {
@@ -34,6 +33,13 @@ export class User {
   setActiveRoom(this: Writable<this>, room: Room | undefined): void {
     // eslint-disable-next-line functional/immutable-data
     this.activeRoom = room;
+  }
+
+  getActiveRoom(): Room {
+    if (!this.activeRoom) {
+      throw new Error('User is not in a room');
+    }
+    return this.activeRoom;
   }
 
   addRoom(this: Writable<this>, room: Room): void {

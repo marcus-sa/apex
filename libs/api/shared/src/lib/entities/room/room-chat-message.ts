@@ -5,10 +5,10 @@ import { Room } from './room';
 import { Vector3D } from '../../types';
 
 // transient
-@entity.name('room-chat')
-export class RoomChat {
+@entity.name('room-chat-message')
+export class RoomChatMessage {
   readonly sender: User;
-  readonly room: Room;
+  // readonly room: Room;
   readonly content: string;
   readonly position: Vector3D;
   readonly sentAt: Date = new Date();

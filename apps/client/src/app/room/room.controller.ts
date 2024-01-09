@@ -2,7 +2,7 @@ import { rpc } from '@deepkit/rpc';
 import { Observable, Subject } from 'rxjs';
 
 import { RoomControllerInterface, RoomEvent } from '@apex/api/client';
-import { Room, RoomChat, User } from '@apex/api/shared';
+import { Room, RoomChatMessage, User } from '@apex/api/shared';
 
 @rpc.controller(RoomControllerInterface)
 export class RoomController implements RoomControllerInterface {
@@ -14,7 +14,7 @@ export class RoomController implements RoomControllerInterface {
 
   banMe(reason?: string): void {}
 
-  handleChatMessage(chat: RoomChat): void {}
+  handleChatMessage(chat: RoomChatMessage): void {}
 
   handleUserJoined(user: User): void {}
 
