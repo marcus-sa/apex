@@ -22,7 +22,10 @@ export const RoomControllerInterface = ControllerSymbol('room', [
   InvalidRoomPasswordError,
 ]);
 
-export type CreateRoomArgs = Omit<JSONEntity<Room>, 'id' | 'users' | 'owner'>;
+export type CreateRoomArgs = Omit<
+  Room,
+  'id' | 'users' | 'owner' | 'map' | 'name'
+>;
 
 export type JoinRoomOptions = { readonly password: string };
 
@@ -33,6 +36,10 @@ export interface RoomControllerInterface {
    * @throws InvalidRoomPasswordError
    */
   join(id: Room['id'], options?: JoinRoomOptions): Promise<Room>;
+
+  leave(): Promise<void>;
+
+  sendChatMessage(content: string): Promise<void>;
 
   delete(id: Room['id']): Promise<Room>;
 

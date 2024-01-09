@@ -1,23 +1,68 @@
 import { cast } from '@deepkit/type';
 
-import { Room, RoomChat, User } from '@apex/api/shared';
+import { Room, RoomChatMessage, User } from '@apex/api/shared';
 import { CreateRoomArgs } from '@apex/api/server';
+import {
+  RoomEvent,
+  RoomChatMessageEvent,
+  RoomUserJoinedEvent,
+  RoomUserLeftEvent,
+} from '@apex/api/client';
 
 import { RoomRepository } from './room.repository';
-import { GameManager, GameClient } from '../game';
+import { GameClient } from '../game';
+
+export class ActiveRoom {
+  private readonly gameClients = new Set<GameClient>();
+
+  constructor(readonly room: Room) {}
+
+  async sendEvent(event: RoomEvent): Promise<void> {
+    await Promise.all(
+      [...this.gameClients].map(async client =>
+        client.controllers.room.handleEvent(event),
+      ),
+    );
+  }
+
+  queueEvent(event: RoomEvent): void {
+    queueMicrotask(async () => this.sendEvent(event));
+  }
+
+  async sendChatMessage(
+    sender: RoomChatMessage['sender'],
+    content: RoomChatMessage['content'],
+  ): Promise<RoomChatMessage> {
+    const chatMessage = cast<RoomChatMessage>({ sender, content });
+    this.room.chatMessages.next(chatMessage);
+    const chatMessageEvent = cast<RoomChatMessageEvent>(chatMessage);
+    await this.sendEvent(chatMessageEvent);
+    return chatMessage;
+  }
+
+  join(gameClient: GameClient): void {
+    this.gameClients.add(gameClient);
+    gameClient.session.user.setActiveRoom(this.room);
+    this.queueEvent(new RoomUserJoinedEvent(gameClient.session.user));
+  }
+
+  leave(gameClient: GameClient): void {
+    this.gameClients.delete(gameClient);
+    gameClient.session.user.setActiveRoom(undefined);
+    this.queueEvent(new RoomUserLeftEvent(gameClient.session.user));
+  }
+}
 
 export class RoomManager {
-  private readonly activeRooms = new Map<Room['id'], Room>();
+  private readonly activeRooms = new Map<Room['id'], ActiveRoom>();
 
-  constructor(
-    private readonly repo: RoomRepository,
-    private readonly game: GameManager,
-  ) {}
+  constructor(private readonly repo: RoomRepository) {}
 
-  private async getOrCreateActiveRoom(id: Room['id']): Promise<Room> {
+  private async getOrCreateActiveRoom(id: Room['id']): Promise<ActiveRoom> {
     if (!this.activeRooms.has(id)) {
       const room = await this.repo.findOne({ id });
-      this.activeRooms.set(id, room);
+      const activeRoom = new ActiveRoom(room);
+      this.activeRooms.set(id, activeRoom);
     }
     return this.activeRooms.get(id)!;
   }
@@ -26,7 +71,7 @@ export class RoomManager {
     this.activeRooms.delete(id);
   }
 
-  getActiveRoom(id: Room['id']): Room {
+  getActiveRoom(id: Room['id']): ActiveRoom {
     const room = this.activeRooms.get(id);
     if (!room) {
       throw new Error('No active room');
@@ -34,44 +79,16 @@ export class RoomManager {
     return room;
   }
 
-  private getGameClientsForActiveRoom(room: Room): readonly GameClient[] {
-    return [...this.game.clients].filter(
-      client => client.session.user?.activeRoom?.id === room.id,
-    );
+  async join(id: Room['id'], gameClient: GameClient): Promise<Room> {
+    const activeRoom = await this.getOrCreateActiveRoom(id);
+    activeRoom.join(gameClient);
+    return activeRoom.room;
   }
 
-  async join(id: Room['id'], user: User): Promise<Room> {
-    const room = await this.getOrCreateActiveRoom(id);
-
-    user.setActiveRoom(room);
-
-    queueMicrotask(async () => {
-      const gameClients = this.getGameClientsForActiveRoom(room);
-      await Promise.all(
-        gameClients.map(async client =>
-          client.controllers.room.handleUserJoined(user),
-        ),
-      );
-    });
-
-    return room;
-  }
-
-  async leave(id: Room['id'], user: User): Promise<Room> {
-    const room = this.getActiveRoom(id);
-
-    user.setActiveRoom(undefined);
-
-    queueMicrotask(async () => {
-      const gameClients = this.getGameClientsForActiveRoom(room);
-      await Promise.all(
-        gameClients.map(async client =>
-          client.controllers.room.handleUserLeft(user),
-        ),
-      );
-    });
-
-    return room;
+  async leave(id: Room['id'], gameClient: GameClient): Promise<Room> {
+    const activeRoom = this.getActiveRoom(id);
+    activeRoom.leave(gameClient);
+    return activeRoom.room;
   }
 
   async create(owner: User, data: CreateRoomArgs): Promise<Room> {
@@ -81,24 +98,12 @@ export class RoomManager {
     });
   }
 
-  async chat(
+  async sendChatMessage(
     id: Room['id'],
-    { sender, content }: Pick<RoomChat, 'sender' | 'content'>,
-  ): Promise<RoomChat> {
-    const room = this.getActiveRoom(id);
-
-    const chat = cast<RoomChat>({ room, sender, content });
-
-    room.chats.next(chat);
-
-    const gameClients = this.getGameClientsForActiveRoom(room);
-    void Promise.all(
-      gameClients.map(async client =>
-        client.controllers.room.handleChatMessage(chat),
-      ),
-    );
-
-    return chat;
+    sender: RoomChatMessage['sender'],
+    content: RoomChatMessage['content'],
+  ): Promise<RoomChatMessage> {
+    return await this.getActiveRoom(id).sendChatMessage(sender, content);
   }
 
   async delete(id: Room['id'], user: User): Promise<Room> {
@@ -106,13 +111,6 @@ export class RoomManager {
     if (room.owner.id !== user.id) {
       throw new Error('User is not owner of the room');
     }
-
-    const gameClients = this.getGameClientsForActiveRoom(room);
-    void Promise.all(
-      gameClients.map(async client =>
-        client.controllers.room.kickMe('Room was deleted'),
-      ),
-    );
 
     this.removeActiveRoom(id);
 
@@ -122,6 +120,6 @@ export class RoomManager {
   }
 
   async get(id: Room['id']): Promise<Room> {
-    return await this.getOrCreateActiveRoom(id);
+    return (await this.getOrCreateActiveRoom(id)).room;
   }
 }

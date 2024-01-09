@@ -52,14 +52,33 @@ export class GameManager {
     await this.user.setOnline(session.user);
   }
 
-  getUserClient(user: User): GameClient | undefined {
-    return this.userClients.get(user.id);
+  getClient(user: User): GameClient;
+  // eslint-disable-next-line @typescript-eslint/unified-signatures
+  getClient(connection: RpcKernelBaseConnection): GameClient;
+  getClient(userOrConnection: User | RpcKernelBaseConnection): GameClient {
+    if (userOrConnection instanceof User) {
+      return this.getClientFromUser(userOrConnection);
+    }
+    if (userOrConnection instanceof RpcKernelBaseConnection) {
+      return this.getClientFromConnection(userOrConnection);
+    }
+    throw new Error('Unreachable');
   }
 
-  getConnectionClient(
-    connection: RpcKernelBaseConnection,
-  ): GameClient | undefined {
-    return this.connectionClients.get(connection);
+  getClientFromUser(user: User): GameClient {
+    const client = this.userClients.get(user.id);
+    if (!client) {
+      throw new Error('No game client for user');
+    }
+    return client;
+  }
+
+  getClientFromConnection(connection: RpcKernelBaseConnection): GameClient {
+    const client = this.connectionClients.get(connection);
+    if (!client) {
+      throw new Error('No game client for connection');
+    }
+    return client;
   }
 
   async disconnect(connection: RpcKernelBaseConnection): Promise<void> {

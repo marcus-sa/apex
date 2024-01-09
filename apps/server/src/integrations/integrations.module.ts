@@ -3,8 +3,8 @@ import { createModule } from '@deepkit/app';
 import { SupabaseModule } from './supabase';
 
 export class IntegrationsConfig {
-  readonly supabase?: any;
-  readonly thirdweb?: any;
+  readonly supabase?: unknown;
+  readonly thirdweb?: unknown;
 }
 
 export class IntegrationsModule extends createModule({

@@ -1,8 +1,8 @@
 import { ControllerSymbol } from '@deepkit/rpc';
 
-import { Room, RoomChat, User } from '@apex/api/shared';
+import { Room, RoomChatMessage, User } from '@apex/api/shared';
 
-import { GameEvent, MessengerEvent, RoomChatEvent, RoomEvent } from './events';
+import { GameEvent, MessengerEvent, ROOM_EVENTS, RoomEvent } from './events';
 
 export const GameControllerInterface = ControllerSymbol('game');
 
@@ -12,13 +12,13 @@ export interface GameControllerInterface {
 
 export const RoomControllerInterface = ControllerSymbol('room', [
   Room,
-  RoomChat,
-  RoomChatEvent,
+  RoomChatMessage,
+  ...ROOM_EVENTS,
 ]);
 
 export interface RoomControllerInterface {
   handleEvent(event: RoomEvent): void;
-  handleChatMessage(chat: RoomChat): void;
+  handleChatMessage(chat: RoomChatMessage): void;
   handleUserJoined(user: User): void;
   handleUserLeft(user: User): void;
   handleUpdates(room: Room): void;
