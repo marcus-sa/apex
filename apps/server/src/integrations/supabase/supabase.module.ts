@@ -1,8 +1,10 @@
 import { createModule } from '@deepkit/app';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js';
+import { provide } from '@deepkit/injector';
 
 import { AuthService } from '../../auth';
 import { SupabaseAuthService } from './supabase-auth.service';
+import { InternalSupabaseClient } from './supabase-client';
 
 export class SupabaseConfig {
   readonly url: string;
@@ -12,8 +14,7 @@ export class SupabaseConfig {
 export class SupabaseModule extends createModule({
   config: SupabaseConfig,
   providers: [
-    {
-      provide: SupabaseClient,
+    provide<InternalSupabaseClient>({
       useFactory(config: SupabaseConfig) {
         return createClient(config.url, config.key, {
           global: {
@@ -21,7 +22,7 @@ export class SupabaseModule extends createModule({
           },
         });
       },
-    },
+    }),
     {
       provide: AuthService,
       useClass: SupabaseAuthService,

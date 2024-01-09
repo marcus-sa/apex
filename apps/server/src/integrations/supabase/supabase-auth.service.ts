@@ -1,4 +1,3 @@
-import { SupabaseClient } from '@supabase/supabase-js';
 import { empty } from '@deepkit/core';
 
 import { CreateUserData } from '@apex/api/server';
@@ -6,10 +5,11 @@ import { User } from '@apex/api/shared';
 
 import { AuthService } from '../../auth';
 import { UserRepository } from '../../user';
+import { InternalSupabaseClient } from './supabase-client';
 
 export class SupabaseAuthService extends AuthService {
   constructor(
-    private readonly client: SupabaseClient,
+    private readonly client: InternalSupabaseClient,
     private readonly user: UserRepository,
   ) {
     super();
