@@ -52,20 +52,7 @@ export class GameManager {
     await this.user.setOnline(session.user);
   }
 
-  getClient(user: User): GameClient;
-  // eslint-disable-next-line @typescript-eslint/unified-signatures
-  getClient(connection: RpcKernelBaseConnection): GameClient;
-  getClient(userOrConnection: User | RpcKernelBaseConnection): GameClient {
-    if (userOrConnection instanceof User) {
-      return this.getClientFromUser(userOrConnection);
-    }
-    if (userOrConnection instanceof RpcKernelBaseConnection) {
-      return this.getClientFromConnection(userOrConnection);
-    }
-    throw new Error('Unreachable');
-  }
-
-  getClientFromUser(user: User): GameClient {
+  getClientByUser(user: User): GameClient {
     const client = this.userClients.get(user.id);
     if (!client) {
       throw new Error('No game client for user');
@@ -73,7 +60,7 @@ export class GameManager {
     return client;
   }
 
-  getClientFromConnection(connection: RpcKernelBaseConnection): GameClient {
+  getClientByConnection(connection: RpcKernelBaseConnection): GameClient {
     const client = this.connectionClients.get(connection);
     if (!client) {
       throw new Error('No game client for connection');

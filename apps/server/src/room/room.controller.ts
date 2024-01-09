@@ -1,7 +1,6 @@
 import { rpc } from '@deepkit/rpc';
 
-import { CreateRoomArgs } from '@apex/api/server';
-import { RoomControllerInterface } from '@apex/api/server';
+import { RoomControllerInterface, CreateRoomArgs } from '@apex/api/server';
 import { Room, User } from '@apex/api/shared';
 
 import { RoomManager } from './room-manager';

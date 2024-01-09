@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "license": "LGPL-3.0-or-later",
   "scripts": {
-    "postinstall": "deepkit-type-install && lefthook install"
+    "postinstall": "deepkit-type-install && lefthook install",
+    "serve:server": "nx serve server",
+    "serve:client": "nx serve client"
   },
   "private": true,
   "dependencies": {

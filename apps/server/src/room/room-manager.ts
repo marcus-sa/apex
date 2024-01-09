@@ -20,13 +20,13 @@ export class ActiveRoom {
   async sendEvent(event: RoomEvent): Promise<void> {
     await Promise.all(
       [...this.gameClients].map(async client =>
-        client.controllers.room.handleEvent(event),
+        await client.controllers.room.handleEvent(event),
       ),
     );
   }
 
   queueEvent(event: RoomEvent): void {
-    queueMicrotask(async () => this.sendEvent(event));
+    queueMicrotask(async () => await this.sendEvent(event));
   }
 
   async sendChatMessage(
@@ -36,14 +36,14 @@ export class ActiveRoom {
     const chatMessage = cast<RoomChatMessage>({ sender, content });
     this.room.chatMessages.next(chatMessage);
     const chatMessageEvent = cast<RoomChatMessageEvent>(chatMessage);
-    await this.sendEvent(chatMessageEvent);
+    void this.sendEvent(chatMessageEvent);
     return chatMessage;
   }
 
-  join(gameClient: GameClient): void {
+  async join(gameClient: GameClient): Promise<void> {
     this.gameClients.add(gameClient);
     gameClient.session.user.setActiveRoom(this.room);
-    this.queueEvent(new RoomUserJoinedEvent(gameClient.session.user));
+    await this.sendEvent(new RoomUserJoinedEvent(gameClient.session.user));
   }
 
   leave(gameClient: GameClient): void {
@@ -81,7 +81,7 @@ export class RoomManager {
 
   async join(id: Room['id'], gameClient: GameClient): Promise<Room> {
     const activeRoom = await this.getOrCreateActiveRoom(id);
-    activeRoom.join(gameClient);
+    await activeRoom.join(gameClient);
     return activeRoom.room;
   }
 

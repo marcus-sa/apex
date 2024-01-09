@@ -1,7 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { App } from '@deepkit/app';
-import { FrameworkModule, RpcServer } from '@deepkit/framework';
-import { RpcKernelSecurity } from '@deepkit/rpc';
+import { FrameworkModule } from '@deepkit/framework';
 import { Database } from '@deepkit/orm';
 import * as yaml from 'yaml';
 import { DeepPartial } from '@deepkit/type';
@@ -9,7 +8,7 @@ import { DeepPartial } from '@deepkit/type';
 import { GameModule } from './game';
 import { InventoryController } from './inventory';
 import { RoomModule } from './room';
-import { ApexRpcServer, ApexRpcKernelSecurity } from './rpc';
+import { RpcModule } from './rpc';
 import { UserModule } from './user';
 import { MessengerModule } from './messenger';
 import { ApexConfig } from './config';
@@ -29,17 +28,10 @@ const app = new App({
     new RoomModule(),
     new UserModule(),
     new MessengerModule(),
+    new RpcModule(),
   ],
   controllers: [InventoryController],
   providers: [
-    {
-      provide: RpcServer,
-      useClass: ApexRpcServer,
-    },
-    {
-      provide: RpcKernelSecurity,
-      useClass: ApexRpcKernelSecurity,
-    },
     {
       provide: Database,
       useClass: ApexDatabase,

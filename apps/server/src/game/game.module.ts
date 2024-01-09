@@ -16,7 +16,7 @@ export class GameModule extends createModule({
         connection: RpcKernelBaseConnection,
         manager: GameManager,
       ): GameClient {
-        return manager.getClientFromConnection(connection);
+        return manager.getClientByConnection(connection);
       },
     },
   ],

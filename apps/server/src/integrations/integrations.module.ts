@@ -1,9 +1,9 @@
 import { createModule } from '@deepkit/app';
 
-import { SupabaseModule } from './supabase';
+import { SupabaseConfig, SupabaseModule } from './supabase';
 
 export class IntegrationsConfig {
-  readonly supabase?: unknown;
+  readonly supabase?: SupabaseConfig;
   readonly thirdweb?: unknown;
 }
 

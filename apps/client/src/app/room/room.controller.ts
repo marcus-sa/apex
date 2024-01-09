@@ -6,7 +6,7 @@ import { Room, RoomChatMessage, User } from '@apex/api/shared';
 
 @rpc.controller(RoomControllerInterface)
 export class RoomController implements RoomControllerInterface {
-  #events = new Subject<RoomEvent>();
+  readonly #events = new Subject<RoomEvent>();
 
   get events(): Observable<RoomEvent> {
     return this.#events.asObservable();

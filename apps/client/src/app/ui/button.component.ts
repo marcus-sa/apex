@@ -1,3 +1,4 @@
+import { cva } from 'class-variance-authority';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,7 +6,6 @@ import {
   Input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cva } from 'class-variance-authority';
 
 import { ApexIconComponent } from './icon.component';
 

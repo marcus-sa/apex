@@ -18,6 +18,6 @@ export class ApexDatabaseConfig {
 
 export class ApexConfig {
   readonly server: ApexRpcServerConfig = new ApexRpcServerConfig();
-  readonly integrations?: IntegrationsConfig;
+  readonly integrations: IntegrationsConfig = new IntegrationsConfig();
   readonly database: ApexDatabaseConfig;
 }

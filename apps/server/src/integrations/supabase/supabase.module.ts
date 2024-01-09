@@ -27,5 +27,6 @@ export class SupabaseModule extends createModule({
       useClass: SupabaseAuthService,
     },
   ],
+  exports: [AuthService],
   forRoot: true,
 }) {}
