@@ -1,7 +1,8 @@
-import { SupabaseConfig } from '@apex/integrations/supabase/client';
+// TODO: circular dependency
+// import { SupabaseConfig } from '@apex/integrations/supabase/client';
 
 export class IntegrationsConfig {
-  readonly supabase?: SupabaseConfig;
+  readonly supabase?: unknown; // SupabaseConfig
   readonly thirdweb?: unknown;
 }
 

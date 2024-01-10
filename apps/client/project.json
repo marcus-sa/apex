@@ -24,8 +24,7 @@
           "format-util"
         ],
         "styles": ["apps/client/src/styles.css"],
-        "scripts": [],
-        "buildLibsFromSource": false
+        "scripts": []
       },
       "configurations": {
         "production": {

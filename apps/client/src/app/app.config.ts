@@ -2,13 +2,14 @@ import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { deserialize } from '@deepkit/type';
 
-import { ApexClientConfig } from '@apex/client';
+import { ApexClientConfig, importProvidersDynamicallyFrom } from '@apex/client';
 
 import { routes } from './routes';
 import { provideRpcClient } from './utils';
 import { GameController } from './game';
 import { MessengerController } from './messenger';
 import { RoomController } from './room';
+import { IntegrationsModule } from './integrations';
 
 export const clientConfig = deserialize<ApexClientConfig>(
   (window as any)['APEX_CLIENT_CONFIG'],
@@ -26,5 +27,8 @@ export const appConfig: ApplicationConfig = {
       provide: ApexClientConfig,
       useValue: clientConfig,
     },
+    importProvidersDynamicallyFrom(
+      new IntegrationsModule(clientConfig.integrations),
+    ),
   ],
 };

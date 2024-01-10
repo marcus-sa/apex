@@ -1,8 +1,7 @@
 {
   "name": "@apex/scuti-renderer",
   "version": "0.0.1",
-  "type": "commonjs",
-  "main": "./index.cjs",
+  "type": "module",
   "module": "./index.js",
   "dependencies": {
     "@pixi/layers": "^2.1.0",

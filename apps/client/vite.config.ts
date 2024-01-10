@@ -1,4 +1,4 @@
-import { join } from 'node:path';
+import { join } from 'path';
 import { defineConfig } from 'vite';
 import { deepkitType } from '@deepkit/vite';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
