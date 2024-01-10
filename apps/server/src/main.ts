@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync } from 'fs';
 import { App } from '@deepkit/app';
 import { FrameworkModule } from '@deepkit/framework';
 import { Database } from '@deepkit/orm';
@@ -74,4 +74,4 @@ router.get(
     ),
 );
 
-void app.run(['server:start']);
+await app.run(['server:start']);

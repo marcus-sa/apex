@@ -1,0 +1,13 @@
+diff --git a/src/executors/node/node.impl.js b/src/executors/node/node.impl.js
+index 946061b55f671c28fd29ec709c0269e8b7b0ab54..25c6ea820699ac58a8e2e7d3fb71e31d8872b5a3 100644
+--- a/src/executors/node/node.impl.js
++++ b/src/executors/node/node.impl.js
+@@ -89,7 +89,7 @@ async function* nodeExecutor(options, context) {
+                         return;
+                     // Run the program
+                     task.promise = new Promise((resolve, reject) => {
+-                        task.childProcess = (0, child_process_1.fork)((0, devkit_1.joinPathFragments)(__dirname, 'node-with-require-overrides'), options.args ?? [], {
++                        task.childProcess = (0, child_process_1.fork)(project.data.targets[buildTarget.target].options.outputFileName.endsWith('.mjs') ? fileToRun : ((0, devkit_1.joinPathFragments)(__dirname, 'node-with-require-overrides')), options.args ?? [], {
+                             execArgv: getExecArgv(options),
+                             stdio: [0, 1, 'pipe', 'ipc'],
+                             env: {

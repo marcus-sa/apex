@@ -13,10 +13,11 @@
         "target": "node",
         "compiler": "tsc",
         "outputPath": "dist/{projectRoot}",
+        "outputFileName": "main.mjs",
         "main": "{projectRoot}/src/main.ts",
         "tsConfig": "{projectRoot}/tsconfig.app.json",
         "assets": [],
-        "webpackConfig": "{projectRoot}/webpack.config.ts",
+        "webpackConfig": "{workspaceRoot}/apps/node-webpack.config.ts",
         "buildLibsFromSource": false
       },
       "configurations": {
