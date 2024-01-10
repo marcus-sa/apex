@@ -15,7 +15,7 @@
         "project": "{projectRoot}/package.json",
         "compiler": "tsc",
         "external": "all",
-        "format": ["cjs", "esm"]
+        "format": ["esm"]
       }
     },
     "lint": {

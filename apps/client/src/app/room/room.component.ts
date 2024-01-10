@@ -1,18 +1,16 @@
-import { Component, DestroyRef, Inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Observable } from 'rxjs';
 
 import { Room, RoomState } from '@apex/api/shared';
-import {
-  FloorMaterial as ScutiFloorMaterial,
-  Room as ScutiRoom,
-  WallMaterial as ScutiWallMaterial,
-} from '@apex/scuti-renderer';
-
 import { JoinRoomOptions } from '@apex/api/server';
 import { RoomChatMessageEvent } from '@apex/api/client';
+// import {
+//   FloorMaterial as ScutiFloorMaterial,
+//   Room as ScutiRoom,
+//   WallMaterial as ScutiWallMaterial,
+// } from '@apex/scuti-renderer';
 
 import { AppComponent } from '../app.component';
 import { RoomService } from './room.service';
@@ -26,7 +24,7 @@ import { RoomController } from './room.controller';
   templateUrl: './room.component.html',
 })
 export class RoomComponent implements OnInit {
-  scutiRoom?: ScutiRoom;
+  // scutiRoom?: ScutiRoom;
 
   constructor(
     private readonly app: AppComponent,
@@ -39,18 +37,18 @@ export class RoomComponent implements OnInit {
   ) {}
 
   private render(room: Room) {
-    this.scutiRoom = new ScutiRoom({
-      heightMap: room.map,
-      dragging: true,
-      centerCamera: true,
-      floorMaterial: new ScutiFloorMaterial(101),
-      floorThickness: 8,
-      wallMaterial: new ScutiWallMaterial(108),
-      wallThickness: 8,
-      wallHeight: -1,
-    });
-
-    this.app.renderer.add(this.scutiRoom);
+    // this.scutiRoom = new ScutiRoom({
+    //   heightMap: room.map,
+    //   dragging: true,
+    //   centerCamera: true,
+    //   floorMaterial: new ScutiFloorMaterial(101),
+    //   floorThickness: 8,
+    //   wallMaterial: new ScutiWallMaterial(108),
+    //   wallThickness: 8,
+    //   wallHeight: -1,
+    // });
+    //
+    // this.app.renderer.add(this.scutiRoom);
   }
 
   private async join(id: Room['id'], options?: JoinRoomOptions): Promise<Room> {
@@ -67,7 +65,9 @@ export class RoomComponent implements OnInit {
         if (!this.service.isOwner(this.user.me, room)) {
           // room.users.length === room.capacity
           if (room.state === RoomState.FULL) {
+            /* eslint-disable no-empty */
           } else if (room.state === RoomState.LOCKED) {
+            /* eslint-disable no-empty */
           } else if (room.state === RoomState.PASSWORD_PROTECTED) {
             const dialogRef = this.dialog.open(
               PasswordProtectedRoomDialogComponent,

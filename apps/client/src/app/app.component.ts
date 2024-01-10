@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { NgIf } from '@angular/common';
 
-import { Scuti } from '@apex/scuti-renderer';
+// import { Scuti } from '@apex/scuti-renderer';
 
 @Component({
   selector: 'apex-root',
@@ -25,7 +25,8 @@ export class AppComponent implements OnInit {
   @ViewChild('init', { static: true })
   readonly initTemplateRef: TemplateRef<unknown>;
 
-  renderer: Scuti;
+  // renderer: Scuti;
+
   assetsLoaded = signal(false);
 
   constructor(private readonly dialog: Dialog) {}
@@ -34,15 +35,15 @@ export class AppComponent implements OnInit {
     const dialogRef = this.dialog.open(this.initTemplateRef, {
       hasBackdrop: true,
     });
-    this.renderer = new Scuti({
-      width: window.innerWidth,
-      height: window.innerHeight,
-      canvas: this.canvasElementRef.nativeElement,
-      resources: 'http://localhost:8083',
-      backgroundColor: 0x212225,
-      resizeTo: window,
-    });
-    await this.renderer.load();
+    // this.renderer = new Scuti({
+    //   width: window.innerWidth,
+    //   height: window.innerHeight,
+    //   canvas: this.canvasElementRef.nativeElement,
+    //   resources: 'http://localhost:8083',
+    //   backgroundColor: 0x212225,
+    //   resizeTo: window,
+    // });
+    // await this.renderer.load();
     this.assetsLoaded.set(true);
     dialogRef.close();
   }

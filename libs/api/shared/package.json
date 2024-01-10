@@ -2,8 +2,7 @@
   "name": "@apex/api/shared",
   "version": "0.0.1",
   "dependencies": {},
-  "type": "commonjs",
-  "main": "./index.cjs",
+  "type": "module",
   "module": "./index.js",
   "reflection": true
 }
