@@ -1,6 +1,9 @@
 import { createModule } from '@deepkit/app';
 
-import { SupabaseConfig, SupabaseModule } from './supabase';
+import {
+  SupabaseConfig,
+  SupabaseModule,
+} from '@apex/integrations/supabase/server';
 
 export class IntegrationsConfig {
   readonly supabase?: SupabaseConfig;

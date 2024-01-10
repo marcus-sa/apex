@@ -1,5 +1,6 @@
 import { RpcKernelBaseConnection } from '@deepkit/rpc';
 
+import { UserSession, UserRepository } from '@apex/server';
 import { User } from '@apex/api/shared';
 import {
   GameControllerInterface,
@@ -8,7 +9,6 @@ import {
 } from '@apex/api/client';
 
 import { GameClient } from './game-client';
-import { UserRepository, UserSession } from '../user';
 
 export class GameManager {
   private readonly userClients = new Map<User['id'], GameClient>();

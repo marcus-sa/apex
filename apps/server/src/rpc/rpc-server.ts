@@ -1,5 +1,6 @@
 import { WebSocket, App } from 'uWebSockets.js';
 import { RpcKernelBaseConnection } from '@deepkit/rpc';
+import { Logger } from '@deepkit/logger';
 import {
   RpcServerCreateConnection,
   RpcServerListener,
@@ -19,6 +20,7 @@ export class ApexRpcServer implements RpcServerInterface {
   constructor(
     private readonly config: ApexRpcServerConfig,
     private readonly game: GameManager,
+    private readonly logger: Logger,
   ) {}
 
   start(
@@ -68,6 +70,7 @@ export class ApexRpcServer implements RpcServerInterface {
       if (!res) {
         throw new Error('Failed to start RPC server');
       }
+      this.logger.log(`RPC listening at ws://localhost:${this.config.port}`);
     });
 
     return {

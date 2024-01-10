@@ -2,14 +2,18 @@ import { readFileSync } from 'node:fs';
 import { App } from '@deepkit/app';
 import { FrameworkModule } from '@deepkit/framework';
 import { Database } from '@deepkit/orm';
+import { DeepPartial, serialize } from '@deepkit/type';
+import { HttpRouterRegistry } from '@deepkit/http';
+import { Response } from '@deepkit/http';
 import * as yaml from 'yaml';
-import { DeepPartial } from '@deepkit/type';
+
+import { ApexClientConfig } from '@apex/client';
+import { UserModule } from '@apex/server';
 
 import { GameModule } from './game';
 import { InventoryController } from './inventory';
 import { RoomModule } from './room';
 import { RpcModule } from './rpc';
-import { UserModule } from './user';
 import { MessengerModule } from './messenger';
 import { ApexConfig } from './config';
 import { ApexDatabase } from './database';
@@ -20,8 +24,9 @@ const app = new App({
   imports: [
     new FrameworkModule({
       migrateOnStartup: true,
-      debug: true,
-      debugBrokerHost: 'http://localhost:8083',
+      host: 'localhost',
+      // debug: true,
+      // debugBrokerHost: 'http://localhost:8083',
     }),
     new IntegrationsModule(),
     new GameModule(),
@@ -37,10 +42,10 @@ const app = new App({
       useClass: ApexDatabase,
     },
   ],
-}).setup((module, config) => {
+}).setup((module, config: ApexConfig) => {
   module
     .getImportedModuleByClass(IntegrationsModule)
-    .configure(config.integrations);
+    .configure(config.server.integrations);
 });
 
 if (process.env['APEX_CONFIG_FILE']) {
@@ -55,5 +60,18 @@ if (process.env['APEX_CONFIG_FILE']) {
 }
 
 app.loadConfigFromEnvVariable('APEX_');
+
+const router = app.get(HttpRouterRegistry);
+
+router.get(
+  '/config.js',
+  () =>
+    new Response(
+      `window.APEX_CLIENT_CONFIG = ${JSON.stringify(
+        serialize<ApexClientConfig>(app.appModule.config.client),
+      )}`,
+      'text/javascript',
+    ),
+);
 
 void app.run(['server:start']);

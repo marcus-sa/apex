@@ -1,5 +1,4 @@
 import { Room } from '@apex/api/shared';
-
-import { Repository } from '../repository';
+import { Repository } from '@apex/server';
 
 export class RoomRepository extends Repository(Room) {}

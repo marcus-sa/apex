@@ -1,5 +1,4 @@
 import { Messenger } from '@apex/api/shared';
-
-import { Repository } from '../repository';
+import { Repository } from '@apex/server';
 
 export class MessengerRepository extends Repository(Messenger) {}

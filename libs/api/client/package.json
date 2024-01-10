@@ -4,5 +4,6 @@
   "dependencies": {},
   "type": "commonjs",
   "main": "./index.cjs",
-  "module": "./index.js"
+  "module": "./index.js",
+  "reflection": true
 }

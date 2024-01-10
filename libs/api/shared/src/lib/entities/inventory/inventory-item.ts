@@ -1,11 +1,12 @@
 import {
+  cast,
+  entity,
   AutoIncrement,
   integer,
   JSONEntity,
   PrimaryKey,
   Reference,
 } from '@deepkit/type';
-import { BackReference, cast, entity } from '@deepkit/type';
 
 import { BaseItem } from '../base-item';
 import { Inventory } from './inventory';

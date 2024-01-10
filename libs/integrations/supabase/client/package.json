@@ -1,0 +1,9 @@
+{
+  "name": "@apex/integrations/supabase/client",
+  "version": "0.0.1",
+  "dependencies": {},
+  "type": "commonjs",
+  "main": "./index.cjs",
+  "module": "./index.js",
+  "reflection": true
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@apex/integrations/supabase/server",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "main": "./index.cjs",
+  "module": "./index.js",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.2"
+  },
+  "reflection": true
+}

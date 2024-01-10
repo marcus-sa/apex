@@ -16,6 +16,7 @@ export class Inventory {
   readonly id: integer & PrimaryKey & AutoIncrement = 0;
   readonly items: readonly InventoryItem[] & BackReference = [];
 
+  // TODO: Wait for https://github.com/deepkit/deepkit-framework/commit/2f689914f1ed0b6055289f1244a60cab0386c10e to land
   // constructor(readonly belongsTo: User & Reference) {}
 
   addItem(this: Writable<this>, item: InventoryItem): void {

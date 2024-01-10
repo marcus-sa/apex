@@ -1,12 +1,11 @@
 import { RemoteController, RpcKernelBaseConnection } from '@deepkit/rpc';
 
+import { UserSession } from '@apex/server';
 import {
   GameControllerInterface,
   MessengerControllerInterface,
   RoomControllerInterface,
 } from '@apex/api/client';
-
-import { UserSession } from '../user';
 
 export interface GameClientControllers {
   readonly game: RemoteController<GameControllerInterface>;

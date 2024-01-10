@@ -4,8 +4,8 @@
   "license": "LGPL-3.0-or-later",
   "scripts": {
     "postinstall": "deepkit-type-install && lefthook install",
-    "serve:server": "nx serve server",
-    "serve:client": "nx serve client"
+    "serve:server": "nx serve aserver",
+    "serve:client": "nx serve aclient"
   },
   "private": true,
   "dependencies": {
@@ -49,7 +49,7 @@
     "glob": "10.3.10",
     "gsap": "^3.12.4",
     "pixi-stats": "^1.2.2",
-    "pixi.js": "7.3.2",
+    "pixi.js": "^7.2.4",
     "rxjs": "7.8.1",
     "scuti-bundle": "^1.0.7",
     "seedrandom": "^3.0.5",

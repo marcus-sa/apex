@@ -15,7 +15,7 @@ import {
 
 export function Repository<T extends OrmEntity>(entity: ClassType<T>) {
   return class BaseRepository {
-    constructor(protected readonly database: Database) {}
+    constructor(readonly database: Database) {}
 
     async findOne(filter: DatabaseQueryModel<T>['filter']): Promise<T> {
       return await this.database.query(entity).filter(filter).findOne();

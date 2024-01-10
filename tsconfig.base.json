@@ -24,10 +24,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@apex/api/client": ["libs/api/client/src/index.ts"],
       "@apex/api/server": ["libs/api/server/src/index.ts"],
       "@apex/api/shared": ["libs/api/shared/src/index.ts"],
-      "@apex/scuti-renderer": ["libs/scuti-renderer/src/src/index.ts"]
+      "@apex/api/client": ["libs/api/client/src/index.ts"],
+      "@apex/integrations/supabase/server": ["libs/integrations/supabase/server/src/index.ts"],
+      "@apex/integrations/supabase/client": ["libs/integrations/supabase/client/src/index.ts"],
+      "@apex/scuti-renderer": ["libs/scuti-renderer/src/src/index.ts"],
+      "@apex/server": ["libs/server/src/index.ts"],
+      "@apex/client": ["libs/client/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

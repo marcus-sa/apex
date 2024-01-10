@@ -2,14 +2,11 @@ import { createModule } from '@deepkit/app';
 import { createClient } from '@supabase/supabase-js';
 import { provide } from '@deepkit/injector';
 
-import { AuthService } from '../../auth';
+import { AuthService } from '@apex/server';
+
 import { SupabaseAuthService } from './supabase-auth.service';
 import { InternalSupabaseClient } from './supabase-client';
-
-export class SupabaseConfig {
-  readonly url: string;
-  readonly key: string;
-}
+import { SupabaseConfig } from './config';
 
 export class SupabaseModule extends createModule({
   config: SupabaseConfig,

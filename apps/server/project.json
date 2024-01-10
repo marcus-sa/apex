@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "aserver",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/server/src",
   "projectType": "application",
@@ -16,7 +16,8 @@
         "main": "{projectRoot}/src/main.ts",
         "tsConfig": "{projectRoot}/tsconfig.app.json",
         "assets": [],
-        "webpackConfig": "{projectRoot}/webpack.config.ts"
+        "webpackConfig": "{projectRoot}/webpack.config.ts",
+        "buildLibsFromSource": false
       },
       "configurations": {
         "development": {},
@@ -32,10 +33,10 @@
       "configurations": {
         "development": {
           "inspect": false,
-          "buildTarget": "server:build:development"
+          "buildTarget": "aserver:build:development"
         },
         "production": {
-          "buildTarget": "server:build:production"
+          "buildTarget": "aserver:build:production"
         }
       }
     },

@@ -1,12 +1,11 @@
-import { RpcInjectorContext } from '@deepkit/framework';
 import {
   AuthenticationError,
   RpcKernelBaseConnection,
   RpcKernelSecurity,
 } from '@deepkit/rpc';
 
-import { AuthService } from '../auth';
-import { UserSession } from '../user';
+import { AuthService, UserSession } from '@apex/server';
+
 import { GameManager } from '../game';
 
 export class ApexRpcKernelSecurity extends RpcKernelSecurity {
@@ -18,7 +17,11 @@ export class ApexRpcKernelSecurity extends RpcKernelSecurity {
   }
 
   // TODO: Wait for https://github.com/deepkit/deepkit-framework/pull/536 to land
-  override async authenticate(token: string, connection: RpcKernelBaseConnection): Promise<UserSession> {
+  // @ts-ignore
+  override async authenticate(
+    token: string,
+    connection: RpcKernelBaseConnection,
+  ): Promise<UserSession> {
     try {
       const user = await this.auth.authenticate(token);
       const session = new UserSession(user, token);

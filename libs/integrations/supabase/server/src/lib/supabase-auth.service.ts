@@ -2,9 +2,8 @@ import { empty } from '@deepkit/core';
 
 import { CreateUserData } from '@apex/api/server';
 import { User } from '@apex/api/shared';
+import { AuthService, UserRepository } from '@apex/server';
 
-import { AuthService } from '../../auth';
-import { UserRepository } from '../../user';
 import { InternalSupabaseClient } from './supabase-client';
 
 export class SupabaseAuthService extends AuthService {
