@@ -1,12 +1,12 @@
 import { Component, ContentChild } from '@angular/core';
-import { ApexButtonComponent } from './button.component';
 import { NgIf } from '@angular/common';
 import { CdkDrag } from '@angular/cdk/drag-drop';
 
+import { ApexButtonComponent } from './button.component';
 import { ApexDialogTitleComponent } from './dialog-title.component';
 
 @Component({
-  selector: '[apexDialogBody]',
+  selector: '[apex-dialog-body]',
   standalone: true,
   exportAs: 'apexDialogBody',
   template: `<ng-content></ng-content>`,

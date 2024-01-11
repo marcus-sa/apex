@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { cva } from 'class-variance-authority';
 
 const icon = cva(['h-5', 'w-5'], {
@@ -13,14 +13,12 @@ const icon = cva(['h-5', 'w-5'], {
   selector: 'apex-icon',
   standalone: true,
   template: ``,
-  host: {
-    '[class]': 'class',
-  },
 })
 export class ApexIconComponent {
   @Input() type: 'cross';
 
-  protected get class() {
+  @HostBinding('class')
+  get class(): string {
     return icon({ type: this.type });
   }
 }

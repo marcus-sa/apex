@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
+  HostBinding,
   Input,
   ViewEncapsulation,
 } from '@angular/core';
@@ -40,13 +41,10 @@ const button = cva(
 );
 
 @Component({
-  selector: 'button[apex], apex-icon[apex-button]',
+  selector: 'button[apex-button], apex-icon[apex-button]',
   exportAs: 'apexButton',
   standalone: true,
   template: `<ng-content></ng-content>`,
-  host: {
-    '[class]': 'class',
-  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -55,7 +53,8 @@ export class ApexButtonComponent {
 
   @ContentChild(ApexIconComponent) icon: ApexIconComponent | undefined;
 
-  protected get class() {
+  @HostBinding('class')
+  get class(): string {
     return button({ intent: this.intent });
   }
 }

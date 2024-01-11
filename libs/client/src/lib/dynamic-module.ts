@@ -1,10 +1,10 @@
-import {
+import type { ClassType } from '@deepkit/core';
+import type {
   EnvironmentProviders,
-  importProvidersFrom,
   ModuleWithProviders,
   Provider,
 } from '@angular/core';
-import { ClassType } from '@deepkit/core';
+import { importProvidersFrom } from '@angular/core';
 
 import { setFactoryDef, setInjectorDef, setNgModuleDef } from './utils';
 
@@ -20,11 +20,11 @@ export abstract class DynamicNgModule<T> {
   private readonly imports = new Set<ClassType>();
   private readonly providers = new Set<NgModuleProvider>();
 
-  protected addProvider(provider: NgModuleProvider) {
+  protected addProvider(provider: NgModuleProvider): void {
     this.providers.add(provider);
   }
 
-  protected addImport(module: ClassType) {
+  protected addImport(module: ClassType): void {
     this.imports.add(module);
   }
 

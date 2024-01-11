@@ -1,23 +1,26 @@
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { deserialize } from '@deepkit/type';
+import { APP_INITIALIZER, ApplicationConfig } from '@angular/core';
+import { provideRouter, Route } from '@angular/router';
 
-import { ApexClientConfig, importProvidersDynamicallyFrom } from '@apex/client';
+import {
+  ApexClientConfig,
+  AuthService,
+  getClientConfig,
+  importProvidersDynamicallyFrom,
+  provideRpcClient,
+} from '@apex/client';
 
 import { routes } from './routes';
-import { provideRpcClient } from './utils';
 import { GameController } from './game';
 import { MessengerController } from './messenger';
 import { RoomController } from './room';
 import { IntegrationsModule } from './integrations';
 
-export const clientConfig = deserialize<ApexClientConfig>(
-  (window as any)['APEX_CLIENT_CONFIG'],
-);
+export const clientConfig = getClientConfig();
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    // eslint-disable-next-line functional/prefer-readonly-type
+    provideRouter(routes as Route[]),
     ...provideRpcClient('ws://localhost:8082', [
       GameController,
       RoomController,
@@ -30,5 +33,11 @@ export const appConfig: ApplicationConfig = {
     importProvidersDynamicallyFrom(
       new IntegrationsModule(clientConfig.integrations),
     ),
+    {
+      provide: APP_INITIALIZER,
+      deps: [AuthService],
+      useFactory: (auth: AuthService) => () => auth.initialize(),
+      multi: true,
+    },
   ],
 };

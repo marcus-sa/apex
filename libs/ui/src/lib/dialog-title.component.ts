@@ -18,7 +18,7 @@ import { ApexIconComponent } from './icon.component';
       <div class="absolute left-[92%] top-[5%]">
         <button
           class="!p-0"
-          apex
+          apex-button
           tabindex="-1"
           *ngIf="closeable"
           (click)="dialogRef.close()"

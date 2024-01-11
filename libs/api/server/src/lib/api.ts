@@ -2,6 +2,13 @@ import { ControllerSymbol } from '@deepkit/rpc';
 
 import { Room, InvalidRoomPasswordError, User } from '@apex/api/shared';
 
+export const AuthControllerInterface = ControllerSymbol('auth', [User]);
+
+export interface AuthControllerInterface {
+  // createUser(data: CreateUserData, token: string): Promise<User>;
+  getUser(): Promise<User>;
+}
+
 export const UserControllerInterface = ControllerSymbol('user', [User]);
 
 export type CreateUserData = Pick<User, 'username' | 'look'>;

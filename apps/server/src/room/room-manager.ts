@@ -19,8 +19,8 @@ export class ActiveRoom {
 
   async sendEvent(event: RoomEvent): Promise<void> {
     await Promise.all(
-      [...this.gameClients].map(async client =>
-        await client.controllers.room.handleEvent(event),
+      [...this.gameClients].map(
+        async client => await client.controllers.room.handleEvent(event),
       ),
     );
   }

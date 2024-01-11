@@ -4,7 +4,7 @@ import * as nodeExternals from 'webpack-node-externals';
 
 // eslint-disable-next-line import/no-default-export
 // @ts-ignore
-export default composePlugins(withNx(), withDeepkit(), (config) => ({
+export default composePlugins(withNx(), withDeepkit(), config => ({
   ...config,
   target: 'es2022',
   experiments: {

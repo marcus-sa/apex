@@ -19,7 +19,7 @@ export class User {
   readonly id: integer & PrimaryKey & AutoIncrement = 0;
   readonly credits: integer & Positive = 0;
   readonly motto?: string;
-  readonly inventory: Inventory & BackReference = new Inventory();
+  readonly inventory: Inventory & BackReference = new Inventory(this);
   readonly rooms: readonly Room[] & BackReference = [];
   readonly username: string & Unique;
   readonly look: string;

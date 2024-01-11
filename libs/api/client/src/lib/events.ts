@@ -1,4 +1,10 @@
-import { entity, ReflectionKind, TypeClass, typeOf, TypeUnion } from '@deepkit/type';
+import {
+  entity,
+  ReflectionKind,
+  TypeClass,
+  typeOf,
+  TypeUnion,
+} from '@deepkit/type';
 import { ClassType } from '@deepkit/core';
 
 import { RoomChatMessage, User } from '@apex/api/shared';

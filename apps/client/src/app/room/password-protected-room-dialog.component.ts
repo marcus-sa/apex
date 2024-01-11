@@ -6,13 +6,12 @@ import { Observable, Subject } from 'rxjs';
 import { NgIf } from '@angular/common';
 
 import { InvalidRoomPasswordError, Room } from '@apex/api/shared';
-
 import {
   ApexButtonComponent,
   ApexDialogBodyComponent,
   ApexDialogTitleComponent,
   ApexInputComponent,
-} from '../ui';
+} from '@apex/ui';
 
 export interface ApexPasswordProtectedRoomDialogData {
   readonly room: Room;
@@ -22,11 +21,11 @@ export interface ApexPasswordProtectedRoomDialogData {
   selector: 'apex-password-protected-room-dialog',
   standalone: true,
   template: `
-    <div apexDialogBody [class.animation-shake]="error()">
+    <div apex-dialog-body [class.animation-shake]="error()">
       <apex-dialog-title closeable>{{ data.room.name }}</apex-dialog-title>
       <p class="text-xs text-white">This room is protected with a door code.</p>
       <input
-        apex
+        apex-input
         type="text"
         [class.border]="error()"
         [class.border-red-700]="error()"
@@ -41,8 +40,8 @@ export interface ApexPasswordProtectedRoomDialogData {
         {{ error()?.['message'] }};
       </p>
       <div class="flex justify-between">
-        <button apex (click)="submit()">Enter</button>
-        <button apex (click)="close()">Cancel</button>
+        <button apex-button (click)="submit()">Enter</button>
+        <button apex-button (click)="close()">Cancel</button>
       </div>
     </div>
   `,
@@ -88,11 +87,11 @@ export class PasswordProtectedRoomDialogComponent {
     return error instanceof Error;
   }
 
-  protected submit() {
+  protected submit(): void {
     this.#onSubmit.next(this.password);
   }
 
-  close() {
+  close(): void {
     this.dialogRef.close();
   }
 }

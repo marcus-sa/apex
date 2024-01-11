@@ -16,11 +16,11 @@ import { AppComponent } from '../app.component';
 import { RoomService } from './room.service';
 import { UserService } from '../user';
 import { PasswordProtectedRoomDialogComponent } from './password-protected-room-dialog.component';
-import { RoomController } from './room.controller';
 
 @Component({
   selector: 'apex-room',
   standalone: true,
+  providers: [RoomService],
   templateUrl: './room.component.html',
 })
 export class RoomComponent implements OnInit {
@@ -29,11 +29,10 @@ export class RoomComponent implements OnInit {
   constructor(
     private readonly app: AppComponent,
     private readonly dialog: Dialog,
-    private readonly service: RoomService,
+    private readonly room: RoomService,
     private readonly user: UserService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly destroyRef: DestroyRef,
-    private readonly controller: RoomController,
   ) {}
 
   private render(room: Room) {
@@ -52,7 +51,7 @@ export class RoomComponent implements OnInit {
   }
 
   private async join(id: Room['id'], options?: JoinRoomOptions): Promise<Room> {
-    const room = await this.service.join(id, options);
+    const room = await this.room.server.join(id, options);
     this.render(room);
     return room;
   }
@@ -61,8 +60,8 @@ export class RoomComponent implements OnInit {
     this.activatedRoute.params
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(async params => {
-        let room = await this.service.get(+params['id']);
-        if (!this.service.isOwner(this.user.me, room)) {
+        let room = await this.room.server.get(+params['id']);
+        if (!this.room.isOwner(this.user.me, room)) {
           // room.users.length === room.capacity
           if (room.state === RoomState.FULL) {
             /* eslint-disable no-empty */
@@ -90,7 +89,7 @@ export class RoomComponent implements OnInit {
         }
       });
 
-    this.controller.events
+    this.room.client.events
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(event => {
         switch (true) {

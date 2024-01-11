@@ -7,8 +7,11 @@ import { HttpRouterRegistry } from '@deepkit/http';
 import { Response } from '@deepkit/http';
 import * as yaml from 'yaml';
 
-import { ApexClientConfig } from '@apex/client';
-import { UserModule } from '@apex/server';
+import { AuthModule, UserModule } from '@apex/server';
+import {
+  ApexClientConfig,
+  CLIENT_CONFIG_GLOBAL_VARIABLE_NAME,
+} from '@apex/client';
 
 import { GameModule } from './game';
 import { InventoryController } from './inventory';
@@ -32,6 +35,7 @@ const app = new App({
     new GameModule(),
     new RoomModule(),
     new UserModule(),
+    new AuthModule(),
     new MessengerModule(),
     new RpcModule(),
   ],
@@ -67,7 +71,7 @@ router.get(
   '/config.js',
   () =>
     new Response(
-      `window.APEX_CLIENT_CONFIG = ${JSON.stringify(
+      `globalThis.${CLIENT_CONFIG_GLOBAL_VARIABLE_NAME} = ${JSON.stringify(
         serialize<ApexClientConfig>(app.appModule.config.client),
       )}`,
       'text/javascript',
