@@ -2,10 +2,13 @@ import { deserialize } from '@deepkit/type';
 
 // FIXME: circular dependency
 // import { SupabaseConfig } from '@apex/integrations/supabase/client';
+// import { FeaturebaseConfig } from '@apex/integrations/featurebase/client';
+// import { ThirdWebConfig } from '@apex/integrations/thirdweb/client';
 
 export class IntegrationsConfig {
   readonly supabase?: unknown; // SupabaseConfig
-  readonly thirdweb?: unknown;
+  readonly featurebase?: unknown; // Featurebase
+  readonly thirdweb?: unknown; // ThirdWebConfig
 }
 
 export class ApexClientConfig {

@@ -10,10 +10,14 @@ import { setFactoryDef, setInjectorDef, setNgModuleDef } from './utils';
 
 export type NgModuleProvider = Provider | EnvironmentProviders;
 
-export function importProvidersDynamicallyFrom(
+export async function importProvidersDynamicallyFrom(
   ...modules: readonly DynamicNgModule<unknown>[]
-): EnvironmentProviders {
-  return importProvidersFrom(...modules.map(module => module.configure()));
+): Promise<EnvironmentProviders> {
+  let configuredModules: readonly ModuleWithProviders<unknown>[] = [];
+  for (const module of modules) {
+    configuredModules = [...configuredModules, await module.configure()];
+  }
+  return importProvidersFrom(...configuredModules);
 }
 
 export abstract class DynamicNgModule<T> {
@@ -28,10 +32,10 @@ export abstract class DynamicNgModule<T> {
     this.imports.add(module);
   }
 
-  protected abstract process(): void;
+  protected abstract process(): Promise<void> | void;
 
-  configure(): ModuleWithProviders<T> {
-    this.process();
+  async configure(): Promise<ModuleWithProviders<T>> {
+    await this.process();
 
     setNgModuleDef(this.constructor, {
       type: this.constructor,

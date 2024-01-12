@@ -1,1 +1,1 @@
-# Supabase Auth Integration
+# [Supabase Auth](https://supabase.com/auth) Integration
