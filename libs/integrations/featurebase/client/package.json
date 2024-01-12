@@ -1,0 +1,8 @@
+{
+  "name": "@apex/integrations/featurebase/client",
+  "version": "0.0.1",
+  "dependencies": {},
+  "type": "module",
+  "module": "./index.js",
+  "reflection": true
+}

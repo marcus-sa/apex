@@ -30,6 +30,8 @@
       "@apex/client": ["libs/client/src/index.ts"],
       "@apex/integrations/supabase/server": ["libs/integrations/supabase/server/src/index.ts"],
       "@apex/integrations/supabase/client": ["libs/integrations/supabase/client/src/index.ts"],
+      "@apex/integrations/featurebase/server": ["libs/integrations/featurebase/server/src/index.ts"],
+      "@apex/integrations/featurebase/client": ["libs/integrations/featurebase/client/src/index.ts"],
       "@apex/scuti-renderer": ["libs/scuti-renderer/src/src/index.ts"],
       "@apex/server": ["libs/server/src/index.ts"],
       "@apex/ui": ["libs/ui/src/index.ts"]

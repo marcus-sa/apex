@@ -22,6 +22,7 @@ export class User {
   readonly inventory: Inventory & BackReference = new Inventory(this);
   readonly rooms: readonly Room[] & BackReference = [];
   readonly username: string & Unique;
+  readonly email?: string & Unique;
   readonly look: string;
   readonly online: boolean = false;
   readonly friends: readonly Friend[] &

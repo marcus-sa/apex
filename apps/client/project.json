@@ -74,10 +74,11 @@
       "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
       "options": {
-        "jestConfig": "apps/client/jest.config.ts"
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/{projectRoot}"
       }
     }
   }

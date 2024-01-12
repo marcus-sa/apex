@@ -30,13 +30,13 @@ export const appConfig: ApplicationConfig = {
       provide: ApexClientConfig,
       useValue: clientConfig,
     },
-    importProvidersDynamicallyFrom(
+    await importProvidersDynamicallyFrom(
       new IntegrationsModule(clientConfig.integrations),
     ),
     {
       provide: APP_INITIALIZER,
       deps: [AuthService],
-      useFactory: (auth: AuthService) => () => auth.initialize(),
+      useFactory: (auth: AuthService) => async () => auth.initialize(),
       multi: true,
     },
   ],
