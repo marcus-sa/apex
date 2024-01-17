@@ -2,7 +2,7 @@ import { empty, Inject } from '@deepkit/core';
 import { SupabaseClient } from '@supabase/supabase-js';
 
 import { CreateUserData } from '@apex/api/server';
-import { User } from '@apex/api/shared';
+import { UnexpectedError, User } from '@apex/api/shared';
 import { AuthService, UserRepository } from '@apex/server';
 
 export class SupabaseAuthService extends AuthService {
@@ -24,7 +24,7 @@ export class SupabaseAuthService extends AuthService {
   override async authenticate(token: string): Promise<User> {
     const user = await this.getUserByToken(token);
     if (empty(user.user_metadata)) {
-      throw new Error('Missing user metadata');
+      throw new UnexpectedError('Supabase user is missing user metadata');
     }
     const id = user.user_metadata['id'] as User['id'];
     return this.user.findOne({ id });
