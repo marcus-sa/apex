@@ -1,10 +1,44 @@
 {
-  "name": "aserver",
+  "name": "server-app",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/server/src",
   "projectType": "application",
   "tags": ["server"],
   "targets": {
+    "build-vite": {
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "configFile": "{projectRoot}/vite.config.ts",
+        "outputPath": "dist/{projectRoot}",
+        "buildLibsFromSource": false,
+        "emptyOutDir": false,
+        "force": true,
+        "ssr": true
+      },
+      "defaultConfiguration": "development",
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "serve-vite": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vite-node --config=apps/server/vite.config.ts --root apps/server apps/server/src/main.ts"
+      },
+      "configurations": {
+        "watch": {
+          "command": "vite-node --watch --config=apps/server/vite.config.ts --root apps/server apps/server/src/main.ts"
+        }
+      }
+    },
     "build": {
       "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
@@ -22,7 +56,11 @@
       },
       "configurations": {
         "development": {},
-        "production": {}
+        "production": {
+          "optimization": true,
+          "sourceMap": true,
+          "namedChunks": true
+        }
       }
     },
     "serve": {
@@ -34,10 +72,10 @@
       "configurations": {
         "development": {
           "inspect": false,
-          "buildTarget": "aserver:build:development"
+          "buildTarget": "server-app:build:development"
         },
         "production": {
-          "buildTarget": "aserver:build:production"
+          "buildTarget": "server-app:build:production"
         }
       }
     },

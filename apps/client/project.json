@@ -1,5 +1,5 @@
 {
-  "name": "aclient",
+  "name": "client-app",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "apex",
@@ -55,10 +55,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "aclient:build:production"
+          "buildTarget": "client-app:build:production"
         },
         "development": {
-          "buildTarget": "aclient:build:development"
+          "buildTarget": "client-app:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -66,7 +66,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "aclient:build"
+        "buildTarget": "client-app:build"
       }
     },
     "lint": {
