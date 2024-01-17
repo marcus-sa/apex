@@ -16,8 +16,6 @@ export class ApexRpcKernelSecurity extends RpcKernelSecurity {
     super();
   }
 
-  // TODO: Wait for https://github.com/deepkit/deepkit-framework/pull/536 to land
-  // @ts-ignore
   override async authenticate(
     token: string,
     connection: RpcKernelBaseConnection,
