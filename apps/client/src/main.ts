@@ -1,6 +1,10 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 
-import { appConfig } from './app/config';
+import { getAppConfig } from './app/config';
 import { AppComponent } from './app/app.component';
 
-void bootstrapApplication(AppComponent, appConfig);
+void (async () => {
+  const config = await getAppConfig();
+  await bootstrapApplication(AppComponent, config);
+})();
+

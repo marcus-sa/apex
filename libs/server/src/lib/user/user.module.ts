@@ -3,14 +3,18 @@ import { SessionState } from '@deepkit/rpc';
 
 import { User } from '@apex/api/shared';
 
-import { UserSession } from './user-session';
 import { UserController } from './user.controller';
 import { UserRepository } from './user.repository';
+import { UserBadgeRepository } from './user-badge.repository';
+import { UserPointRepository } from './user-point.repository';
+import { UserSession } from './user-session';
 
 export class UserModule extends createModule({
   controllers: [UserController],
   providers: [
     UserRepository,
+    UserBadgeRepository,
+    UserPointRepository,
     {
       provide: UserSession,
       scope: 'rpc',
@@ -26,6 +30,12 @@ export class UserModule extends createModule({
       },
     },
   ],
-  exports: [UserRepository, UserSession, User],
+  exports: [
+    UserRepository,
+    UserBadgeRepository,
+    UserPointRepository,
+    UserSession,
+    User,
+  ],
   forRoot: true,
 }) {}

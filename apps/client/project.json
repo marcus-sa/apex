@@ -7,7 +7,7 @@
   "tags": ["client"],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@nx/angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/client",
@@ -15,7 +15,10 @@
         "browser": "apps/client/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/client/tsconfig.app.json",
-        "assets": ["apps/client/src/favicon.ico", "apps/client/src/assets"],
+        "assets": [
+          "apps/client/src/favicon.ico",
+          "apps/client/src/assets"
+        ],
         "allowedCommonJsDependencies": [
           "dot-prop",
           "to-fast-properties",
@@ -52,7 +55,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@nx/angular:dev-server",
       "configurations": {
         "production": {
           "buildTarget": "client-app:build:production"
@@ -62,12 +65,6 @@
         }
       },
       "defaultConfiguration": "development"
-    },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
-      "options": {
-        "buildTarget": "client-app:build"
-      }
     },
     "lint": {
       "executor": "@nx/eslint:lint",

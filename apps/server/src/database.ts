@@ -12,6 +12,10 @@ import {
   Room,
   RoomItem,
   User,
+  Point,
+  Badge,
+  UserBadge,
+  UserPoint,
 } from '@apex/api/shared';
 
 import { ApexDatabaseConfig } from './config';
@@ -39,9 +43,13 @@ export class ApexDatabase extends Database {
   constructor(config: ApexDatabaseConfig) {
     super(ApexDatabase.createAdapter(config), [
       BaseItem,
+      Badge,
+      Point,
+      User,
+      UserBadge,
+      UserPoint,
       Inventory,
       InventoryItem,
-      User,
       RoomItem,
       Room,
       Catalogue,

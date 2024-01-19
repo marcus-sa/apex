@@ -4,10 +4,10 @@
   "license": "LGPL-3.0-or-later",
   "scripts": {
     "postinstall": "deepkit-type-install && lefthook install",
-    "serve:server": "nx serve aserver",
-    "build:server": "nx build aserver",
-    "serve:client": "nx serve aclient",
-    "build:client": "nx build aclient"
+    "serve:server": "nx serve server-app",
+    "build:server": "nx build server-app",
+    "serve:client": "nx serve client-app",
+    "build:client": "nx build client-app"
   },
   "private": true,
   "dependencies": {

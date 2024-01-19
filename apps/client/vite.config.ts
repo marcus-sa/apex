@@ -6,17 +6,20 @@ import { angular } from '@analogjs/vite-plugin-angular/src/lib/angular-vite-plug
 
 export default defineConfig(({ mode }) => {
   const isTestMode = mode === 'test';
-  const tsConfig = isTestMode ? join(__dirname, 'tsconfig.spec.json') : join(__dirname, 'tsconfig.app.json');
+  const tsConfig = isTestMode
+    ? join(__dirname, 'tsconfig.spec.json')
+    : join(__dirname, 'tsconfig.app.json');
 
   return {
     optimizeDeps: {
+      include: [
+        "dot-prop",
+        "to-fast-properties",
+        "buffer",
+        "ansi-styles",
+        "format-util"
+      ],
       exclude: ['@deepkit/rpc'],
-      esbuildOptions: {
-        target: 'esnext',
-      },
-    },
-    build: {
-      target: 'esnext',
     },
     plugins: [
       nxViteTsPaths(),
@@ -28,6 +31,11 @@ export default defineConfig(({ mode }) => {
         tsConfig,
       }),
     ],
+    build: {
+      commonjsOptions: {
+        esmExternals: true,
+      },
+    },
     test: {
       globals: true,
       cache: {

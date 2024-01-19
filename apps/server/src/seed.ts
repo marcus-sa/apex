@@ -1,7 +1,6 @@
-import { App } from '@deepkit/app';
 import { cast } from '@deepkit/type';
 
-import { Inventory, Room, User } from '@apex/api/shared';
+import { Point, Room, User, UserPoint } from '@apex/api/shared';
 
 import { ApexDatabase } from './database';
 import { ApexDatabaseConfig } from './config';
@@ -19,10 +18,12 @@ const config = cast<ApexDatabaseConfig>({
 });
 const db = new ApexDatabase(config);
 
-const user1 = User.create({
-  username: 'Test',
-  look: '',
-});
+const point1 = new Point('credits');
+const point2 = new Point('diamonds');
+
+const user1 = new User('test', '');
+const user1Point1 = new UserPoint(user1, point1, 10);
+user1.addPoint(user1Point1);
 
 const room1 = Room.create({
   name: 'Room 1',
@@ -45,4 +46,12 @@ x000000000
   `,
 });
 
-await db.persist(user1, user1.inventory, room1);
+await db.persist(
+  point1,
+  point2,
+  user1,
+  ...user1.points,
+  ...user1.activeBadges,
+  user1.inventory,
+  room1,
+);

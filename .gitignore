@@ -42,3 +42,6 @@ var/debug
 .nx/cache
 .angular
 .env
+
+apex.config.yaml
+apex.config.yml

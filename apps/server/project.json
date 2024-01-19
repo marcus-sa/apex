@@ -5,7 +5,7 @@
   "projectType": "application",
   "tags": ["server"],
   "targets": {
-    "build-vite": {
+    "build": {
       "executor": "@nx/vite:build",
       "outputs": [
         "{options.outputPath}"
@@ -28,7 +28,7 @@
         }
       }
     },
-    "serve-vite": {
+    "serve": {
       "executor": "nx:run-commands",
       "options": {
         "command": "vite-node --config=apps/server/vite.config.ts --root apps/server apps/server/src/main.ts"
@@ -36,46 +36,6 @@
       "configurations": {
         "watch": {
           "command": "vite-node --watch --config=apps/server/vite.config.ts --root apps/server apps/server/src/main.ts"
-        }
-      }
-    },
-    "build": {
-      "executor": "@nx/webpack:webpack",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
-      "options": {
-        "target": "node",
-        "compiler": "tsc",
-        "outputPath": "dist/{projectRoot}",
-        "outputFileName": "main.mjs",
-        "main": "{projectRoot}/src/main.ts",
-        "tsConfig": "{projectRoot}/tsconfig.app.json",
-        "assets": [],
-        "webpackConfig": "{workspaceRoot}/apps/node-webpack.config.ts",
-        "buildLibsFromSource": false
-      },
-      "configurations": {
-        "development": {},
-        "production": {
-          "optimization": true,
-          "sourceMap": true,
-          "namedChunks": true
-        }
-      }
-    },
-    "serve": {
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "server:build"
-      },
-      "configurations": {
-        "development": {
-          "inspect": false,
-          "buildTarget": "server-app:build:development"
-        },
-        "production": {
-          "buildTarget": "server-app:build:production"
         }
       }
     },

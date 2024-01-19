@@ -1,13 +1,14 @@
-import { empty, Inject } from '@deepkit/core';
-import { SupabaseClient } from '@supabase/supabase-js';
+import { empty } from '@deepkit/core';
 
 import { CreateUserData } from '@apex/api/server';
 import { UnexpectedError, User } from '@apex/api/shared';
 import { AuthService, UserRepository } from '@apex/server';
 
+import { ISupabaseClient } from './client';
+
 export class SupabaseAuthService extends AuthService {
   constructor(
-    private readonly client: Inject<SupabaseClient>,
+    private readonly client: ISupabaseClient,
     private readonly user: UserRepository,
   ) {
     super();

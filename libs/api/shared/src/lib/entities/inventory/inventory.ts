@@ -8,13 +8,14 @@ import {
   Reference,
 } from '@deepkit/type';
 
-import { User } from '../user';
+import { User, UserBadge } from '../user';
 import { InventoryItem } from './inventory-item';
 
 @entity.name('inventory')
 export class Inventory {
   readonly id: integer & PrimaryKey & AutoIncrement = 0;
   readonly items: readonly InventoryItem[] & BackReference = [];
+  readonly badges: readonly UserBadge[] & BackReference = [];
 
   constructor(readonly user: User & Reference) {}
 

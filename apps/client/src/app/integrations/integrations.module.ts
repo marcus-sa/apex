@@ -1,6 +1,8 @@
 import { ClassType } from '@deepkit/core';
 
-import { DynamicNgModule, IntegrationsConfig } from '@apex/client';
+import { DynamicNgModule } from '@apex/client';
+
+import { IntegrationsConfig } from '../config';
 
 export class IntegrationsModule extends DynamicNgModule<IntegrationsModule> {
   constructor(private readonly config: IntegrationsConfig) {
