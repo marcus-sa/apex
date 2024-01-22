@@ -92,7 +92,7 @@
     "@schematics/angular": "17.0.3",
     "@svgr/webpack": "^8.0.1",
     "@swc-node/register": "1.6.7",
-    "@swc/cli": "~0.1.62",
+    "@swc/cli": "~0.1.65",
     "@swc/core": "1.3.85",
     "@swc/jest": "0.2.20",
     "@testing-library/angular": "^15.1.0",
